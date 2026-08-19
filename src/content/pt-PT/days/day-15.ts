@@ -90,5 +90,23 @@ export const day15: LessonDay = {
         },
       ],
     },
+    {
+      id: "d15-test",
+      lessonDay: 15,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-tenho-uma-reserva", type: "chunk", portuguese: "Tenho uma reserva.", dutch: "Ik heb een reservering.", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-em-nome-de-duran", type: "chunk", portuguese: "Em nome de Duran.", dutch: "Op naam van Duran.", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-a-que-horas-e-o-pequeno-almoco", type: "chunk", portuguese: "A que horas é o pequeno-almoço?", dutch: "Hoe laat is het ontbijt?", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-onde-fica-o-meu-quarto", type: "chunk", portuguese: "Onde fica o meu quarto?", dutch: "Waar is mijn kamer?", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-o-wi-fi-nao-funciona", type: "chunk", portuguese: "O Wi-Fi não funciona.", dutch: "De wifi werkt niet.", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "w-hotel", type: "word", portuguese: "hotel", dutch: "hotel", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 1 },
+        { id: "w-reserva", type: "word", portuguese: "reserva", dutch: "reservering", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 1 },
+        { id: "w-quarto", type: "word", portuguese: "quarto", dutch: "kamer", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 1 },
+        { id: "w-rececao", type: "word", portuguese: "receção", dutch: "receptie", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 1 },
+        { id: "w-chave", type: "word", portuguese: "chave", dutch: "sleutel", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 1 },
+      ],
+    },
   ],
 };

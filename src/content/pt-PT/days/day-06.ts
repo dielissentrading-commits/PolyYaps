@@ -97,5 +97,23 @@ export const day06: LessonDay = {
         },
       ],
     },
+    {
+      id: "d06-test",
+      lessonDay: 6,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-tenho-um-irmao", type: "chunk", portuguese: "Tenho um irmão.", dutch: "Ik heb een broer.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "c-tenho-uma-irma", type: "chunk", portuguese: "Tenho uma irmã.", dutch: "Ik heb een zus.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "c-esta-e-a-minha-familia", type: "chunk", portuguese: "Esta é a minha família.", dutch: "Dit is mijn familie.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "c-este-e-o-meu-amigo", type: "chunk", portuguese: "Este é o meu amigo.", dutch: "Dit is mijn vriend.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "c-esta-e-a-minha-namorada", type: "chunk", portuguese: "Esta é a minha namorada.", dutch: "Dit is mijn vriendin.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "w-familia", type: "word", portuguese: "família", dutch: "familie", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 1 },
+        { id: "w-amigo-amiga", type: "word", portuguese: "amigo / amiga", dutch: "vriend / vriendin", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 1 },
+        { id: "w-namorado-namorada", type: "word", portuguese: "namorado / namorada", dutch: "vriend / vriendin / partner", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 1 },
+        { id: "w-pai", type: "word", portuguese: "pai", dutch: "vader", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 1 },
+        { id: "w-mae", type: "word", portuguese: "mãe", dutch: "moeder", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 1 },
+      ],
+    },
   ],
 };

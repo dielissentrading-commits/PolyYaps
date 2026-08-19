@@ -105,3 +105,54 @@ describe('buildSteps', () => {
     expect(buildSteps([], { currentDay: 1, seed: 'empty' })).toEqual([]);
   });
 });
+
+describe('buildTestSteps', () => {
+  it('asks only for production, never multiple choice', async () => {
+    const { buildTestSteps } = await import('@/engine/exercises');
+    const steps = buildTestSteps(pool, { seed: 'test' });
+
+    expect(steps).toHaveLength(pool.length);
+    for (const step of steps) {
+      expect(step.kind).toBe('exercise');
+      if (step.kind === 'exercise') {
+        expect(step.exercise.options).toBeUndefined();
+        expect(step.exercise.answerLang).toBe('pt-PT');
+      }
+    }
+  });
+
+  it('has no study phase', async () => {
+    const { buildTestSteps } = await import('@/engine/exercises');
+    const steps = buildTestSteps(pool, { seed: 'test' });
+    expect(steps.some((step) => step.kind === 'study')).toBe(false);
+  });
+
+  it('covers every item once', async () => {
+    const { buildTestSteps } = await import('@/engine/exercises');
+    const steps = buildTestSteps(pool, { seed: 'test' });
+    expect(new Set(steps.map((step) => step.item.id)).size).toBe(pool.length);
+  });
+});
+
+describe('buildListeningSteps', () => {
+  it('hides the written prompt', async () => {
+    const { buildListeningSteps } = await import('@/engine/exercises');
+    const steps = buildListeningSteps(pool, { seed: 'listen' });
+    for (const step of steps) {
+      if (step.kind === 'exercise') {
+        expect(step.exercise.audioOnly).toBe(true);
+        expect(step.exercise.type).toBe('listening');
+      }
+    }
+  });
+});
+
+describe('reviewExerciseFor', () => {
+  it('recognises new material and produces known material', async () => {
+    const { reviewExerciseFor } = await import('@/engine/exercises');
+    expect(reviewExerciseFor(0)).toBe('recognition');
+    expect(reviewExerciseFor(1)).toBe('recognition');
+    expect(reviewExerciseFor(2)).toBe('production');
+    expect(reviewExerciseFor(4)).toBe('production');
+  });
+});

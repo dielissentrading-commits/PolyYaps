@@ -89,5 +89,23 @@ export const day28: LessonDay = {
         },
       ],
     },
+    {
+      id: "d28-test",
+      lessonDay: 28,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-ha-um-problema", type: "chunk", portuguese: "Há um problema.", dutch: "Er is een probleem.", dayIntroduced: 28, category: "problemen-oplossen", priority: 2 },
+        { id: "c-acho-que-houve-um-erro", type: "chunk", portuguese: "Acho que houve um erro.", dutch: "Ik denk dat er een fout is gemaakt.", dayIntroduced: 28, category: "problemen-oplossen", priority: 2 },
+        { id: "c-nao-foi-isto-que-pedi", type: "chunk", portuguese: "Não foi isto que pedi.", dutch: "Dit is niet wat ik besteld heb.", dayIntroduced: 28, category: "problemen-oplossen", priority: 2 },
+        { id: "c-perdi-o-meu-bilhete", type: "chunk", portuguese: "Perdi o meu bilhete.", dutch: "Ik ben mijn kaartje kwijt.", dayIntroduced: 28, category: "problemen-oplossen", priority: 2 },
+        { id: "c-nao-percebo", type: "chunk", portuguese: "Não percebo.", dutch: "Ik begrijp het niet.", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "w-errado", type: "word", portuguese: "errado", dutch: "verkeerd", dayIntroduced: 28, category: "problemen-oplossen", priority: 1 },
+        { id: "w-problema", type: "word", portuguese: "problema", dutch: "probleem", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 1 },
+        { id: "w-erro", type: "word", portuguese: "erro", dutch: "fout", dayIntroduced: 28, category: "problemen-oplossen", priority: 1 },
+        { id: "w-perdido", type: "word", portuguese: "perdido", dutch: "verloren", dayIntroduced: 28, category: "problemen-oplossen", priority: 1 },
+        { id: "w-fechado", type: "word", portuguese: "fechado", dutch: "gesloten", dayIntroduced: 28, category: "problemen-oplossen", priority: 1 },
+      ],
+    },
   ],
 };

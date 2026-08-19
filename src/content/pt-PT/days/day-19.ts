@@ -83,5 +83,23 @@ export const day19: LessonDay = {
         },
       ],
     },
+    {
+      id: "d19-test",
+      lessonDay: 19,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-queres-tomar-um-cafe", type: "chunk", portuguese: "Queres tomar um café?", dutch: "Wil je koffie drinken?", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "c-queres-jantar-comigo", type: "chunk", portuguese: "Queres jantar comigo?", dutch: "Wil je met mij eten?", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "c-podemos-ir-amanha", type: "chunk", portuguese: "Podemos ir amanhã.", dutch: "We kunnen morgen gaan.", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "c-vamos-ao-centro", type: "chunk", portuguese: "Vamos ao centro?", dutch: "Zullen we naar het centrum gaan?", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "c-a-que-horas", type: "chunk", portuguese: "A que horas?", dutch: "Hoe laat?", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "w-combinar", type: "word", portuguese: "combinar", dutch: "afspreken", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 1 },
+        { id: "w-encontrar-se", type: "word", portuguese: "encontrar-se", dutch: "afspreken / elkaar ontmoeten", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 1 },
+        { id: "w-livre", type: "word", portuguese: "livre", dutch: "vrij", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 1 },
+        { id: "w-ocupado", type: "word", portuguese: "ocupado", dutch: "bezet", dayIntroduced: 3, category: "hoe-gaat-het", priority: 1 },
+        { id: "w-talvez", type: "word", portuguese: "talvez", dutch: "misschien", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 1 },
+      ],
+    },
   ],
 };

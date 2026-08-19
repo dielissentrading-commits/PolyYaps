@@ -97,5 +97,23 @@ export const day09: LessonDay = {
         },
       ],
     },
+    {
+      id: "d09-test",
+      lessonDay: 9,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-normalmente-acordo-as-sete", type: "chunk", portuguese: "Normalmente acordo às sete.", dutch: "Normaal word ik om zeven uur wakker.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "c-tomo-o-pequeno-almoco", type: "chunk", portuguese: "Tomo o pequeno-almoço.", dutch: "Ik ontbijt.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "c-depois-vou-trabalhar", type: "chunk", portuguese: "Depois vou trabalhar.", dutch: "Daarna ga ik werken.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "c-comeco-a-trabalhar-as-nove", type: "chunk", portuguese: "Começo a trabalhar às nove.", dutch: "Ik begin om negen uur met werken.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "c-almoco-ao-meio-dia", type: "chunk", portuguese: "Almoço ao meio-dia.", dutch: "Ik lunch rond het middaguur.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "w-acordar", type: "word", portuguese: "acordar", dutch: "wakker worden", dayIntroduced: 9, category: "dagelijkse-routine", priority: 1 },
+        { id: "w-levantar-se", type: "word", portuguese: "levantar-se", dutch: "opstaan", dayIntroduced: 9, category: "dagelijkse-routine", priority: 1 },
+        { id: "w-tomar", type: "word", portuguese: "tomar", dutch: "nemen", dayIntroduced: 9, category: "dagelijkse-routine", priority: 1 },
+        { id: "w-pequeno-almoco", type: "word", portuguese: "pequeno-almoço", dutch: "ontbijt", dayIntroduced: 9, category: "dagelijkse-routine", priority: 1 },
+        { id: "w-comecar", type: "word", portuguese: "começar", dutch: "beginnen", dayIntroduced: 9, category: "dagelijkse-routine", priority: 1 },
+      ],
+    },
   ],
 };

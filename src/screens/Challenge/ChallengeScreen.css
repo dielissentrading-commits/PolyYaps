@@ -76,4 +76,5 @@
 
 .challenge__note {
   margin-top: var(--space-8);
+  text-align: center;
 }

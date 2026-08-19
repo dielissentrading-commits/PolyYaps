@@ -83,5 +83,23 @@ export const day21: LessonDay = {
         },
       ],
     },
+    {
+      id: "d21-test",
+      lessonDay: 21,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-e-a-tua-primeira-vez-em-portugal", type: "chunk", portuguese: "É a tua primeira vez em Portugal?", dutch: "Is het je eerste keer in Portugal?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "c-ha-quanto-tempo-estas-aqui", type: "chunk", portuguese: "Há quanto tempo estás aqui?", dutch: "Hoe lang ben je hier?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "c-estas-aqui-de-ferias", type: "chunk", portuguese: "Estás aqui de férias?", dutch: "Ben je hier op vakantie?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "c-ou-estas-aqui-em-trabalho", type: "chunk", portuguese: "Ou estás aqui em trabalho?", dutch: "Of ben je hier voor werk?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "c-vieste-sozinho", type: "chunk", portuguese: "Vieste sozinho?", dutch: "Ben je alleen gekomen?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "w-conhecer", type: "word", portuguese: "conhecer", dutch: "leren kennen", dayIntroduced: 17, category: "een-reis-navertellen", priority: 1 },
+        { id: "w-pessoa", type: "word", portuguese: "pessoa", dutch: "persoon", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 1 },
+        { id: "w-primeira-vez", type: "word", portuguese: "primeira vez", dutch: "eerste keer", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 1 },
+        { id: "w-aqui", type: "word", portuguese: "aqui", dutch: "hier", dayIntroduced: 13, category: "de-weg-vragen", priority: 1 },
+        { id: "w-local", type: "word", portuguese: "local", dutch: "lokaal", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 1 },
+      ],
+    },
   ],
 };

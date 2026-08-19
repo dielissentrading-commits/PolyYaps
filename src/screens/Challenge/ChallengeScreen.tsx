@@ -62,10 +62,10 @@ export function ChallengeScreen() {
           </section>
         )}
 
-        <div className="placeholder challenge__note">
-          <span className="placeholder__title">Beoordeling volgt later</span>
-          De stappen komen uit de lesstof. Scoring, stempel en XP komen uit de challenge-engine.
-        </div>
+        <p className="challenge__note muted small">
+          Je doorloopt de dag zoals een gewone les; de checkpoint weegt spreken en praktijk
+          zwaarder mee in je dagscore.
+        </p>
       </div>
     </FocusShell>
   );

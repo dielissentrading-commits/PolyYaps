@@ -1,21 +1,40 @@
+import { useMemo } from 'react';
 import { TopBar } from '@/components/layout/TopBar';
 import { StatCard } from '@/components/cards/StatCard';
 import { ProgressBar } from '@/components/progress/ProgressBar';
+import { MASTERY_LABELS } from '@/engine/mastery';
+import { getItem } from '@/content/pt-PT/course';
 import { useProgress } from '@/hooks/useProgress';
+import type { MasteryLevel } from '@/types';
 import './VocabularyScreen.css';
 
-/** The five mastery levels from docs/07-technical-architecture.md, section 9. */
-const MASTERY_LEVELS = [
-  { level: 0, label: 'Nieuw', count: 31 },
-  { level: 1, label: 'Herkend', count: 24 },
-  { level: 2, label: 'Herinnerd', count: 22 },
-  { level: 3, label: 'Geproduceerd', count: 36 },
-  { level: 4, label: 'Actief', count: 25 },
-];
+const LEVELS: MasteryLevel[] = [0, 1, 2, 3, 4];
 
 export function VocabularyScreen() {
-  const { vocabulary } = useProgress();
-  const total = MASTERY_LEVELS.reduce((sum, entry) => sum + entry.count, 0);
+  const { vocabulary, items } = useProgress();
+
+  const { distribution, total, strongest } = useMemo(() => {
+    const tracked = Object.values(items);
+    const counts = new Map<MasteryLevel, number>(LEVELS.map((level) => [level, 0]));
+
+    for (const item of tracked) {
+      counts.set(item.masteryLevel, (counts.get(item.masteryLevel) ?? 0) + 1);
+    }
+
+    return {
+      distribution: LEVELS.map((level) => ({
+        level,
+        label: MASTERY_LABELS[level],
+        count: counts.get(level) ?? 0,
+      })),
+      total: tracked.length,
+      strongest: [...tracked]
+        .sort((a, b) => b.strength - a.strength)
+        .slice(0, 8)
+        .map((entry) => ({ progress: entry, item: getItem(entry.itemId) }))
+        .filter((entry) => entry.item),
+    };
+  }, [items]);
 
   return (
     <>
@@ -32,35 +51,55 @@ export function VocabularyScreen() {
         <section className="section">
           <div className="section-header">
             <h2 className="eyebrow">Mastery-verdeling</h2>
+            <span className="muted small">{total} items</span>
           </div>
-          <div className="card vocabulary__mastery">
-            {MASTERY_LEVELS.map((entry) => (
-              <div className="vocabulary__level" key={entry.level}>
-                <div className="vocabulary__level-head">
-                  <span className="vocabulary__level-label">
-                    <span className="vocabulary__level-index">{entry.level}</span>
-                    {entry.label}
-                  </span>
-                  <span className="muted small">{entry.count}</span>
+
+          {total === 0 ? (
+            <div className="placeholder">
+              <span className="placeholder__title">Nog niets geoefend</span>
+              Zodra je een les doet, verschijnt hier hoe goed je elk woord beheerst.
+            </div>
+          ) : (
+            <div className="card vocabulary__mastery">
+              {distribution.map((entry) => (
+                <div className="vocabulary__level" key={entry.level}>
+                  <div className="vocabulary__level-head">
+                    <span className="vocabulary__level-label">
+                      <span className="vocabulary__level-index">{entry.level}</span>
+                      {entry.label}
+                    </span>
+                    <span className="muted small">{entry.count}</span>
+                  </div>
+                  <ProgressBar
+                    value={(entry.count / total) * 100}
+                    label={entry.label}
+                    size="thin"
+                    tone={entry.level >= 3 ? 'success' : 'primary'}
+                  />
                 </div>
-                <ProgressBar
-                  value={(entry.count / total) * 100}
-                  label={entry.label}
-                  size="thin"
-                  tone={entry.level >= 3 ? 'success' : 'primary'}
-                />
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </section>
 
-        <section className="section">
-          <div className="placeholder">
-            <span className="placeholder__title">Itemlijst volgt in V0.4</span>
-            Zodra mastery en strength per item worden bijgehouden, staat hier de doorzoekbare
-            lijst met woorden en chunks.
-          </div>
-        </section>
+        {strongest.length > 0 && (
+          <section className="section">
+            <div className="section-header">
+              <h2 className="eyebrow">Sterkste items</h2>
+            </div>
+            <ul className="stack vocabulary__items">
+              {strongest.map(({ item, progress }) => (
+                <li className="vocabulary__item" key={progress.itemId}>
+                  <span className="vocabulary__item-text">
+                    <strong lang="pt-PT">{item!.portuguese}</strong>
+                    <span className="muted small">{item!.dutch}</span>
+                  </span>
+                  <span className="chip">{MASTERY_LABELS[progress.masteryLevel]}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
     </>
   );

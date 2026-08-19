@@ -34,7 +34,14 @@
   margin-top: var(--space-4);
 }
 
+/* Padded to a comfortable touch target rather than the height of its text. */
 .home__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  margin: -6px -8px;
+  padding: 6px 8px;
+  border-radius: var(--radius-small);
   color: var(--color-primary-dark);
   font-weight: 700;
 }

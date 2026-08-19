@@ -97,5 +97,23 @@ export const day16: LessonDay = {
         },
       ],
     },
+    {
+      id: "d16-test",
+      lessonDay: 16,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-ontem-trabalhei", type: "chunk", portuguese: "Ontem trabalhei.", dutch: "Gisteren heb ik gewerkt.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "c-ontem-fui-ao-centro", type: "chunk", portuguese: "Ontem fui ao centro.", dutch: "Gisteren ging ik naar het centrum.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "c-depois-fui-a-um-restaurante", type: "chunk", portuguese: "Depois fui a um restaurante.", dutch: "Daarna ging ik naar een restaurant.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "c-comi-peixe", type: "chunk", portuguese: "Comi peixe.", dutch: "Ik at vis.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "c-bebi-vinho", type: "chunk", portuguese: "Bebi vinho.", dutch: "Ik dronk wijn.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "w-ontem", type: "word", portuguese: "ontem", dutch: "gisteren", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 1 },
+        { id: "w-depois", type: "word", portuguese: "depois", dutch: "daarna", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 1 },
+        { id: "w-primeiro", type: "word", portuguese: "primeiro", dutch: "eerst", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 1 },
+        { id: "w-voltar", type: "word", portuguese: "voltar", dutch: "teruggaan", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 1 },
+        { id: "w-chegar", type: "word", portuguese: "chegar", dutch: "aankomen", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 1 },
+      ],
+    },
   ],
 };

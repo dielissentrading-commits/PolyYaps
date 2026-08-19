@@ -83,5 +83,23 @@ export const day17: LessonDay = {
         },
       ],
     },
+    {
+      id: "d17-test",
+      lessonDay: 17,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-no-ano-passado-fui-a", type: "chunk", portuguese: "No ano passado fui a…", dutch: "Vorig jaar ging ik naar…", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "c-fiquei-la-uma-semana", type: "chunk", portuguese: "Fiquei lá uma semana.", dutch: "Ik bleef daar een week.", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "c-visitei", type: "chunk", portuguese: "Visitei…", dutch: "Ik bezocht…", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "c-conheci-a-cidade", type: "chunk", portuguese: "Conheci a cidade.", dutch: "Ik leerde de stad kennen.", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "c-comi-muito-bem", type: "chunk", portuguese: "Comi muito bem.", dutch: "Ik heb erg goed gegeten.", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "w-viagem", type: "word", portuguese: "viagem", dutch: "reis", dayIntroduced: 17, category: "een-reis-navertellen", priority: 1 },
+        { id: "w-ferias", type: "word", portuguese: "férias", dutch: "vakantie", dayIntroduced: 17, category: "een-reis-navertellen", priority: 1 },
+        { id: "w-praia", type: "word", portuguese: "praia", dutch: "strand", dayIntroduced: 17, category: "een-reis-navertellen", priority: 1 },
+        { id: "w-museu", type: "word", portuguese: "museu", dutch: "museum", dayIntroduced: 17, category: "een-reis-navertellen", priority: 1 },
+        { id: "w-cidade", type: "word", portuguese: "cidade", dutch: "stad", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 1 },
+      ],
+    },
   ],
 };

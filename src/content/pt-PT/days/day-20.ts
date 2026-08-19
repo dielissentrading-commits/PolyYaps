@@ -50,5 +50,18 @@ export const day20: LessonDay = {
         },
       ],
     },
+    {
+      id: "d20-test",
+      lessonDay: 20,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "w-ontem", type: "word", portuguese: "ontem", dutch: "gisteren", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 1 },
+        { id: "w-hoje", type: "word", portuguese: "hoje", dutch: "vandaag", dayIntroduced: 3, category: "hoe-gaat-het", priority: 1 },
+        { id: "w-amanha", type: "word", portuguese: "amanhã", dutch: "morgen", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 1 },
+        { id: "w-agora", type: "word", portuguese: "agora", dutch: "nu", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 1 },
+        { id: "w-antes", type: "word", portuguese: "antes", dutch: "voorheen / ervoor", dayIntroduced: 20, category: "verleden-heden-toekomst", priority: 1 },
+      ],
+    },
   ],
 };

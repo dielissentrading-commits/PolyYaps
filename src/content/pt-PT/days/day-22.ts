@@ -97,5 +97,23 @@ export const day22: LessonDay = {
         },
       ],
     },
+    {
+      id: "d22-test",
+      lessonDay: 22,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-gosto-muito-de-comida-portuguesa", type: "chunk", portuguese: "Gosto muito de comida portuguesa.", dutch: "Ik hou erg van Portugees eten.", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "c-qual-e-a-especialidade-daqui", type: "chunk", portuguese: "Qual é a especialidade daqui?", dutch: "Wat is de specialiteit hier?", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "c-queria-provar-algo-tipico", type: "chunk", portuguese: "Queria provar algo típico.", dutch: "Ik zou iets typisch willen proberen.", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "c-prefiro-vinho-branco", type: "chunk", portuguese: "Prefiro vinho branco.", dutch: "Ik heb liever witte wijn.", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "c-este-vinho-e-muito-bom", type: "chunk", portuguese: "Este vinho é muito bom.", dutch: "Deze wijn is erg goed.", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "w-vinho-branco", type: "word", portuguese: "vinho branco", dutch: "witte wijn", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 1 },
+        { id: "w-vinho-tinto", type: "word", portuguese: "vinho tinto", dutch: "rode wijn", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 1 },
+        { id: "w-queijo", type: "word", portuguese: "queijo", dutch: "kaas", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 1 },
+        { id: "w-peixe", type: "word", portuguese: "peixe", dutch: "vis", dayIntroduced: 11, category: "in-een-restaurant", priority: 1 },
+        { id: "w-marisco", type: "word", portuguese: "marisco", dutch: "zeevruchten", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 1 },
+      ],
+    },
   ],
 };

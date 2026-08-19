@@ -97,5 +97,23 @@ export const day07: LessonDay = {
         },
       ],
     },
+    {
+      id: "d07-test",
+      lessonDay: 7,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-o-que-fazes", type: "chunk", portuguese: "O que fazes?", dutch: "Wat doe je voor werk?", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "c-trabalho-em-marketing", type: "chunk", portuguese: "Trabalho em marketing.", dutch: "Ik werk in marketing.", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "c-trabalho-numa-empresa", type: "chunk", portuguese: "Trabalho numa empresa.", dutch: "Ik werk bij een bedrijf.", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "c-trabalho-com-clientes", type: "chunk", portuguese: "Trabalho com clientes.", dutch: "Ik werk met klanten.", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "c-tenho-uma-reuniao-hoje", type: "chunk", portuguese: "Tenho uma reunião hoje.", dutch: "Ik heb vandaag een vergadering.", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "w-trabalhar", type: "word", portuguese: "trabalhar", dutch: "werken", dayIntroduced: 7, category: "werk-beroep", priority: 1 },
+        { id: "w-trabalho", type: "word", portuguese: "trabalho", dutch: "werk", dayIntroduced: 7, category: "werk-beroep", priority: 1 },
+        { id: "w-empresa", type: "word", portuguese: "empresa", dutch: "bedrijf", dayIntroduced: 7, category: "werk-beroep", priority: 1 },
+        { id: "w-escritorio", type: "word", portuguese: "escritório", dutch: "kantoor", dayIntroduced: 7, category: "werk-beroep", priority: 1 },
+        { id: "w-colega", type: "word", portuguese: "colega", dutch: "collega", dayIntroduced: 7, category: "werk-beroep", priority: 1 },
+      ],
+    },
   ],
 };

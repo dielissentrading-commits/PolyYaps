@@ -38,3 +38,25 @@
   font-weight: 700;
   color: var(--color-muted);
 }
+
+.vocabulary__items {
+  gap: var(--space-2);
+}
+
+.vocabulary__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface);
+}
+
+.vocabulary__item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}

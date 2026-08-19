@@ -97,5 +97,23 @@ export const day03: LessonDay = {
         },
       ],
     },
+    {
+      id: "d03-test",
+      lessonDay: 3,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-tudo-bem", type: "chunk", portuguese: "Tudo bem?", dutch: "Alles goed?", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "c-como-estas", type: "chunk", portuguese: "Como estás?", dutch: "Hoe gaat het met je?", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "c-estou-bem-obrigado", type: "chunk", portuguese: "Estou bem, obrigado.", dutch: "Het gaat goed, bedankt.", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "c-estou-muito-bem", type: "chunk", portuguese: "Estou muito bem.", dutch: "Het gaat heel goed.", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "c-hoje-estou-cansado", type: "chunk", portuguese: "Hoje estou cansado.", dutch: "Vandaag ben ik moe.", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "w-estar", type: "word", portuguese: "estar", dutch: "zijn / zich bevinden", dayIntroduced: 3, category: "hoe-gaat-het", priority: 1 },
+        { id: "w-bem", type: "word", portuguese: "bem", dutch: "goed", dayIntroduced: 3, category: "hoe-gaat-het", priority: 1 },
+        { id: "w-mal", type: "word", portuguese: "mal", dutch: "slecht", dayIntroduced: 3, category: "hoe-gaat-het", priority: 1 },
+        { id: "w-muito", type: "word", portuguese: "muito", dutch: "erg / veel", dayIntroduced: 3, category: "hoe-gaat-het", priority: 1 },
+        { id: "w-hoje", type: "word", portuguese: "hoje", dutch: "vandaag", dayIntroduced: 3, category: "hoe-gaat-het", priority: 1 },
+      ],
+    },
   ],
 };

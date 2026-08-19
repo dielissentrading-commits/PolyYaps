@@ -97,5 +97,23 @@ export const day12: LessonDay = {
         },
       ],
     },
+    {
+      id: "d12-test",
+      lessonDay: 12,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-estou-a-procura-de", type: "chunk", portuguese: "Estou à procura de…", dutch: "Ik ben op zoek naar…", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "c-quanto-custa-isto", type: "chunk", portuguese: "Quanto custa isto?", dutch: "Hoeveel kost dit?", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "c-tem-isto-noutro-tamanho", type: "chunk", portuguese: "Tem isto noutro tamanho?", dutch: "Heeft u dit in een andere maat?", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "c-tem-isto-em-preto", type: "chunk", portuguese: "Tem isto em preto?", dutch: "Heeft u dit in het zwart?", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "c-posso-experimentar", type: "chunk", portuguese: "Posso experimentar?", dutch: "Mag ik het passen?", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "w-loja", type: "word", portuguese: "loja", dutch: "winkel", dayIntroduced: 12, category: "winkelen", priority: 1 },
+        { id: "w-tamanho", type: "word", portuguese: "tamanho", dutch: "maat", dayIntroduced: 12, category: "winkelen", priority: 1 },
+        { id: "w-cor", type: "word", portuguese: "cor", dutch: "kleur", dayIntroduced: 12, category: "winkelen", priority: 1 },
+        { id: "w-preco", type: "word", portuguese: "preço", dutch: "prijs", dayIntroduced: 12, category: "winkelen", priority: 1 },
+        { id: "w-caro", type: "word", portuguese: "caro", dutch: "duur", dayIntroduced: 12, category: "winkelen", priority: 1 },
+      ],
+    },
   ],
 };

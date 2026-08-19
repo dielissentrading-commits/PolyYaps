@@ -97,5 +97,23 @@ export const day24: LessonDay = {
         },
       ],
     },
+    {
+      id: "d24-test",
+      lessonDay: 24,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-portugal-e-mais-quente", type: "chunk", portuguese: "Portugal é mais quente.", dutch: "Portugal is warmer.", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "c-os-paises-baixos-sao-mais-pequenos", type: "chunk", portuguese: "Os Países Baixos são mais pequenos.", dutch: "Nederland is kleiner.", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "c-aqui-e-mais-tranquilo", type: "chunk", portuguese: "Aqui é mais tranquilo.", dutch: "Hier is het rustiger.", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "c-e-muito-diferente", type: "chunk", portuguese: "É muito diferente.", dutch: "Het is heel anders.", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "c-e-parecido-com", type: "chunk", portuguese: "É parecido com…", dutch: "Het lijkt op…", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "w-mais", type: "word", portuguese: "mais", dutch: "meer", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 1 },
+        { id: "w-menos", type: "word", portuguese: "menos", dutch: "minder", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 1 },
+        { id: "w-melhor", type: "word", portuguese: "melhor", dutch: "beter", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 1 },
+        { id: "w-pior", type: "word", portuguese: "pior", dutch: "slechter", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 1 },
+        { id: "w-maior", type: "word", portuguese: "maior", dutch: "groter", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 1 },
+      ],
+    },
   ],
 };

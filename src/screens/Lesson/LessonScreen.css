@@ -90,6 +90,6 @@
   color: var(--color-muted);
 }
 
-.lesson__note {
+.lesson__hint {
   margin-top: var(--space-6);
 }

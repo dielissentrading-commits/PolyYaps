@@ -83,5 +83,23 @@ export const day27: LessonDay = {
         },
       ],
     },
+    {
+      id: "d27-test",
+      lessonDay: 27,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-o-objetivo-e", type: "chunk", portuguese: "O objetivo é…", dutch: "Het doel is…", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "c-estamos-a-tentar-melhorar-os-resultados", type: "chunk", portuguese: "Estamos a tentar melhorar os resultados.", dutch: "We proberen de resultaten te verbeteren.", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "c-os-resultados-sao-bons", type: "chunk", portuguese: "Os resultados são bons.", dutch: "De resultaten zijn goed.", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "c-precisamos-de-melhorar-isto", type: "chunk", portuguese: "Precisamos de melhorar isto.", dutch: "We moeten dit verbeteren.", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "c-qual-e-o-orcamento", type: "chunk", portuguese: "Qual é o orçamento?", dutch: "Wat is het budget?", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "w-campanha", type: "word", portuguese: "campanha", dutch: "campagne", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 1 },
+        { id: "w-anuncio", type: "word", portuguese: "anúncio", dutch: "advertentie", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 1 },
+        { id: "w-orcamento", type: "word", portuguese: "orçamento", dutch: "budget", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 1 },
+        { id: "w-resultado", type: "word", portuguese: "resultado", dutch: "resultaat", dayIntroduced: 26, category: "zakelijk-kennismaken", priority: 1 },
+        { id: "w-venda", type: "word", portuguese: "venda", dutch: "verkoop", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 1 },
+      ],
+    },
   ],
 };

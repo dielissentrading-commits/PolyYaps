@@ -37,10 +37,9 @@ export function PassportScreen() {
           ))}
         </ul>
 
-        <div className="placeholder passport__note">
-          <span className="placeholder__title">Stempels worden echt in V0.5</span>
-          Een stempel verdien je door het bijbehorende scenario of de boss challenge te halen.
-        </div>
+        <p className="passport__note muted small">
+          Je verdient een stempel door de dag af te ronden die het bijbehorende scenario leert.
+        </p>
       </div>
     </div>
   );

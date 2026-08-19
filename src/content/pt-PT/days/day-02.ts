@@ -97,5 +97,23 @@ export const day02: LessonDay = {
         },
       ],
     },
+    {
+      id: "d02-test",
+      lessonDay: 2,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-onde-moras", type: "chunk", portuguese: "Onde moras?", dutch: "Waar woon je?", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "c-moro-nos-paises-baixos", type: "chunk", portuguese: "Moro nos Países Baixos.", dutch: "Ik woon in Nederland.", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "c-de-onde-es", type: "chunk", portuguese: "De onde és?", dutch: "Waar kom je vandaan?", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "c-tenho-26-anos", type: "chunk", portuguese: "Tenho 26 anos.", dutch: "Ik ben 26 jaar.", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "c-que-linguas-falas", type: "chunk", portuguese: "Que línguas falas?", dutch: "Welke talen spreek je?", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "w-ter", type: "word", portuguese: "ter", dutch: "hebben", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 1 },
+        { id: "w-morar", type: "word", portuguese: "morar", dutch: "wonen", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 1 },
+        { id: "w-viver", type: "word", portuguese: "viver", dutch: "leven / wonen", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 1 },
+        { id: "w-falar", type: "word", portuguese: "falar", dutch: "spreken", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 1 },
+        { id: "w-aprender", type: "word", portuguese: "aprender", dutch: "leren", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 1 },
+      ],
+    },
   ],
 };

@@ -98,5 +98,23 @@ export const day10: LessonDay = {
         },
       ],
     },
+    {
+      id: "d10-test",
+      lessonDay: 10,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-acho-que-sim", type: "chunk", portuguese: "Acho que sim.", dutch: "Ik denk van wel.", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "c-acho-que-nao", type: "chunk", portuguese: "Acho que não.", dutch: "Ik denk van niet.", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "c-acho-que-e-interessante", type: "chunk", portuguese: "Acho que é interessante.", dutch: "Ik vind/denk dat het interessant is.", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "c-gosto-porque", type: "chunk", portuguese: "Gosto porque…", dutch: "Ik vind het leuk omdat…", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "c-prefiro", type: "chunk", portuguese: "Prefiro…", dutch: "Ik heb liever…", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "w-achar", type: "word", portuguese: "achar", dutch: "vinden / denken", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 1 },
+        { id: "w-pensar", type: "word", portuguese: "pensar", dutch: "denken", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 1 },
+        { id: "w-porque", type: "word", portuguese: "porque", dutch: "omdat", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 1 },
+        { id: "w-mas", type: "word", portuguese: "mas", dutch: "maar", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 1 },
+        { id: "w-e", type: "word", portuguese: "e", dutch: "en", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 1 },
+      ],
+    },
   ],
 };

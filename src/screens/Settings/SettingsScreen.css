@@ -47,3 +47,17 @@
   margin-top: var(--space-6);
   align-items: center;
 }
+
+.settings__status {
+  margin-top: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-small);
+  background: var(--color-success-soft);
+  color: var(--color-success);
+  font-weight: 650;
+}
+
+.settings__status--error {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}

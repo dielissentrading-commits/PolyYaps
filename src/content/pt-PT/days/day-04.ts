@@ -97,5 +97,23 @@ export const day04: LessonDay = {
         },
       ],
     },
+    {
+      id: "d04-test",
+      lessonDay: 4,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-queria-um-cafe-por-favor", type: "chunk", portuguese: "Queria um café, por favor.", dutch: "Ik zou graag een koffie willen.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "c-queria-uma-cerveja", type: "chunk", portuguese: "Queria uma cerveja.", dutch: "Ik zou graag een bier willen.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "c-uma-agua-por-favor", type: "chunk", portuguese: "Uma água, por favor.", dutch: "Een water, alstublieft.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "c-com-leite-por-favor", type: "chunk", portuguese: "Com leite, por favor.", dutch: "Met melk, alstublieft.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "c-sem-acucar", type: "chunk", portuguese: "Sem açúcar.", dutch: "Zonder suiker.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "w-cafe", type: "word", portuguese: "café", dutch: "koffie", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 1 },
+        { id: "w-agua", type: "word", portuguese: "água", dutch: "water", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 1 },
+        { id: "w-cerveja", type: "word", portuguese: "cerveja", dutch: "bier", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 1 },
+        { id: "w-vinho", type: "word", portuguese: "vinho", dutch: "wijn", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 1 },
+        { id: "w-cha", type: "word", portuguese: "chá", dutch: "thee", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 1 },
+      ],
+    },
   ],
 };

@@ -68,5 +68,18 @@ export const day25: LessonDay = {
         },
       ],
     },
+    {
+      id: "d25-test",
+      lessonDay: 25,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-a-serio", type: "chunk", portuguese: "A sério?", dutch: "Echt?", dayIntroduced: 25, category: "smalltalk-natuurlijk-laten-klinken", priority: 2 },
+        { id: "c-que-giro", type: "chunk", portuguese: "Que giro!", dutch: "Wat leuk!", dayIntroduced: 25, category: "smalltalk-natuurlijk-laten-klinken", priority: 2 },
+        { id: "c-que-fixe", type: "chunk", portuguese: "Que fixe!", dutch: "Gaaf!", dayIntroduced: 25, category: "smalltalk-natuurlijk-laten-klinken", priority: 2 },
+        { id: "c-que-pena", type: "chunk", portuguese: "Que pena.", dutch: "Wat jammer.", dayIntroduced: 25, category: "smalltalk-natuurlijk-laten-klinken", priority: 2 },
+        { id: "c-claro", type: "chunk", portuguese: "Claro.", dutch: "Natuurlijk.", dayIntroduced: 25, category: "smalltalk-natuurlijk-laten-klinken", priority: 2 },
+      ],
+    },
   ],
 };

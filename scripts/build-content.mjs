@@ -117,7 +117,15 @@ function buildModules(day, items) {
       ...(speakingTasks.length ? { tasks: speakingTasks } : {}),
     });
   }
-  if (testTasks.length) add('test', { tasks: testTasks });
+  // The fixed lesson hour ends with a daily test (masterplan, step 4): active
+  // production over a mix of the day's own words and chunks.
+  const testItems = [...chunks.slice(0, 5), ...words.slice(0, 5)];
+  if (testTasks.length || testItems.length) {
+    add('test', {
+      items: testItems,
+      ...(testTasks.length ? { tasks: testTasks } : {}),
+    });
+  }
 
   return modules;
 }

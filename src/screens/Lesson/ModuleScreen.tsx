@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { ExercisePlayer } from '@/components/learning/ExercisePlayer';
 import { SpeakingModule } from './SpeakingModule';
-import { buildListeningSteps, buildSteps } from '@/engine/exercises';
+import { buildListeningSteps, buildSteps, buildTestSteps } from '@/engine/exercises';
 import { getDay } from '@/content/pt-PT/course';
 import { getModuleDefinition } from '@/content/pt-PT/modules';
 import { useProgress } from '@/hooks/useProgress';
@@ -33,6 +33,9 @@ export function ModuleScreen() {
     // own builder rather than the study-then-recall sequence.
     if (current.type === 'listening') {
       return buildListeningSteps(current.items, { seed: current.id });
+    }
+    if (current.type === 'test') {
+      return buildTestSteps(current.items, { seed: current.id });
     }
     if (current.type === 'speaking') return [];
     return buildSteps(current.items, { currentDay: user.currentDay, seed: current.id });

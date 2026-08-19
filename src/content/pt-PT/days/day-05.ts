@@ -100,5 +100,23 @@ export const day05: LessonDay = {
         },
       ],
     },
+    {
+      id: "d05-test",
+      lessonDay: 5,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-quanto-custa", type: "chunk", portuguese: "Quanto custa?", dutch: "Hoeveel kost het?", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "c-quanto-e", type: "chunk", portuguese: "Quanto é?", dutch: "Hoeveel is het?", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "c-sao-cinco-euros", type: "chunk", portuguese: "São cinco euros.", dutch: "Het is vijf euro.", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "c-posso-pagar-com-cartao", type: "chunk", portuguese: "Posso pagar com cartão?", dutch: "Kan ik met kaart betalen?", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "c-em-dinheiro", type: "chunk", portuguese: "Em dinheiro.", dutch: "Contant.", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "w-zero", type: "word", portuguese: "zero", dutch: "0", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 1 },
+        { id: "w-um-uma", type: "word", portuguese: "um / uma", dutch: "1", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 1 },
+        { id: "w-dois-duas", type: "word", portuguese: "dois / duas", dutch: "2", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 1 },
+        { id: "w-tres", type: "word", portuguese: "três", dutch: "3", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 1 },
+        { id: "w-quatro", type: "word", portuguese: "quatro", dutch: "4", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 1 },
+      ],
+    },
   ],
 };

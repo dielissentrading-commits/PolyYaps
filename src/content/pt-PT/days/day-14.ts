@@ -97,5 +97,23 @@ export const day14: LessonDay = {
         },
       ],
     },
+    {
+      id: "d14-test",
+      lessonDay: 14,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-queria-um-bilhete-para-lisboa", type: "chunk", portuguese: "Queria um bilhete para Lisboa.", dutch: "Ik zou graag een kaartje naar Lissabon willen.", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "c-so-ida", type: "chunk", portuguese: "Só ida.", dutch: "Alleen heen.", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "c-ida-e-volta", type: "chunk", portuguese: "Ida e volta.", dutch: "Retour.", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "c-a-que-horas-parte-o-comboio", type: "chunk", portuguese: "A que horas parte o comboio?", dutch: "Hoe laat vertrekt de trein?", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "c-a-que-horas-chega", type: "chunk", portuguese: "A que horas chega?", dutch: "Hoe laat komt hij aan?", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "w-comboio", type: "word", portuguese: "comboio", dutch: "trein", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 1 },
+        { id: "w-autocarro", type: "word", portuguese: "autocarro", dutch: "bus", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 1 },
+        { id: "w-metro", type: "word", portuguese: "metro", dutch: "metro", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 1 },
+        { id: "w-bilhete", type: "word", portuguese: "bilhete", dutch: "kaartje", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 1 },
+        { id: "w-estacao", type: "word", portuguese: "estação", dutch: "station", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 1 },
+      ],
+    },
   ],
 };

@@ -97,5 +97,23 @@ export const day01: LessonDay = {
         },
       ],
     },
+    {
+      id: "d01-test",
+      lessonDay: 1,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-ola-bom-dia", type: "chunk", portuguese: "Olá, bom dia.", dutch: "Hallo, goedemorgen.", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "c-como-te-chamas", type: "chunk", portuguese: "Como te chamas?", dutch: "Hoe heet je?", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "c-chamo-me-duran", type: "chunk", portuguese: "Chamo-me Duran.", dutch: "Ik heet Duran.", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "c-sou-neerlandes", type: "chunk", portuguese: "Sou neerlandês.", dutch: "Ik ben Nederlands.", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "c-sou-dos-paises-baixos", type: "chunk", portuguese: "Sou dos Países Baixos.", dutch: "Ik kom uit Nederland.", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "w-ola", type: "word", portuguese: "olá", dutch: "hallo", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 1 },
+        { id: "w-bom-dia", type: "word", portuguese: "bom dia", dutch: "goedemorgen", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 1 },
+        { id: "w-boa-tarde", type: "word", portuguese: "boa tarde", dutch: "goedemiddag", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 1 },
+        { id: "w-boa-noite", type: "word", portuguese: "boa noite", dutch: "goedenavond / goedenacht", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 1 },
+        { id: "w-ate-logo", type: "word", portuguese: "até logo", dutch: "tot later", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 1 },
+      ],
+    },
   ],
 };

@@ -90,5 +90,23 @@ export const day13: LessonDay = {
         },
       ],
     },
+    {
+      id: "d13-test",
+      lessonDay: 13,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-onde-fica", type: "chunk", portuguese: "Onde fica…?", dutch: "Waar is…?", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "c-como-posso-chegar-ao-centro", type: "chunk", portuguese: "Como posso chegar ao centro?", dutch: "Hoe kom ik in het centrum?", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "c-e-longe-daqui", type: "chunk", portuguese: "É longe daqui?", dutch: "Is het ver hiervandaan?", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "c-e-perto", type: "chunk", portuguese: "É perto.", dutch: "Het is dichtbij.", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "c-a-esquerda", type: "chunk", portuguese: "À esquerda.", dutch: "Naar links.", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "w-esquerda", type: "word", portuguese: "esquerda", dutch: "links", dayIntroduced: 13, category: "de-weg-vragen", priority: 1 },
+        { id: "w-direita", type: "word", portuguese: "direita", dutch: "rechts", dayIntroduced: 13, category: "de-weg-vragen", priority: 1 },
+        { id: "w-em-frente", type: "word", portuguese: "em frente", dutch: "rechtdoor", dayIntroduced: 13, category: "de-weg-vragen", priority: 1 },
+        { id: "w-perto", type: "word", portuguese: "perto", dutch: "dichtbij", dayIntroduced: 13, category: "de-weg-vragen", priority: 1 },
+        { id: "w-longe", type: "word", portuguese: "longe", dutch: "ver weg", dayIntroduced: 13, category: "de-weg-vragen", priority: 1 },
+      ],
+    },
   ],
 };

@@ -97,5 +97,23 @@ export const day18: LessonDay = {
         },
       ],
     },
+    {
+      id: "d18-test",
+      lessonDay: 18,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-amanha-vou-trabalhar", type: "chunk", portuguese: "Amanhã vou trabalhar.", dutch: "Morgen ga ik werken.", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "c-depois-vou-jantar", type: "chunk", portuguese: "Depois vou jantar.", dutch: "Daarna ga ik avondeten.", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "c-vou-visitar-lisboa", type: "chunk", portuguese: "Vou visitar Lisboa.", dutch: "Ik ga Lissabon bezoeken.", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "c-este-fim-de-semana-vou-descansar", type: "chunk", portuguese: "Este fim de semana vou descansar.", dutch: "Dit weekend ga ik uitrusten.", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "c-o-que-vais-fazer-amanha", type: "chunk", portuguese: "O que vais fazer amanhã?", dutch: "Wat ga je morgen doen?", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "w-amanha", type: "word", portuguese: "amanhã", dutch: "morgen", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 1 },
+        { id: "w-proximo", type: "word", portuguese: "próximo", dutch: "volgende", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 1 },
+        { id: "w-plano", type: "word", portuguese: "plano", dutch: "plan", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 1 },
+        { id: "w-fim-de-semana", type: "word", portuguese: "fim de semana", dutch: "weekend", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 1 },
+        { id: "w-descansar", type: "word", portuguese: "descansar", dutch: "uitrusten", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 1 },
+      ],
+    },
   ],
 };

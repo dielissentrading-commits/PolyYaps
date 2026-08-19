@@ -81,10 +81,10 @@ export function LessonScreen() {
           })}
         </ol>
 
-        <div className="placeholder lesson__note">
-          <span className="placeholder__title">Review en dagtoets volgen later</span>
-          Deze modules komen niet uit de lesstof maar uit de review- en scoring-engine (V0.4).
-        </div>
+        <p className="lesson__hint muted small">
+          Herhaling van eerdere dagen staat apart onder Review, zodat die zich aanpast aan wat
+          je nog niet vasthoudt.
+        </p>
       </div>
     </FocusShell>
   );

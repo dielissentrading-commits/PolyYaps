@@ -83,5 +83,23 @@ export const day23: LessonDay = {
         },
       ],
     },
+    {
+      id: "d23-test",
+      lessonDay: 23,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-gostas-de-viajar", type: "chunk", portuguese: "Gostas de viajar?", dutch: "Hou je van reizen?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "c-qual-e-o-teu-pais-favorito", type: "chunk", portuguese: "Qual é o teu país favorito?", dutch: "Wat is je favoriete land?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "c-onde-foste-nas-ultimas-ferias", type: "chunk", portuguese: "Onde foste nas últimas férias?", dutch: "Waar was je tijdens je laatste vakantie?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "c-ja-foste-a-portugal", type: "chunk", portuguese: "Já foste a Portugal?", dutch: "Ben je al eens in Portugal geweest?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "c-ja-alguma-vez-estiveste-em", type: "chunk", portuguese: "Já alguma vez estiveste em…?", dutch: "Ben je ooit in… geweest?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "w-destino", type: "word", portuguese: "destino", dutch: "bestemming", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 1 },
+        { id: "w-pais", type: "word", portuguese: "país", dutch: "land", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 1 },
+        { id: "w-cidade", type: "word", portuguese: "cidade", dutch: "stad", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 1 },
+        { id: "w-praia", type: "word", portuguese: "praia", dutch: "strand", dayIntroduced: 17, category: "een-reis-navertellen", priority: 1 },
+        { id: "w-montanha", type: "word", portuguese: "montanha", dutch: "berg", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 1 },
+      ],
+    },
   ],
 };

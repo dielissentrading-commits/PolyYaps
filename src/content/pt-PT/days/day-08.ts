@@ -97,5 +97,23 @@ export const day08: LessonDay = {
         },
       ],
     },
+    {
+      id: "d08-test",
+      lessonDay: 8,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-o-que-gostas-de-fazer", type: "chunk", portuguese: "O que gostas de fazer?", dutch: "Wat doe je graag?", dayIntroduced: 8, category: "hobby-s-vrije-tijd", priority: 2 },
+        { id: "c-gosto-de-viajar", type: "chunk", portuguese: "Gosto de viajar.", dutch: "Ik hou van reizen.", dayIntroduced: 8, category: "hobby-s-vrije-tijd", priority: 2 },
+        { id: "c-gosto-muito-de-cozinhar", type: "chunk", portuguese: "Gosto muito de cozinhar.", dutch: "Ik kook erg graag.", dayIntroduced: 8, category: "hobby-s-vrije-tijd", priority: 2 },
+        { id: "c-gosto-de-ouvir-musica", type: "chunk", portuguese: "Gosto de ouvir música.", dutch: "Ik luister graag naar muziek.", dayIntroduced: 8, category: "hobby-s-vrije-tijd", priority: 2 },
+        { id: "c-tambem-gosto-de-vinho", type: "chunk", portuguese: "Também gosto de vinho.", dutch: "Ik hou ook van wijn.", dayIntroduced: 8, category: "hobby-s-vrije-tijd", priority: 2 },
+        { id: "w-gostar-de", type: "word", portuguese: "gostar de", dutch: "houden van / leuk vinden", dayIntroduced: 8, category: "hobby-s-vrije-tijd", priority: 1 },
+        { id: "w-adorar", type: "word", portuguese: "adorar", dutch: "dol zijn op", dayIntroduced: 8, category: "hobby-s-vrije-tijd", priority: 1 },
+        { id: "w-fazer", type: "word", portuguese: "fazer", dutch: "doen", dayIntroduced: 7, category: "werk-beroep", priority: 1 },
+        { id: "w-viajar", type: "word", portuguese: "viajar", dutch: "reizen", dayIntroduced: 8, category: "hobby-s-vrije-tijd", priority: 1 },
+        { id: "w-cozinhar", type: "word", portuguese: "cozinhar", dutch: "koken", dayIntroduced: 8, category: "hobby-s-vrije-tijd", priority: 1 },
+      ],
+    },
   ],
 };

@@ -98,6 +98,8 @@ export interface ProgressState {
   completeLesson: (day: number) => Promise<LessonProgress | undefined>;
   clearSession: () => void;
   resetProgress: () => Promise<void>;
+  /** Re-reads everything from storage, e.g. after importing a backup. */
+  reload: () => Promise<void>;
 }
 
 const ProgressContext = createContext<ProgressState | null>(null);
@@ -134,27 +136,23 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const [justUnlocked, setJustUnlocked] = useState<string[]>([]);
   const [session, setSession] = useState<LessonSession | undefined>();
 
-  useEffect(() => {
-    let cancelled = false;
-
-    void repository.loadProgress().then((stored) => {
-      if (cancelled) return;
-      setUser(stored.user);
-      setLessons(stored.lessons);
-      setItems(stored.items);
-      setWeakness(stored.weakness);
-      setAchievementProgress(stored.achievements);
-      setStampsEarned(
-        Object.fromEntries(stored.stamps.map((stamp) => [stamp.id, stamp.earnedAt])),
-      );
-      setPersistent(stored.persistent);
-      setReady(true);
-    });
-
-    return () => {
-      cancelled = true;
-    };
+  const reload = useCallback(async () => {
+    const stored = await repository.loadProgress();
+    setUser(stored.user);
+    setLessons(stored.lessons);
+    setItems(stored.items);
+    setWeakness(stored.weakness);
+    setAchievementProgress(stored.achievements);
+    setStampsEarned(
+      Object.fromEntries(stored.stamps.map((stamp) => [stamp.id, stamp.earnedAt])),
+    );
+    setPersistent(stored.persistent);
+    setReady(true);
   }, []);
+
+  useEffect(() => {
+    void reload();
+  }, [reload]);
 
   /**
    * Applies answers to item mastery and schedules the next review for each.
@@ -347,6 +345,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       completeLesson,
       clearSession,
       resetProgress: reset,
+      reload,
     };
   }, [
     ready,
@@ -363,6 +362,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     completeLesson,
     clearSession,
     reset,
+    reload,
   ]);
 
   return <ProgressContext.Provider value={value}>{children}</ProgressContext.Provider>;

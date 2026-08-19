@@ -7,10 +7,18 @@
 :root {
   /* Color */
   --color-primary: #d95c45;
-  --color-primary-dark: #c44e3a;
+  --color-primary-dark: #c0402a;
   --color-primary-soft: #fbeeea;
   --color-text: #222222;
-  --color-muted: #737373;
+  /*
+   * Two values are a shade darker than docs/06-app-design.md specifies, so
+   * that text meets WCAG AA (4.5:1):
+   *   primary-dark  c44e3a -> c0402a  (white on it, and it on light surfaces)
+   *   muted         737373 -> 676767  (small grey text on sand)
+   * The terracotta identity is unchanged; --color-primary still carries it on
+   * fills, bars and icons, where 3:1 is the bar for non-text elements.
+   */
+  --color-muted: #676767;
   --color-background: #faf9f7;
   --color-surface: #ffffff;
   --color-border: #e8e5e1;

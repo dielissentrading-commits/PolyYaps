@@ -97,5 +97,23 @@ export const day11: LessonDay = {
         },
       ],
     },
+    {
+      id: "d11-test",
+      lessonDay: 11,
+      type: "test",
+      estimatedMinutes: 5,
+      items: [
+        { id: "c-tem-uma-mesa-para-dois", type: "chunk", portuguese: "Tem uma mesa para dois?", dutch: "Heeft u een tafel voor twee?", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "c-pode-trazer-a-ementa-por-favor", type: "chunk", portuguese: "Pode trazer a ementa, por favor?", dutch: "Kunt u de kaart brengen?", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "c-o-que-recomenda", type: "chunk", portuguese: "O que recomenda?", dutch: "Wat raadt u aan?", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "c-queria-este-prato", type: "chunk", portuguese: "Queria este prato.", dutch: "Ik zou graag dit gerecht willen.", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "c-para-mim-o-peixe", type: "chunk", portuguese: "Para mim, o peixe.", dutch: "Voor mij de vis.", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "w-restaurante", type: "word", portuguese: "restaurante", dutch: "restaurant", dayIntroduced: 11, category: "in-een-restaurant", priority: 1 },
+        { id: "w-mesa", type: "word", portuguese: "mesa", dutch: "tafel", dayIntroduced: 11, category: "in-een-restaurant", priority: 1 },
+        { id: "w-ementa", type: "word", portuguese: "ementa", dutch: "menukaart", dayIntroduced: 11, category: "in-een-restaurant", priority: 1 },
+        { id: "w-entrada", type: "word", portuguese: "entrada", dutch: "voorgerecht", dayIntroduced: 11, category: "in-een-restaurant", priority: 1 },
+        { id: "w-prato", type: "word", portuguese: "prato", dutch: "gerecht", dayIntroduced: 11, category: "in-een-restaurant", priority: 1 },
+      ],
+    },
   ],
 };

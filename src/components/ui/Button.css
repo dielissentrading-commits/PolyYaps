@@ -32,12 +32,12 @@
 }
 
 .btn--primary {
-  background: var(--color-primary);
+  background: var(--color-primary-dark);
   color: var(--color-surface);
 }
 
 .btn--primary:hover:not(:disabled) {
-  background: var(--color-primary-dark);
+  background: #a8351f;
 }
 
 .btn--secondary {

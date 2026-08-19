@@ -49,7 +49,7 @@
   width: 76px;
   height: 76px;
   border-radius: var(--radius-pill);
-  background: var(--color-primary);
+  background: var(--color-primary-dark);
   color: var(--color-surface);
   transition:
     background-color var(--duration-fast) var(--ease-standard),
@@ -62,7 +62,7 @@
 
 /* Subtle pulse while recording — no alarm, just a sign it is listening. */
 .mic-button--on {
-  background: var(--color-primary-dark);
+  background: #a8351f;
   animation: mic-pulse 1.6s var(--ease-standard) infinite;
 }
 

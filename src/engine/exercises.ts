@@ -233,3 +233,20 @@ export function buildListeningSteps(
     exercise: listeningExercise(item, items, `${options.seed}-${item.id}`),
   }));
 }
+
+/**
+ * A daily test: no study phase and no multiple choice, only active production.
+ * Recognition has already been practised earlier in the lesson.
+ */
+export function buildTestSteps(
+  items: LearningItem[],
+  options: { seed: string },
+): LessonStep[] {
+  const random = seededRandom(options.seed);
+
+  return shuffle(items, random).map((item) => ({
+    kind: 'exercise' as const,
+    item,
+    exercise: buildExercise(item, items, { produce: true, seed: `${options.seed}-${item.id}` }),
+  }));
+}

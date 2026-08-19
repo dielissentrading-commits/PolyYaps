@@ -47,7 +47,7 @@
 }
 
 .day-card__marker--current {
-  background: var(--color-primary);
+  background: var(--color-primary-dark);
   color: var(--color-surface);
 }
 
