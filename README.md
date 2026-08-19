@@ -17,12 +17,37 @@ PolyYaps is a mobile-first Progressive Web App for learning European Portuguese 
 - `docs/06-app-design.md` — information architecture, wireframes, visual identity and high-fidelity UI specification
 - `docs/07-technical-architecture.md` — technical architecture and implementation roadmap
 
-## Development
+## Running the app
 
-Requires Node 20 or newer.
+Requires Node 20.19+ or 22.12+ (`node -v` to check).
 
 ```bash
+git clone https://github.com/dielissentrading-commits/PolyYaps.git
+cd PolyYaps
+git checkout claude/app-shell-prototype-1avlcz
 npm install
+npm run dev
+```
+
+Open the printed `localhost` address. The dev server also listens on the local
+network, so the `Network:` address opens the app on a phone on the same wifi.
+
+To try it the way it ships — service worker, offline, install prompt — build it
+first:
+
+```bash
+npm run build
+npm run preview
+```
+
+Installing to the home screen needs `localhost` or HTTPS. Over a plain
+`http://192.168.x.x` address the app runs but the service worker will not
+register, so offline and installing stay unavailable until it is served over
+HTTPS.
+
+## Development
+
+```bash
 npm run dev               # development server
 npm run build             # typecheck, build, generate the service worker
 npm run preview           # serve the production build
