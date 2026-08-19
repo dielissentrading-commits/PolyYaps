@@ -1,0 +1,58 @@
+name: Publish PolyYaps To Legacy Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: legacy-pages-publish
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build production app
+        run: npm run build
+
+      - name: Copy production build to Pages root
+        run: |
+          test -f dist/app.html
+          test -d dist/assets
+          rm -rf assets
+          cp -R dist/assets ./assets
+          cp dist/app.html ./index.html
+          cp dist/manifest.webmanifest ./manifest.webmanifest
+          cp dist/icon.svg ./icon.svg
+          cp dist/sw.js ./sw.js
+          touch .nojekyll
+
+      - name: Commit published build
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f index.html assets manifest.webmanifest icon.svg sw.js .nojekyll
+          if git diff --cached --quiet; then
+            echo "Published files are already current."
+            exit 0
+          fi
+          git commit -m "deploy: publish PolyYaps production build"
+          git push origin HEAD:main
