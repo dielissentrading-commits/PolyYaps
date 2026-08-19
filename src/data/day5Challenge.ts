@@ -1,0 +1,91 @@
+import type { ChallengeContent } from '../types/learning';
+
+export const day5Challenge: ChallengeContent = {
+  day: 5,
+  title: 'Café Challenge',
+  city: 'Lisboa',
+  subtitle: 'Je eerste echte checkpoint: bestellen, prijs begrijpen en betalen zonder Engels.',
+  goal: 'Rond een volledig cafébezoek af in het Portugees en verdien je eerste paspoortstempel.',
+  rewardXp: 150,
+  stampId: 'cafe-lisboa',
+  stampLabel: '☕ Café de Lisboa',
+  toolkit: {
+    vocabulary: [
+      { id: 'euro', portuguese: 'euro', dutch: 'euro', weaknessCategory: 'NUMBERS' },
+      { id: 'centimo', portuguese: 'cêntimo', dutch: 'cent', weaknessCategory: 'NUMBERS' },
+      { id: 'dinheiro', portuguese: 'dinheiro', dutch: 'contant geld', weaknessCategory: 'PAYMENT' },
+      { id: 'cartao', portuguese: 'cartão', dutch: 'kaart / pinpas', weaknessCategory: 'PAYMENT' },
+      { id: 'pagar', portuguese: 'pagar', dutch: 'betalen', weaknessCategory: 'PAYMENT' },
+      { id: 'custar', portuguese: 'custar', dutch: 'kosten', weaknessCategory: 'NUMBERS' },
+      { id: 'hora', portuguese: 'hora', dutch: 'uur', weaknessCategory: 'TIME' },
+      { id: 'meia', portuguese: 'meia', dutch: 'half', weaknessCategory: 'TIME' },
+      { id: 'agora', portuguese: 'agora', dutch: 'nu', weaknessCategory: 'TIME' },
+      { id: 'quanto', portuguese: 'quanto', dutch: 'hoeveel', weaknessCategory: 'NUMBERS' },
+    ],
+    chunks: [
+      { id: 'quanto-custa', portuguese: 'Quanto custa?', dutch: 'Hoeveel kost het?', weaknessCategory: 'NUMBERS' },
+      { id: 'quanto-e', portuguese: 'Quanto é?', dutch: 'Hoeveel is het?', weaknessCategory: 'NUMBERS' },
+      { id: 'cinco-euros', portuguese: 'São cinco euros.', dutch: 'Het is vijf euro.', weaknessCategory: 'NUMBERS' },
+      { id: 'pagar-cartao', portuguese: 'Posso pagar com cartão?', dutch: 'Kan ik met kaart betalen?', weaknessCategory: 'PAYMENT' },
+      { id: 'em-dinheiro', portuguese: 'Em dinheiro.', dutch: 'Contant.', weaknessCategory: 'PAYMENT' },
+      { id: 'que-horas', portuguese: 'Que horas são?', dutch: 'Hoe laat is het?', weaknessCategory: 'TIME' },
+      { id: 'uma-hora', portuguese: 'É uma hora.', dutch: 'Het is één uur.', weaknessCategory: 'TIME' },
+      { id: 'duas-horas', portuguese: 'São duas horas.', dutch: 'Het is twee uur.', weaknessCategory: 'TIME' },
+    ],
+    numberLines: [
+      '0 zero · 1 um/uma · 2 dois/duas · 3 três · 4 quatro · 5 cinco',
+      '6 seis · 7 sete · 8 oito · 9 nove · 10 dez',
+      '11 onze · 12 doze · 13 treze · 14 catorze · 15 quinze',
+      '16 dezasseis · 17 dezassete · 18 dezoito · 19 dezanove · 20 vinte',
+    ],
+  },
+  steps: [
+    {
+      id: 's1', speaker: 'barista', line: 'Bom dia. O que deseja?',
+      prompt: 'Bestel beleefd een koffie.', type: 'input',
+      answer: 'queria um café por favor',
+      alternatives: ['Queria um café, por favor.', 'queria um cafe por favor'],
+    },
+    {
+      id: 's2', speaker: 'barista', line: 'Mais alguma coisa?',
+      prompt: 'Je wilt ook water. Wat zeg je?', type: 'choice',
+      answer: 'Uma água, por favor.',
+      options: ['Uma água, por favor.', 'Tenho água.', 'Sou água.'],
+    },
+    {
+      id: 's3', speaker: 'system',
+      prompt: 'Vraag hoeveel het kost.', type: 'input',
+      answer: 'quanto custa', alternatives: ['Quanto custa?', 'quanto é', 'Quanto é?'],
+      itemRef: { type: 'chunk', id: 'quanto-custa' },
+    },
+    {
+      id: 's4', speaker: 'barista', line: 'São cinco euros.',
+      prompt: 'Hoeveel moet je betalen?', type: 'choice',
+      answer: '€5', options: ['€2', '€5', '€15'],
+      itemRef: { type: 'chunk', id: 'cinco-euros' },
+    },
+    {
+      id: 's5', speaker: 'system',
+      prompt: 'Vraag of je met kaart kunt betalen.', type: 'input',
+      answer: 'posso pagar com cartão', alternatives: ['Posso pagar com cartão?', 'posso pagar com cartao'],
+      itemRef: { type: 'chunk', id: 'pagar-cartao' },
+    },
+    {
+      id: 's6', speaker: 'barista', line: 'Sim, claro.',
+      prompt: 'Sluit je bestelling beleefd af.', type: 'choice',
+      answer: 'É tudo, obrigado.', options: ['É tudo, obrigado.', 'Mais alguma coisa?', 'Quanto custa?'],
+    },
+    {
+      id: 's7', speaker: 'system',
+      prompt: 'Je wilt weten hoe laat het is. Wat vraag je?', type: 'input',
+      answer: 'que horas são', alternatives: ['Que horas são?', 'que horas sao'],
+      itemRef: { type: 'chunk', id: 'que-horas' },
+    },
+    {
+      id: 's8', speaker: 'barista', line: 'São duas horas.',
+      prompt: 'Welke tijd hoorde je?', type: 'choice',
+      answer: '14:00 / 2 uur', options: ['13:00 / 1 uur', '14:00 / 2 uur', '12:30 / half één'],
+      itemRef: { type: 'chunk', id: 'duas-horas' },
+    },
+  ],
+};
