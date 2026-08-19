@@ -19,6 +19,7 @@ export type ProgressState = {
   passportStamps: string[];
   achievements: string[];
   lastStudyDate?: string;
+  courseCompletedAt?: string;
 };
 
 const STORAGE_KEY = 'polyyaps-progress-v1';
@@ -53,12 +54,9 @@ function daysBetween(a: string, b: string) {
 function updateStreak(existing: ProgressState, today: string) {
   if (existing.lastStudyDate === today) return { streak: existing.streak, freezes: existing.streakFreezes ?? 0, advanced: false };
   if (!existing.lastStudyDate) return { streak: 1, freezes: existing.streakFreezes ?? 0, advanced: true };
-
   const gap = daysBetween(existing.lastStudyDate, today);
   if (gap === 1) return { streak: existing.streak + 1, freezes: existing.streakFreezes ?? 0, advanced: true };
-  if (gap === 2 && (existing.streakFreezes ?? 0) > 0) {
-    return { streak: existing.streak + 1, freezes: existing.streakFreezes - 1, advanced: true };
-  }
+  if (gap === 2 && (existing.streakFreezes ?? 0) > 0) return { streak: existing.streak + 1, freezes: existing.streakFreezes - 1, advanced: true };
   return { streak: 1, freezes: existing.streakFreezes ?? 0, advanced: true };
 }
 
@@ -79,13 +77,7 @@ export function loadProgress(): ProgressState {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return initialProgress;
     const parsed = JSON.parse(raw) as Partial<ProgressState>;
-    return {
-      ...initialProgress,
-      ...parsed,
-      streakFreezes: parsed.streakFreezes ?? 0,
-      passportStamps: parsed.passportStamps ?? [],
-      achievements: parsed.achievements ?? [],
-    };
+    return { ...initialProgress, ...parsed, streakFreezes: parsed.streakFreezes ?? 0, passportStamps: parsed.passportStamps ?? [], achievements: parsed.achievements ?? [] };
   } catch {
     return initialProgress;
   }
@@ -100,9 +92,8 @@ export function completeLesson(day: number, score: number, wordIds: string[], ch
   const today = localDateKey();
   const previousResult = existing.dayResults[day];
   const stars: 1 | 2 | 3 = score >= 90 ? 3 : score >= 75 ? 2 : 1;
-  const baseXp = 100;
   const scoreBonus = score === 100 ? 15 : score >= 90 ? 10 : 0;
-  const xpEarned = previousResult ? Math.max(10, scoreBonus) : baseXp + scoreBonus;
+  const xpEarned = previousResult ? Math.max(10, scoreBonus) : 100 + scoreBonus;
   const streakState = updateStreak(existing, today);
   const achievements = new Set(existing.achievements);
   const learnedWords = mergeLearningKeys(existing.learnedWords, day, 'word', wordIds);
@@ -110,6 +101,7 @@ export function completeLesson(day: number, score: number, wordIds: string[], ch
 
   if (!existing.completedDays.includes(day)) achievements.add('primeiras-palavras');
   if (learnedWords.length >= 100) achievements.add('cem-palavras');
+  if (day >= 27) achievements.add('negocios');
   const streakFreezes = applyStreakRewards(existing, streakState, achievements);
 
   const next: ProgressState = {
@@ -120,29 +112,17 @@ export function completeLesson(day: number, score: number, wordIds: string[], ch
     longestStreak: Math.max(existing.longestStreak, streakState.streak),
     streakFreezes,
     completedDays: Array.from(new Set([...existing.completedDays, day])).sort((a, b) => a - b),
-    dayResults: {
-      ...existing.dayResults,
-      [day]: { score, stars, xpEarned, completedAt: new Date().toISOString(), kind: 'lesson' },
-    },
+    dayResults: { ...existing.dayResults, [day]: { score, stars, xpEarned, completedAt: new Date().toISOString(), kind: 'lesson' } },
     learnedWords,
     learnedChunks,
     achievements: Array.from(achievements),
     lastStudyDate: today,
   };
-
   saveProgress(next);
   return next;
 }
 
-export function completeChallenge(
-  day: number,
-  score: number,
-  rewardXp: number,
-  stampId: string,
-  wordIds: string[],
-  chunkIds: string[],
-  achievementId = 'um-cafe-por-favor',
-): ProgressState {
+export function completeChallenge(day: number, score: number, rewardXp: number, stampId: string, wordIds: string[], chunkIds: string[], achievementId = 'um-cafe-por-favor'): ProgressState {
   const existing = loadProgress();
   const today = localDateKey();
   const previousResult = existing.dayResults[day];
@@ -163,6 +143,8 @@ export function completeChallenge(
   }
   if (learnedWords.length >= 100) achievements.add('cem-palavras');
   const streakFreezes = applyStreakRewards(existing, streakState, achievements);
+  const completedDays = passed ? Array.from(new Set([...existing.completedDays, day])).sort((a, b) => a - b) : existing.completedDays;
+  const completedAt = day === 30 && passed ? new Date().toISOString() : existing.courseCompletedAt;
 
   const next: ProgressState = {
     ...existing,
@@ -171,18 +153,15 @@ export function completeChallenge(
     streak: streakState.streak,
     longestStreak: Math.max(existing.longestStreak, streakState.streak),
     streakFreezes,
-    completedDays: passed ? Array.from(new Set([...existing.completedDays, day])).sort((a, b) => a - b) : existing.completedDays,
-    dayResults: {
-      ...existing.dayResults,
-      [day]: { score, stars, xpEarned, completedAt: new Date().toISOString(), kind: 'challenge' },
-    },
+    completedDays,
+    dayResults: { ...existing.dayResults, [day]: { score, stars, xpEarned, completedAt: new Date().toISOString(), kind: 'challenge' } },
     learnedWords,
     learnedChunks,
     passportStamps: Array.from(stamps),
     achievements: Array.from(achievements),
     lastStudyDate: today,
+    courseCompletedAt: completedAt,
   };
-
   saveProgress(next);
   return next;
 }
