@@ -45,6 +45,35 @@ export type LessonContent = {
   quiz: QuizQuestion[];
 };
 
+export type ChallengeStep = {
+  id: string;
+  speaker: 'barista' | 'system';
+  line?: string;
+  prompt: string;
+  type: 'input' | 'choice';
+  answer: string;
+  alternatives?: string[];
+  options?: string[];
+  itemRef?: { type: 'word' | 'chunk'; id: string };
+};
+
+export type ChallengeContent = {
+  day: number;
+  title: string;
+  city: string;
+  subtitle: string;
+  goal: string;
+  rewardXp: number;
+  stampId: string;
+  stampLabel: string;
+  toolkit: {
+    vocabulary: VocabularyItem[];
+    chunks: ChunkItem[];
+    numberLines: string[];
+  };
+  steps: ChallengeStep[];
+};
+
 export type ItemType = 'word' | 'chunk';
 export type EvidenceType = 'exposure' | 'recognition' | 'recall' | 'listening' | 'sentence' | 'speaking' | 'context' | 'spontaneous' | 'quiz';
 export type MasteryLevel = 0 | 1 | 2 | 3 | 4;
