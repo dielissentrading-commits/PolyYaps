@@ -1,0 +1,32 @@
+name: QA Live Pages Smoke
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify live HTML and assets
+        run: |
+          url="https://dielissentrading-commits.github.io/PolyYaps/?qa=${GITHUB_SHA}"
+          curl -fsSL --retry 8 --retry-delay 3 "$url" -o /tmp/index.html
+          cat /tmp/index.html
+          if grep -q '/src/main.tsx' /tmp/index.html; then
+            echo "Live Pages is still serving source index.html"
+            exit 1
+          fi
+          js=$(grep -oE '\./assets/[^\" ]+\.js' /tmp/index.html | head -1)
+          css=$(grep -oE '\./assets/[^\" ]+\.css' /tmp/index.html | head -1)
+          test -n "$js"
+          test -n "$css"
+          base="https://dielissentrading-commits.github.io/PolyYaps/"
+          curl -fsS --retry 5 --retry-delay 2 "${base}${js#./}" -o /tmp/app.js
+          curl -fsS --retry 5 --retry-delay 2 "${base}${css#./}" -o /tmp/app.css
+          test $(wc -c </tmp/app.js) -gt 100000
+          test $(wc -c </tmp/app.css) -gt 10000
+          echo "LIVE_OK js=$js css=$css js_bytes=$(wc -c </tmp/app.js) css_bytes=$(wc -c </tmp/app.css)"
