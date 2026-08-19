@@ -1,14 +1,9 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { FocusShell } from '@/components/layout/FocusShell';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
-import { StudyCard } from '@/components/learning/StudyCard';
-import { ChoiceExercise } from '@/components/learning/ChoiceExercise';
-import { InputExercise } from '@/components/learning/InputExercise';
-import { Feedback } from '@/components/learning/Feedback';
-import { playAudio } from '@/audio/playback';
-import { checkAnswer, isCorrect, type AnswerCheck } from '@/engine/answers';
+import { ExercisePlayer } from '@/components/learning/ExercisePlayer';
 import { buildSteps } from '@/engine/exercises';
 import { getDay } from '@/content/pt-PT/course';
 import { getModuleDefinition } from '@/content/pt-PT/modules';
@@ -16,15 +11,11 @@ import { useProgress } from '@/hooks/useProgress';
 import type { AnswerResult, LessonNote, LessonTask } from '@/types';
 import './ModuleScreen.css';
 
-/** XP for a correct answer, before the XP engine takes over the real numbers. */
-const XP_PER_CORRECT = 2;
-
 /**
- * Lesson player — docs/06-app-design.md, "Lesson player".
+ * One module of a lesson.
  *
- * Item modules run a study-then-recall sequence; note and task modules are a
- * single screen. One learning target at a time, one dominant action, and a
- * correction that never blocks progress.
+ * Modules with learning items run the shared player; grammar, listening and
+ * speaking modules present their material and continue.
  */
 export function ModuleScreen() {
   const { day, module } = useParams();
@@ -43,159 +34,55 @@ export function ModuleScreen() {
     [current, user.currentDay],
   );
 
-  const [index, setIndex] = useState(0);
-  const [answer, setAnswer] = useState('');
-  const [check, setCheck] = useState<AnswerCheck | null>(null);
-  const [marked, setMarked] = useState<Set<string>>(new Set());
-  const [results, setResults] = useState<AnswerResult[]>([]);
-
-  const listen = useCallback((text: string) => {
-    void playAudio({ text });
-  }, []);
-
   if (!lesson || !current) {
     return <Navigate to={lesson ? `/lesson/${lesson.day}` : '/learn'} replace />;
   }
 
   const definition = getModuleDefinition(current.type);
-  const hasSteps = steps.length > 0;
-  const step = hasSteps ? steps[index] : undefined;
-  const isExercise = step?.kind === 'exercise';
-  const answered = check !== null;
-
   const moduleIndex = lesson.modules.findIndex((entry) => entry.id === current.id);
   const nextModule = lesson.modules[moduleIndex + 1];
   const nextLabel = nextModule
     ? (getModuleDefinition(nextModule.type)?.label ?? nextModule.type)
     : undefined;
-  const isLastStep = !hasSteps || index >= steps.length - 1;
+  const finishLabel = nextLabel ? `Verder naar ${nextLabel}` : 'Naar resultaat';
 
-  const leaveModule = () => {
+  const finish = (results: AnswerResult[]) => {
     recordAnswers(results);
-    if (nextModule) {
-      navigate(`/lesson/${lesson.day}/${nextModule.type}`);
-    } else {
-      navigate(`/lesson/${lesson.day}/result`);
-    }
+    navigate(
+      nextModule ? `/lesson/${lesson.day}/${nextModule.type}` : `/lesson/${lesson.day}/result`,
+    );
   };
 
-  const submit = (given: string) => {
-    if (!isExercise || answered) return;
-    const verdict = checkAnswer(given, step.exercise.expected);
-    setAnswer(given);
-    setCheck(verdict);
-    setResults((previous) => [
-      ...previous,
-      {
-        itemId: step.exercise.itemId,
-        correct: isCorrect(verdict.verdict),
-        weight: step.exercise.weight,
-        exerciseType: step.exercise.type,
-        itemType: step.item.type,
-      },
-    ]);
-  };
-
-  const advance = () => {
-    if (isLastStep) {
-      leaveModule();
-      return;
-    }
-    setIndex((value) => value + 1);
-    setAnswer('');
-    setCheck(null);
-  };
-
-  const toggleMark = () => {
-    if (!isExercise) return;
-    setMarked((previous) => {
-      const next = new Set(previous);
-      if (next.has(step.exercise.itemId)) next.delete(step.exercise.itemId);
-      else next.add(step.exercise.itemId);
-      return next;
-    });
-  };
-
-  // The dominant action changes with the state of the current step.
-  const primaryLabel = (() => {
-    if (!isExercise) {
-      return isLastStep ? (nextLabel ? `Verder naar ${nextLabel}` : 'Naar resultaat') : 'Volgende';
-    }
-    if (!answered) return step.exercise.options ? 'Kies een antwoord' : 'Controleer';
-    return isLastStep ? (nextLabel ? `Verder naar ${nextLabel}` : 'Naar resultaat') : 'Volgende';
-  })();
-
-  // Choosing an option submits it directly, so before answering the footer has
-  // nothing to confirm on a choice question, and nothing to check on an empty
-  // typed one. Either way it must not submit an empty answer as a mistake.
-  const primaryDisabled =
-    isExercise &&
-    !answered &&
-    (Boolean(step.exercise.options) || answer.trim().length === 0);
-
-  const onPrimary = () => {
-    if (isExercise && !answered) submit(answer);
-    else advance();
-  };
+  if (steps.length > 0) {
+    return (
+      <ExercisePlayer
+        title={definition?.label ?? current.type}
+        steps={steps}
+        closeTo={`/lesson/${lesson.day}`}
+        finishLabel={finishLabel}
+        onFinish={finish}
+        currentDay={lesson.day}
+      />
+    );
+  }
 
   return (
     <FocusShell
       title={definition?.label ?? current.type}
-      step={hasSteps ? index + 1 : undefined}
-      totalSteps={hasSteps ? steps.length : undefined}
       closeTo={`/lesson/${lesson.day}`}
       footer={
         <Button
           fullWidth
-          onClick={onPrimary}
-          disabled={primaryDisabled}
+          onClick={() => finish([])}
           trailing={<Icon name="chevron-right" size={20} />}
         >
-          {primaryLabel}
+          {finishLabel}
         </Button>
       }
     >
       <div className="module">
-        {step?.kind === 'study' && (
-          <StudyCard
-            item={step.item}
-            isRepeat={step.item.dayIntroduced < lesson.day}
-            onListen={() => listen(step.item.portuguese)}
-          />
-        )}
-
-        {step?.kind === 'exercise' && step.exercise.options && (
-          <ChoiceExercise
-            exercise={step.exercise}
-            answered={answered ? answer : undefined}
-            onChoose={submit}
-          />
-        )}
-
-        {step?.kind === 'exercise' && !step.exercise.options && (
-          <InputExercise
-            exercise={step.exercise}
-            value={answer}
-            onChange={setAnswer}
-            onSubmit={() => submit(answer)}
-            locked={answered}
-          />
-        )}
-
-        {isExercise && check && (
-          <Feedback
-            check={check}
-            given={answer}
-            expected={step.exercise.expected}
-            xp={isCorrect(check.verdict) ? XP_PER_CORRECT : 0}
-            onListen={() => listen(step.item.portuguese)}
-            onMarkForReview={toggleMark}
-            marked={marked.has(step.exercise.itemId)}
-          />
-        )}
-
-        {!hasSteps && current.notes?.map((note) => <NoteCard key={note.title} note={note} />)}
-        {!hasSteps && current.tasks?.map((task) => <TaskCard key={task.title} task={task} />)}
+        {current.notes?.map((note) => <NoteCard key={note.title} note={note} />)}
+        {current.tasks?.map((task) => <TaskCard key={task.title} task={task} />)}
       </div>
     </FocusShell>
   );

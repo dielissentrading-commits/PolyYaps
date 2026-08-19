@@ -1,0 +1,26 @@
+.splash {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  background: var(--color-background);
+}
+
+.splash__wordmark {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  animation: splash-fade 900ms var(--ease-standard) infinite alternate;
+}
+
+.splash__accent {
+  color: var(--color-primary);
+}
+
+@keyframes splash-fade {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}

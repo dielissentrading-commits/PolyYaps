@@ -9,7 +9,7 @@ import {
 } from 'react';
 import { course, getDay } from '@/content/pt-PT/course';
 import { achievements } from '@/content/pt-PT/achievements';
-import { stamps } from '@/content/pt-PT/passport';
+import { stamps, stampsForDay } from '@/content/pt-PT/passport';
 import { levelForXP, levelTitle } from '@/content/pt-PT/levels';
 import { dayKey } from '@/engine/dates';
 import { applyAnswer, emptyItemProgress } from '@/engine/mastery';
@@ -18,6 +18,7 @@ import { buildLessonProgress } from '@/engine/scoring';
 import { applyStudyDay } from '@/engine/streak';
 import { lessonXP } from '@/engine/xp';
 import { currentFocus, type WeaknessCounts } from '@/engine/weakness';
+import { evaluateAchievements, newlyUnlocked } from '@/engine/achievements';
 import { scheduleNextReview } from '@/engine/review';
 import * as repository from '@/storage/progressRepository';
 import type {
@@ -84,6 +85,8 @@ export interface ProgressState {
   vocabulary: VocabularyStats;
   achievements: Achievement[];
   achievementProgress: AchievementProgress[];
+  /** Achievements unlocked by the most recent completion, for one celebration. */
+  justUnlocked: string[];
   passportStamps: PassportStamp[];
   todayLesson?: CourseDay;
   completionPercentage: number;
@@ -127,6 +130,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<Record<string, ItemProgress>>({});
   const [weakness, setWeakness] = useState<WeaknessCounts>({});
   const [stampsEarned, setStampsEarned] = useState<Record<string, string>>({});
+  const [achievementProgress, setAchievementProgress] = useState<AchievementProgress[]>([]);
+  const [justUnlocked, setJustUnlocked] = useState<string[]>([]);
   const [session, setSession] = useState<LessonSession | undefined>();
 
   useEffect(() => {
@@ -138,6 +143,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       setLessons(stored.lessons);
       setItems(stored.items);
       setWeakness(stored.weakness);
+      setAchievementProgress(stored.achievements);
       setStampsEarned(
         Object.fromEntries(stored.stamps.map((stamp) => [stamp.id, stamp.earnedAt])),
       );
@@ -235,9 +241,30 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       });
       setUser(nextUser);
 
+      // Gamification follows from the day being finished, never the other way
+      // around: XP and stamps are consequences, not inputs.
+      const nextLessons = [...lessons.filter((entry) => entry.day !== day), record];
+      const nextAchievements = evaluateAchievements(
+        { user: nextUser, lessons: nextLessons, items: Object.values(items) },
+        achievementProgress,
+      );
+      setJustUnlocked(newlyUnlocked(achievementProgress, nextAchievements));
+      setAchievementProgress(nextAchievements);
+
+      const earnedNow = stampsForDay(day).filter((stamp) => !stampsEarned[stamp.id]);
+      const earnedAt = new Date().toISOString();
+      if (earnedNow.length) {
+        setStampsEarned((previous) => ({
+          ...previous,
+          ...Object.fromEntries(earnedNow.map((stamp) => [stamp.id, earnedAt])),
+        }));
+      }
+
       await Promise.all([
         repository.saveLesson(record),
         repository.saveUser(nextUser),
+        repository.saveAchievements(nextAchievements),
+        ...earnedNow.map((stamp) => repository.saveStamp(stamp.id, earnedAt)),
         repository.appendHistory({
           day,
           answered: answers.length,
@@ -248,7 +275,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
       return record;
     },
-    [session, lessons, user],
+    [session, lessons, user, items, achievementProgress, stampsEarned],
   );
 
   const reset = useCallback(async () => {
@@ -258,6 +285,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     setItems({});
     setWeakness({});
     setStampsEarned({});
+    setAchievementProgress([]);
+    setJustUnlocked([]);
     setSession(undefined);
   }, []);
 
@@ -298,11 +327,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         chunksActive: active.filter((item) => isChunk(item.itemId)).length,
       },
       achievements,
-      achievementProgress: achievements.map((achievement) => ({
-        achievementId: achievement.id,
-        unlocked: false,
-        progress: 0,
-      })),
+      achievementProgress,
+      justUnlocked,
       passportStamps: stamps.map<PassportStamp>((stamp) => ({
         id: stamp.id,
         title: stamp.title,
@@ -327,6 +353,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     items,
     weakness,
     stampsEarned,
+    achievementProgress,
+    justUnlocked,
     session,
     recordAnswers,
     completeLesson,

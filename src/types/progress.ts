@@ -18,6 +18,8 @@ export interface UserProgress {
   streakFreezes: number;
   totalLearningMinutes: number;
   lastCompletedDate?: string;
+  /** Correct listening answers, tracked for the listening achievement. */
+  listeningCorrect?: number;
 }
 
 export interface ItemProgress {

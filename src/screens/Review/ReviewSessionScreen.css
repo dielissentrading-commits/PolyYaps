@@ -1,0 +1,23 @@
+.review-done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-10) var(--space-4);
+  text-align: center;
+}
+
+.review-done__score {
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.review-done__bar {
+  width: 100%;
+  margin-top: var(--space-6);
+}
+
+.review-done__note {
+  margin-top: var(--space-6);
+}

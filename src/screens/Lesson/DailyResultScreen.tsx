@@ -5,6 +5,8 @@ import { ButtonLink } from '@/components/ui/Button';
 import { Stars } from '@/components/gamification/Indicators';
 import { SkillBar } from '@/components/progress/SkillBar';
 import { getDay } from '@/content/pt-PT/course';
+import { achievements as catalogue } from '@/content/pt-PT/achievements';
+import { stampsForDay } from '@/content/pt-PT/passport';
 import { useProgress } from '@/hooks/useProgress';
 import type { LessonProgress, SkillKey } from '@/types';
 import './DailyResultScreen.css';
@@ -22,8 +24,15 @@ const SKILL_LABELS: Array<[keyof LessonProgress, SkillKey, string]> = [
  */
 export function DailyResultScreen() {
   const { day } = useParams();
-  const { session, completeLesson, clearSession, lessonProgressFor, user, persistent } =
-    useProgress();
+  const {
+    session,
+    completeLesson,
+    clearSession,
+    lessonProgressFor,
+    user,
+    persistent,
+    justUnlocked,
+  } = useProgress();
 
   const dayNumber = Number(day);
   const lesson = Number.isFinite(dayNumber) ? getDay(dayNumber) : undefined;
@@ -53,6 +62,11 @@ export function DailyResultScreen() {
   const skills = record
     ? SKILL_LABELS.filter(([field]) => typeof record[field] === 'number')
     : [];
+
+  const unlocked = record
+    ? catalogue.filter((achievement) => justUnlocked.includes(achievement.id))
+    : [];
+  const stamps = record ? stampsForDay(lesson.day) : [];
 
   return (
     <FocusShell
@@ -87,6 +101,32 @@ export function DailyResultScreen() {
                     <SkillBar key={key} label={label} score={record[field] as number} />
                   ))}
                 </div>
+              </section>
+            )}
+
+            {(unlocked.length > 0 || stamps.length > 0) && (
+              <section className="section--tight">
+                <h2 className="eyebrow">Verdiend</h2>
+                <ul className="result__earned">
+                  {stamps.map((stamp) => (
+                    <li className="result__earned-item" key={stamp.id}>
+                      <span className="result__earned-mark">✦</span>
+                      <span>
+                        <strong>Paspoortstempel {stamp.title}</strong>
+                        <span className="muted small"> · {stamp.scenario}</span>
+                      </span>
+                    </li>
+                  ))}
+                  {unlocked.map((achievement) => (
+                    <li className="result__earned-item" key={achievement.id}>
+                      <span className="result__earned-mark">{achievement.icon}</span>
+                      <span>
+                        <strong>{achievement.title}</strong>
+                        <span className="muted small"> · {achievement.description}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </section>
             )}
 

@@ -1,5 +1,5 @@
 import { TopBar } from '@/components/layout/TopBar';
-import { Button } from '@/components/ui/Button';
+import { ButtonLink } from '@/components/ui/Button';
 import { StatCard } from '@/components/cards/StatCard';
 import { useProgress } from '@/hooks/useProgress';
 import './ReviewScreen.css';
@@ -21,9 +21,15 @@ export function ReviewScreen() {
               ? `± ${review.estimatedMinutes} minuten · gemengd woorden, chunks en luisteren`
               : 'Rond eerst een les af. Wat je leert komt hier vanzelf terug.'}
           </p>
-          <Button fullWidth disabled={!hasWork}>
-            Start review
-          </Button>
+          {hasWork ? (
+            <ButtonLink to="/review/session" fullWidth>
+              Start review
+            </ButtonLink>
+          ) : (
+            <span className="btn btn--primary btn--full review__disabled" aria-disabled="true">
+              Start review
+            </span>
+          )}
         </section>
 
         <section className="section--tight review__stats">
@@ -46,12 +52,7 @@ export function ReviewScreen() {
           </section>
         )}
 
-        <section className="section">
-          <div className="placeholder">
-            <span className="placeholder__title">Review-engine volgt in V0.4</span>
-            De wachtrij, mastery-levels en intervallen komen uit de review- en weakness-engine.
-          </div>
-        </section>
+
       </div>
     </>
   );

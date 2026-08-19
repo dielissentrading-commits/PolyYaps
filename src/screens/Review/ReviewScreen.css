@@ -32,3 +32,8 @@
 .review__focus-title {
   margin-bottom: var(--space-1);
 }
+
+.review__disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

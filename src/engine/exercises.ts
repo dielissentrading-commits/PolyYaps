@@ -1,4 +1,4 @@
-import type { ExerciseType, LearningItem } from '@/types';
+import type { ExerciseType, ItemProgress, LearningItem, MasteryLevel } from '@/types';
 import { acceptableAnswers } from './answers';
 
 /**
@@ -168,4 +168,35 @@ export function buildSteps(
   }
 
   return steps;
+}
+
+/**
+ * Exercise type for a review item, by mastery level — architecture section 11.
+ *
+ * Listening, context and spontaneous exercises are not implemented yet, so the
+ * top levels currently practise full production, which is the hardest form the
+ * app can actually ask for.
+ */
+export function reviewExerciseFor(mastery: MasteryLevel): 'recognition' | 'production' {
+  return mastery <= 1 ? 'recognition' : 'production';
+}
+
+/**
+ * Turns a review queue into exercises. Review has no study phase: the point is
+ * retrieval, so every step asks a question.
+ */
+export function buildReviewSteps(
+  entries: Array<{ item: LearningItem; progress: ItemProgress }>,
+  options: { seed: string },
+): LessonStep[] {
+  const pool = entries.map((entry) => entry.item);
+
+  return entries.map(({ item, progress }) => ({
+    kind: 'exercise' as const,
+    item,
+    exercise: buildExercise(item, pool, {
+      produce: reviewExerciseFor(progress.masteryLevel) === 'production',
+      seed: `${options.seed}-${item.id}`,
+    }),
+  }));
 }

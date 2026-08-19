@@ -79,3 +79,21 @@ export function getChallengeTask(day: CourseDay): LessonTask | undefined {
   }
   return undefined;
 }
+
+/** Every learning item in the course, indexed by id. */
+const ITEMS_BY_ID = new Map<string, import('@/types').LearningItem>();
+for (const day of days) {
+  for (const module of day.modules) {
+    for (const item of module.items) {
+      if (!ITEMS_BY_ID.has(item.id)) ITEMS_BY_ID.set(item.id, item);
+    }
+  }
+}
+
+export function getItem(id: string): import('@/types').LearningItem | undefined {
+  return ITEMS_BY_ID.get(id);
+}
+
+export function allItems(): import('@/types').LearningItem[] {
+  return [...ITEMS_BY_ID.values()];
+}
