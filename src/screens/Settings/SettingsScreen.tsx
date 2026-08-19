@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { TopBar } from '@/components/layout/TopBar';
 import { Button } from '@/components/ui/Button';
 import { useProgress } from '@/hooks/useProgress';
@@ -6,7 +7,8 @@ import './SettingsScreen.css';
 const APP_VERSION = '0.1.0';
 
 export function SettingsScreen() {
-  const { user, levelTitle } = useProgress();
+  const { user, levelTitle, persistent, resetProgress } = useProgress();
+  const [confirmingReset, setConfirmingReset] = useState(false);
 
   return (
     <>
@@ -29,6 +31,10 @@ export function SettingsScreen() {
             <SettingRow label="Dagelijkse herinnering" value="Nog niet beschikbaar" />
             <SettingRow label="Audio automatisch afspelen" value="Nog niet beschikbaar" />
             <SettingRow label="Microfoontoegang" value="Nog niet beschikbaar" />
+            <SettingRow
+              label="Voortgang bewaren"
+              value={persistent ? 'Op dit apparaat' : 'Niet mogelijk in deze browser'}
+            />
           </div>
         </section>
 
@@ -45,8 +51,36 @@ export function SettingsScreen() {
             </Button>
           </div>
           <p className="muted small settings__hint">
-            Export en import komen zodra voortgang lokaal in IndexedDB wordt bewaard (V0.3).
+            Export en import volgen. Je voortgang staat lokaal op dit apparaat en wordt nergens
+            heen gestuurd.
           </p>
+
+          <div className="stack settings__danger">
+            {confirmingReset ? (
+              <>
+                <p className="muted small">
+                  Dit wist je voortgang, mastery, XP en streak definitief.
+                </p>
+                <Button
+                  variant="secondary"
+                  fullWidth
+                  onClick={() => {
+                    void resetProgress();
+                    setConfirmingReset(false);
+                  }}
+                >
+                  Ja, wis alles
+                </Button>
+                <Button variant="text" onClick={() => setConfirmingReset(false)}>
+                  Annuleren
+                </Button>
+              </>
+            ) : (
+              <Button variant="text" onClick={() => setConfirmingReset(true)}>
+                Voortgang wissen
+              </Button>
+            )}
+          </div>
         </section>
 
         <p className="settings__version muted small">PolyYaps {APP_VERSION} · shell prototype</p>

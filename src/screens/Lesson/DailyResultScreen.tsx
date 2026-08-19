@@ -1,54 +1,58 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { FocusShell } from '@/components/layout/FocusShell';
 import { ButtonLink } from '@/components/ui/Button';
 import { Stars } from '@/components/gamification/Indicators';
-import { ProgressBar } from '@/components/progress/ProgressBar';
+import { SkillBar } from '@/components/progress/SkillBar';
 import { getDay } from '@/content/pt-PT/course';
 import { useProgress } from '@/hooks/useProgress';
-import type { StarCount } from '@/types';
+import type { LessonProgress, SkillKey } from '@/types';
 import './DailyResultScreen.css';
 
-/** Star thresholds — architecture section 16. */
-function starsFor(score: number): StarCount {
-  if (score >= 90) return 3;
-  if (score >= 75) return 2;
-  return 1;
-}
+const SKILL_LABELS: Array<[keyof LessonProgress, SkillKey, string]> = [
+  ['vocabularyScore', 'vocabulary', 'Woordenschat'],
+  ['listeningScore', 'listening', 'Luisteren'],
+  ['speakingScore', 'speaking', 'Spreken'],
+  ['practicalScore', 'practical', 'Praktisch Portugees'],
+];
 
 /**
  * Daily result — screen 9 in docs/06-app-design.md.
- * Shows what the learner actually answered in this session.
+ * Completing the lesson happens here: it is the moment the day is finished.
  */
 export function DailyResultScreen() {
   const { day } = useParams();
-  const { session, clearSession } = useProgress();
+  const { session, completeLesson, clearSession, lessonProgressFor, user, persistent } =
+    useProgress();
 
   const dayNumber = Number(day);
   const lesson = Number.isFinite(dayNumber) ? getDay(dayNumber) : undefined;
 
-  const summary = useMemo(() => {
-    const answers = session?.answers ?? [];
-    if (answers.length === 0) return undefined;
+  const [record, setRecord] = useState<LessonProgress | undefined>();
+  const submitted = useRef(false);
 
-    const totalWeight = answers.reduce((sum, answer) => sum + answer.weight, 0);
-    const earned = answers
-      .filter((answer) => answer.correct)
-      .reduce((sum, answer) => sum + answer.weight, 0);
+  // Finish the day exactly once, however often this screen re-renders.
+  useEffect(() => {
+    if (submitted.current || !lesson) return;
+    if (!session || session.answers.length === 0) {
+      setRecord(lessonProgressFor(lesson.day));
+      return;
+    }
+    submitted.current = true;
 
-    return {
-      answered: answers.length,
-      correct: answers.filter((answer) => answer.correct).length,
-      score: totalWeight ? Math.round((earned / totalWeight) * 100) : 0,
-    };
-  }, [session]);
-
-  // The session belongs to this screen now; leaving starts a fresh one.
-  useEffect(() => clearSession, [clearSession]);
+    void completeLesson(lesson.day).then((result) => {
+      setRecord(result);
+      clearSession();
+    });
+  }, [lesson, session, completeLesson, clearSession, lessonProgressFor]);
 
   if (!lesson) {
     return <Navigate to="/learn" replace />;
   }
+
+  const skills = record
+    ? SKILL_LABELS.filter(([field]) => typeof record[field] === 'number')
+    : [];
 
   return (
     <FocusShell
@@ -61,23 +65,38 @@ export function DailyResultScreen() {
       }
     >
       <div className="result">
-        {summary ? (
+        {record ? (
           <>
             <div className="result__hero">
-              <Stars count={starsFor(summary.score)} />
-              <p className="result__score">{summary.score}%</p>
-              <p className="muted small">
-                {summary.correct} van {summary.answered} goed beantwoord
-              </p>
+              <Stars count={record.stars} />
+              <p className="result__score">{record.lessonScore}%</p>
+              <p className="muted small">{lesson.title}</p>
             </div>
 
-            <div className="result__bar">
-              <ProgressBar
-                value={summary.score}
-                label="Dagscore"
-                tone={summary.score >= 75 ? 'success' : 'primary'}
-              />
+            <div className="result__rewards">
+              <span className="chip chip--primary">+{record.xpEarned} XP</span>
+              <span className="chip">Streak {user.streak}</span>
+              <span className="chip">{record.timeSpentMinutes} min</span>
             </div>
+
+            {skills.length > 0 && (
+              <section className="section--tight">
+                <h2 className="eyebrow">Vaardigheden vandaag</h2>
+                <div className="stack--4 stack result__skills">
+                  {skills.map(([field, key, label]) => (
+                    <SkillBar key={key} label={label} score={record[field] as number} />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {!persistent && (
+              <div className="placeholder result__note">
+                <span className="placeholder__title">Niet opgeslagen</span>
+                Deze browser staat geen lokale opslag toe, dus je voortgang verdwijnt als je de
+                app sluit.
+              </div>
+            )}
           </>
         ) : (
           <div className="result__hero">
@@ -87,12 +106,6 @@ export function DailyResultScreen() {
             </p>
           </div>
         )}
-
-        <div className="placeholder result__note">
-          <span className="placeholder__title">Nog niet opgeslagen</span>
-          Deze score verdwijnt als je de app sluit. Opslag, mastery, XP en streak komen in de
-          volgende versies.
-        </div>
       </div>
     </FocusShell>
   );

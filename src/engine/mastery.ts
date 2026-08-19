@@ -1,5 +1,4 @@
-import type { ItemProgress, MasteryLevel } from '@/types';
-import type { ExerciseType } from './exercises';
+import type { ExerciseType, ItemProgress, MasteryLevel } from '@/types';
 import { EXERCISE_WEIGHTS } from './exercises';
 
 /**

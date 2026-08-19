@@ -1,3 +1,5 @@
+import type { ExerciseType, LearningItemType } from './content';
+
 /**
  * Progress contracts — docs/07-technical-architecture.md section 7.
  * V0.1 serves these from mock data; V0.3 serves the same shapes from IndexedDB
@@ -90,6 +92,9 @@ export interface AnswerResult {
   correct: boolean;
   /** Exercise weight, from EXERCISE_WEIGHTS. */
   weight: number;
+  exerciseType: ExerciseType;
+  /** What kind of material was practised, which decides the skill it scores. */
+  itemType?: LearningItemType;
 }
 
 /** Answers collected while working through one day's lesson. */

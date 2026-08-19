@@ -1,4 +1,4 @@
-import type { LearningItem } from '@/types';
+import type { ExerciseType, LearningItem } from '@/types';
 import { acceptableAnswers } from './answers';
 
 /**
@@ -9,14 +9,7 @@ import { acceptableAnswers } from './answers';
  * worth more than recognition, so the review engine can prefer it later.
  */
 
-export type ExerciseType =
-  | 'recognition'
-  | 'production'
-  | 'listening'
-  | 'sentence'
-  | 'speaking'
-  | 'context'
-  | 'spontaneous';
+export type { ExerciseType };
 
 export const EXERCISE_WEIGHTS: Record<ExerciseType, number> = {
   recognition: 1,

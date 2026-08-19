@@ -75,3 +75,29 @@ describe('buildLessonProgress', () => {
     expect(record.stars).toBeGreaterThanOrEqual(1);
   });
 });
+
+describe('skill attribution by material', () => {
+  it('scores chunk recognition under chunks, not vocabulary', () => {
+    const scores = skillScores([
+      { itemId: 'c-ola-bom-dia', correct: true, weight: 1, exerciseType: 'recognition', itemType: 'chunk' },
+    ]);
+    expect(scores.chunks).toBe(100);
+    expect(scores.vocabulary).toBeUndefined();
+  });
+
+  it('still scores single words under vocabulary', () => {
+    const scores = skillScores([
+      { itemId: 'w-ola', correct: true, weight: 1, exerciseType: 'recognition', itemType: 'word' },
+    ]);
+    expect(scores.vocabulary).toBe(100);
+    expect(scores.chunks).toBeUndefined();
+  });
+
+  it('keeps listening with listening even for a chunk', () => {
+    const scores = skillScores([
+      { itemId: 'c-ola', correct: true, weight: 2, exerciseType: 'listening', itemType: 'chunk' },
+    ]);
+    expect(scores.listening).toBe(100);
+    expect(scores.chunks).toBeUndefined();
+  });
+});

@@ -42,3 +42,8 @@
   margin-top: var(--space-10);
   text-align: center;
 }
+
+.settings__danger {
+  margin-top: var(--space-6);
+  align-items: center;
+}

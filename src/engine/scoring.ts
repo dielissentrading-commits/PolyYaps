@@ -1,5 +1,10 @@
-import type { AnswerResult, LessonProgress, SkillKey, StarCount } from '@/types';
-import type { ExerciseType } from './exercises';
+import type {
+  AnswerResult,
+  ExerciseType,
+  LessonProgress,
+  SkillKey,
+  StarCount,
+} from '@/types';
 
 /**
  * Daily score — docs/07-technical-architecture.md, section 13.
@@ -8,7 +13,7 @@ import type { ExerciseType } from './exercises';
  * so the Progress screen can show long-term trends per skill.
  */
 
-/** Which skill each exercise type contributes to. */
+/** Which skill each exercise type trains, for single words. */
 const SKILL_OF_EXERCISE: Record<ExerciseType, SkillKey> = {
   recognition: 'vocabulary',
   production: 'vocabulary',
@@ -18,6 +23,22 @@ const SKILL_OF_EXERCISE: Record<ExerciseType, SkillKey> = {
   context: 'practical',
   spontaneous: 'practical',
 };
+
+/**
+ * The skill an answer scores.
+ *
+ * Working with a chunk trains chunks, whether the learner recognised it or
+ * produced it — the material decides, not only the exercise format. Listening
+ * and speaking stay tied to the exercise, because those are about the channel
+ * rather than the material.
+ */
+function skillOf(answer: AnswerResult): SkillKey {
+  const byExercise = SKILL_OF_EXERCISE[answer.exerciseType];
+  if (answer.itemType === 'chunk' && (byExercise === 'vocabulary' || byExercise === 'chunks')) {
+    return 'chunks';
+  }
+  return byExercise;
+}
 
 /** Weight of each skill in a normal lesson score. */
 export const NORMAL_LESSON_WEIGHTS: Record<SkillKey, number> = {
@@ -39,16 +60,15 @@ export const CHECKPOINT_WEIGHTS: Record<SkillKey, number> = {
   practical: 0.2,
 };
 
-export interface AnsweredExercise extends AnswerResult {
-  exerciseType: ExerciseType;
-}
+/** An answer as stored, kept as its own name for readability in the engine. */
+export type AnsweredExercise = AnswerResult;
 
 /** Percentage correct per skill, for the skills the session actually covered. */
 export function skillScores(answers: AnsweredExercise[]): Partial<Record<SkillKey, number>> {
   const totals = new Map<SkillKey, { earned: number; possible: number }>();
 
   for (const answer of answers) {
-    const skill = SKILL_OF_EXERCISE[answer.exerciseType];
+    const skill = skillOf(answer);
     const entry = totals.get(skill) ?? { earned: 0, possible: 0 };
     entry.possible += answer.weight;
     if (answer.correct) entry.earned += answer.weight;

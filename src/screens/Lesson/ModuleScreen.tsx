@@ -13,7 +13,7 @@ import { buildSteps } from '@/engine/exercises';
 import { getDay } from '@/content/pt-PT/course';
 import { getModuleDefinition } from '@/content/pt-PT/modules';
 import { useProgress } from '@/hooks/useProgress';
-import type { LessonNote, LessonTask } from '@/types';
+import type { AnswerResult, LessonNote, LessonTask } from '@/types';
 import './ModuleScreen.css';
 
 /** XP for a correct answer, before the XP engine takes over the real numbers. */
@@ -47,9 +47,7 @@ export function ModuleScreen() {
   const [answer, setAnswer] = useState('');
   const [check, setCheck] = useState<AnswerCheck | null>(null);
   const [marked, setMarked] = useState<Set<string>>(new Set());
-  const [results, setResults] = useState<
-    Array<{ itemId: string; correct: boolean; weight: number }>
-  >([]);
+  const [results, setResults] = useState<AnswerResult[]>([]);
 
   const listen = useCallback((text: string) => {
     void playAudio({ text });
@@ -92,6 +90,8 @@ export function ModuleScreen() {
         itemId: step.exercise.itemId,
         correct: isCorrect(verdict.verdict),
         weight: step.exercise.weight,
+        exerciseType: step.exercise.type,
+        itemType: step.item.type,
       },
     ]);
   };
@@ -121,12 +121,17 @@ export function ModuleScreen() {
     if (!isExercise) {
       return isLastStep ? (nextLabel ? `Verder naar ${nextLabel}` : 'Naar resultaat') : 'Volgende';
     }
-    if (!answered) return 'Controleer';
+    if (!answered) return step.exercise.options ? 'Kies een antwoord' : 'Controleer';
     return isLastStep ? (nextLabel ? `Verder naar ${nextLabel}` : 'Naar resultaat') : 'Volgende';
   })();
 
+  // Choosing an option submits it directly, so before answering the footer has
+  // nothing to confirm on a choice question, and nothing to check on an empty
+  // typed one. Either way it must not submit an empty answer as a mistake.
   const primaryDisabled =
-    isExercise && !answered && !step.exercise.options && answer.trim().length === 0;
+    isExercise &&
+    !answered &&
+    (Boolean(step.exercise.options) || answer.trim().length === 0);
 
   const onPrimary = () => {
     if (isExercise && !answered) submit(answer);

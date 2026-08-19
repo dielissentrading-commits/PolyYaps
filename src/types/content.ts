@@ -27,6 +27,16 @@ export interface LearningItem {
   weaknessCategory?: WeaknessCategory;
 }
 
+/** How a learning item is being practised — masterplan step 5. */
+export type ExerciseType =
+  | 'recognition'
+  | 'production'
+  | 'listening'
+  | 'sentence'
+  | 'speaking'
+  | 'context'
+  | 'spontaneous';
+
 export type LessonModuleType =
   | 'review'
   | 'vocabulary'
