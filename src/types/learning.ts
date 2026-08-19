@@ -47,7 +47,7 @@ export type LessonContent = {
 
 export type ChallengeStep = {
   id: string;
-  speaker: 'barista' | 'system';
+  speaker: 'barista' | 'local' | 'system';
   line?: string;
   prompt: string;
   type: 'input' | 'choice';
