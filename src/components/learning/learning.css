@@ -1,0 +1,244 @@
+/* Shared styling for the lesson player's learning surfaces. */
+
+.learn-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  background: var(--color-background);
+  text-align: center;
+}
+
+.learn-card__label {
+  margin-bottom: var(--space-2);
+}
+
+/* Large Portuguese learning target — docs/06-app-design.md, typography. */
+.learn-card__target {
+  font-size: var(--font-size-target);
+  line-height: var(--line-height-target);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Dutch prompts are read, not learned, so they sit a step quieter. */
+.learn-card__target--prompt {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+}
+
+.learn-card__translation {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.learn-card__audio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  font-size: var(--font-size-small);
+  font-weight: 650;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.learn-card__audio:hover {
+  background: var(--color-sand);
+}
+
+/* --- Multiple choice ------------------------------------------------------ */
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  margin-top: var(--space-6);
+}
+
+.choice {
+  width: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface);
+  font-size: var(--font-size-body);
+  font-weight: 650;
+  text-align: left;
+  transition:
+    border-color var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard);
+}
+
+.choice:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
+}
+
+.choice:disabled {
+  cursor: default;
+}
+
+.choice--correct {
+  border-color: var(--color-success);
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
+/* Calm correction: the wrong pick is marked, not punished. */
+.choice--wrong {
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}
+
+.choice--dimmed {
+  opacity: 0.45;
+}
+
+/* --- Typed answers -------------------------------------------------------- */
+
+.answer-form {
+  width: 100%;
+  margin-top: var(--space-6);
+}
+
+.answer-input {
+  width: 100%;
+  height: var(--button-height);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--font-size-body);
+  font-weight: 650;
+  text-align: center;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.answer-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.answer-input:disabled {
+  opacity: 0.7;
+}
+
+/* --- Feedback ------------------------------------------------------------- */
+
+.feedback {
+  margin-top: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-medium);
+  animation: feedback-in var(--duration-medium) var(--ease-standard);
+}
+
+@keyframes feedback-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+.feedback--right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
+.feedback__mark {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  background: var(--color-success);
+  color: var(--color-surface);
+}
+
+.feedback__title {
+  flex: 1;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: 700;
+}
+
+.feedback__xp {
+  font-size: var(--font-size-tiny);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.feedback--wrong {
+  background: var(--color-sand);
+  color: var(--color-text);
+}
+
+.feedback__compare {
+  margin-top: var(--space-3);
+}
+
+.feedback__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+}
+
+.feedback__row dt {
+  flex-shrink: 0;
+  color: var(--color-muted);
+  font-size: var(--font-size-tiny);
+  font-weight: 650;
+}
+
+.feedback__given {
+  color: var(--color-muted);
+  font-size: var(--font-size-small);
+  text-align: right;
+}
+
+.feedback__expected {
+  font-size: var(--font-size-body);
+  font-weight: 700;
+  text-align: right;
+}
+
+.feedback__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.feedback__action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  font-size: var(--font-size-tiny);
+  font-weight: 650;
+}
+
+.feedback__action--on {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}

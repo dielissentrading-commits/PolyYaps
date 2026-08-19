@@ -21,6 +21,10 @@
   font-variant-numeric: tabular-nums;
 }
 
+.result__bar {
+  margin-top: var(--space-6);
+}
+
 .result__rewards {
   display: flex;
   flex-wrap: wrap;

@@ -1,12 +1,12 @@
 import { TopBar } from '@/components/layout/TopBar';
-import { ButtonLink } from '@/components/ui/Button';
+import { Button } from '@/components/ui/Button';
 import { StatCard } from '@/components/cards/StatCard';
-import { Icon } from '@/components/ui/Icon';
 import { useProgress } from '@/hooks/useProgress';
 import './ReviewScreen.css';
 
 export function ReviewScreen() {
   const { review, vocabulary } = useProgress();
+  const hasWork = review.dueCount > 0;
 
   return (
     <>
@@ -14,14 +14,16 @@ export function ReviewScreen() {
 
       <div className="page">
         <section className="card review__hero">
-          <span className="eyebrow">Klaar om te herhalen</span>
+          <span className="eyebrow">{hasWork ? 'Klaar om te herhalen' : 'Nog niets te herhalen'}</span>
           <p className="review__count">{review.dueCount} items</p>
           <p className="muted small">
-            ± {review.estimatedMinutes} minuten · gemengd woorden, chunks en luisteren
+            {hasWork
+              ? `± ${review.estimatedMinutes} minuten · gemengd woorden, chunks en luisteren`
+              : 'Rond eerst een les af. Wat je leert komt hier vanzelf terug.'}
           </p>
-          <ButtonLink to="/lesson/1/review" fullWidth trailing={<Icon name="chevron-right" size={20} />}>
+          <Button fullWidth disabled={!hasWork}>
             Start review
-          </ButtonLink>
+          </Button>
         </section>
 
         <section className="section--tight review__stats">
@@ -48,7 +50,6 @@ export function ReviewScreen() {
           <div className="placeholder">
             <span className="placeholder__title">Review-engine volgt in V0.4</span>
             De wachtrij, mastery-levels en intervallen komen uit de review- en weakness-engine.
-            Deze shell laat alleen de structuur zien.
           </div>
         </section>
       </div>

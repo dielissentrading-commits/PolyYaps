@@ -84,6 +84,21 @@ export interface PassportStamp {
   earnedAt?: string;
 }
 
+/** One answered exercise, the unit the engines consume. */
+export interface AnswerResult {
+  itemId: string;
+  correct: boolean;
+  /** Exercise weight, from EXERCISE_WEIGHTS. */
+  weight: number;
+}
+
+/** Answers collected while working through one day's lesson. */
+export interface LessonSession {
+  day: number;
+  answers: AnswerResult[];
+  startedAt: string;
+}
+
 export interface ReviewQueueSummary {
   dueCount: number;
   weakCount: number;
