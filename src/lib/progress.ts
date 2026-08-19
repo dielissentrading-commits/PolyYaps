@@ -57,10 +57,10 @@ export function saveProgress(progress: ProgressState) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
 }
 
-export function completeDayOne(score: number, wordIds: string[], chunkIds: string[]): ProgressState {
+export function completeLesson(day: number, score: number, wordIds: string[], chunkIds: string[]): ProgressState {
   const existing = loadProgress();
   const today = localDateKey();
-  const previousResult = existing.dayResults[1];
+  const previousResult = existing.dayResults[day];
   const stars: 1 | 2 | 3 = score >= 90 ? 3 : score >= 75 ? 2 : 1;
   const baseXp = 100;
   const scoreBonus = score === 100 ? 15 : score >= 90 ? 10 : 0;
@@ -77,17 +77,17 @@ export function completeDayOne(score: number, wordIds: string[], chunkIds: strin
 
   const next: ProgressState = {
     ...existing,
-    currentDay: Math.max(existing.currentDay, 2),
+    currentDay: Math.max(existing.currentDay, Math.min(30, day + 1)),
     totalXp: existing.totalXp + xpEarned,
     streak,
     longestStreak: Math.max(existing.longestStreak, streak),
-    completedDays: Array.from(new Set([...existing.completedDays, 1])),
+    completedDays: Array.from(new Set([...existing.completedDays, day])).sort((a, b) => a - b),
     dayResults: {
       ...existing.dayResults,
-      1: { score, stars, xpEarned, completedAt: new Date().toISOString() },
+      [day]: { score, stars, xpEarned, completedAt: new Date().toISOString() },
     },
-    learnedWords: Array.from(new Set([...existing.learnedWords, ...wordIds])),
-    learnedChunks: Array.from(new Set([...existing.learnedChunks, ...chunkIds])),
+    learnedWords: Array.from(new Set([...existing.learnedWords, ...wordIds.map((id) => `d${day}:word:${id}`)])),
+    learnedChunks: Array.from(new Set([...existing.learnedChunks, ...chunkIds.map((id) => `d${day}:chunk:${id}`)])),
     lastStudyDate: today,
   };
 
