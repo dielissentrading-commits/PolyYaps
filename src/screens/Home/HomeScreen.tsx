@@ -54,10 +54,14 @@ export function HomeScreen() {
           <ActionCard
             to="/review"
             icon="review"
-            tone="primary"
+            tone={review.dueCount > 0 ? 'primary' : 'neutral'}
             title="Smart Review"
-            description={`± ${review.estimatedMinutes} min oefenen`}
-            badge={String(review.dueCount)}
+            description={
+              review.dueCount > 0
+                ? `± ${review.estimatedMinutes} min oefenen`
+                : 'Niets te herhalen vandaag'
+            }
+            badge={review.dueCount > 0 ? String(review.dueCount) : undefined}
           />
 
           {review.focusLabel && (

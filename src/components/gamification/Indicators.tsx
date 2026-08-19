@@ -12,7 +12,7 @@ export function StreakIndicator({ days }: { days: number }) {
     <span className="indicator indicator--streak">
       <Icon name="flame" size={16} />
       <span className="indicator__value">{days}</span>
-      <span className="indicator__unit">dagen</span>
+      <span className="indicator__unit">{days === 1 ? 'dag' : 'dagen'}</span>
     </span>
   );
 }
