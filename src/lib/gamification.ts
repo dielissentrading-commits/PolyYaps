@@ -18,21 +18,25 @@ export const achievements = [
   { id: 'um-cafe-por-favor', icon: '☕', title: 'Um café, por favor', description: 'Slaag voor de Café Challenge.' },
   { id: 'em-boa-forma', icon: '🔥', title: 'Em boa forma', description: 'Bouw een streak van 5 dagen.' },
   { id: 'cem-palavras', icon: '100', title: 'Cem palavras', description: 'Leer 100 unieke woorden.' },
-  { id: 'estou-a-ouvir', icon: '◉', title: 'Estou a ouvir', description: 'Bouw sterke luister-mastery op.' },
+  { id: 'estou-a-ouvir', icon: '◉', title: 'Estou a ouvir', description: 'Bereik 70% gemiddelde mastery over minstens 50 items.' },
   { id: 'sem-ingles', icon: '💬', title: 'Sem inglês', description: 'Slaag voor Meet a Local.' },
-  { id: 'persistente', icon: '20', title: 'Persistente', description: 'Bereik een streak van 20 dagen.' },
-  { id: 'boa-viagem', icon: '🚆', title: 'Boa viagem', description: 'Slaag later voor de Travel Day.' },
-  { id: 'a-portuguesa', icon: '🍷', title: 'À portuguesa', description: 'Slaag later voor de culturele challenge.' },
+  { id: 'boa-viagem', icon: '🧳', title: 'Boa viagem', description: 'Slaag voor Portugal Travel Day.' },
+  { id: 'tempo-completo', icon: '⏳', title: 'Ontem, Hoje, Amanhã', description: 'Slaag voor de tijdschallenge.' },
+  { id: 'a-portuguesa', icon: '🍷', title: 'À portuguesa', description: 'Slaag voor Night Out in Portugal.' },
   { id: 'negocios', icon: '💼', title: 'Negócios', description: 'Rond de zakelijke module af.' },
+  { id: 'persistente', icon: '20', title: 'Persistente', description: 'Bereik een streak van 20 dagen.' },
+  { id: 'dia-completo', icon: '🗺️', title: 'Um dia em Portugal', description: 'Slaag voor de volledige dagsimulatie.' },
+  { id: 'desafio-completo', icon: '🇵🇹', title: 'Desafio Completo', description: 'Slaag voor de finale op Dag 30.' },
 ] as const;
 
 export const passportStamps = [
   { id: 'cafe-lisboa', icon: '☕', city: 'Lisboa', title: 'Café', day: 5 },
   { id: 'conversa-coimbra', icon: '💬', city: 'Coimbra', title: 'Conversa', day: 10 },
-  { id: 'travel-lisboa', icon: '🚆', city: 'Lisboa', title: 'Boa Viagem', day: 15 },
-  { id: 'tempo-evora', icon: '⌛', city: 'Évora', title: 'Tempo', day: 20 },
-  { id: 'cultura-porto', icon: '🍷', city: 'Porto', title: 'Cultura', day: 25 },
-  { id: 'final-algarve', icon: '🇵🇹', city: 'Algarve', title: 'Desafio', day: 30 },
+  { id: 'viagem-lisboa', icon: '🧳', city: 'Lisboa', title: 'Boa Viagem', day: 15 },
+  { id: 'tempo-coimbra', icon: '⏳', city: 'Coimbra', title: 'Tempo', day: 20 },
+  { id: 'noite-porto', icon: '🍷', city: 'Porto', title: 'Noite', day: 25 },
+  { id: 'dia-lisboa', icon: '🗺️', city: 'Lisboa', title: 'Dia Inteiro', day: 29 },
+  { id: 'final-portugal', icon: '🇵🇹', city: 'Portugal', title: 'Desafio', day: 30 },
 ] as const;
 
 export function getLevel(totalXp: number) {
@@ -53,15 +57,9 @@ export function getLevelProgress(totalXp: number) {
 }
 
 export function achievementDetails(progress: ProgressState) {
-  return achievements.map((achievement) => ({
-    ...achievement,
-    unlocked: progress.achievements.includes(achievement.id),
-  }));
+  return achievements.map((achievement) => ({ ...achievement, unlocked: progress.achievements.includes(achievement.id) }));
 }
 
 export function stampDetails(progress: ProgressState) {
-  return passportStamps.map((stamp) => ({
-    ...stamp,
-    unlocked: progress.passportStamps.includes(stamp.id),
-  }));
+  return passportStamps.map((stamp) => ({ ...stamp, unlocked: progress.passportStamps.includes(stamp.id) }));
 }
