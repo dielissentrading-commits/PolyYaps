@@ -2,6 +2,12 @@
 
 PolyYaps is a mobile-first Progressive Web App for learning European Portuguese in 30 days. It combines active speaking, listening, practical travel/work scenarios, spaced repetition, progress tracking and calm, travel-oriented gamification.
 
+## Live app
+
+**GitHub Pages:** https://dielissentrading-commits.github.io/PolyYaps
+
+Every push to `main` triggers the GitHub Pages production deployment workflow.
+
 ## V1.0
 
 PolyYaps V1.0 is the first complete webapp release.
@@ -16,7 +22,7 @@ PolyYaps V1.0 is the first complete webapp release.
 - Course progress can be exported/imported as a local JSON backup.
 - The PWA has a manifest, standalone Home Screen metadata and an offline service-worker app shell.
 - GitHub Actions verifies `tsc -b && vite build`.
-- A GitHub Pages deployment workflow is included for static hosting.
+- GitHub Pages is configured for static production hosting.
 
 ## Stack
 
@@ -86,7 +92,7 @@ Typed playable content lives under `src/data/`.
 6. ✅ V0.6 — pt-PT speaking/listening progressive enhancement
 7. ✅ V0.7 — installable/offline PWA foundation
 8. ✅ V0.8 — full 30-day typed curriculum
-9. ✅ V1.0 — QA, backup/import, final checkpoints and static deployment pipeline
+9. ✅ V1.0 — QA, backup/import, final checkpoints and GitHub Pages deployment
 
 ## Known limitation
 
