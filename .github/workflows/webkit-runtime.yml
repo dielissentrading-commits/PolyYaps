@@ -1,0 +1,46 @@
+name: QA WebKit Runtime
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  webkit-runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright WebKit
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps webkit
+
+      - name: Build
+        run: npm run build
+
+      - name: Serve at GitHub Pages subpath
+        run: |
+          mkdir -p site/PolyYaps
+          cp -R dist/. site/PolyYaps/
+          python3 -m http.server 4173 --directory site >/tmp/polyyaps-server.log 2>&1 &
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:4173/PolyYaps/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/polyyaps-server.log
+          exit 1
+
+      - name: Open app in WebKit
+        run: node qa/runtime.mjs
