@@ -15,6 +15,11 @@ export function SpeechPractice({ prompt, model, onAssessment }: Props) {
   const [selfChecked, setSelfChecked] = useState(false);
   const supported = speechRecognitionAvailable();
 
+  function selfAssess() {
+    setSelfChecked((value) => !value);
+    if (!selfChecked) onAssessment?.(70);
+  }
+
   async function record() {
     if (listening) return;
     setListening(true);
@@ -48,13 +53,21 @@ export function SpeechPractice({ prompt, model, onAssessment }: Props) {
               <span>{score >= 75 ? 'Goed verstaanbaar' : score >= 55 ? 'Begrijpelijk — probeer nog één keer voor vloeiendheid' : 'Nog lastig — luister en probeer opnieuw'}</span>
             </div>
           )}
-          {error && <div className="speech-error">{error}</div>}
+          {error && (
+            <div className="speech-fallback">
+              <strong>Microfoonbeoordeling lukte niet</strong>
+              <span>{error} Zeg de zin hardop na; je kunt daarna handmatig bevestigen dat je geoefend hebt.</span>
+              <button className={`self-check ${selfChecked ? 'checked' : ''}`} onClick={selfAssess}>
+                <span>{selfChecked ? '✓' : '○'}</span> Ik heb de opdracht hardop gedaan
+              </button>
+            </div>
+          )}
         </>
       ) : (
         <div className="speech-fallback">
           <strong>Microfoonbeoordeling niet beschikbaar</strong>
           <span>Zeg de zin hardop na en beoordeel jezelf. De rest van de les blijft volledig werken.</span>
-          <button className={`self-check ${selfChecked ? 'checked' : ''}`} onClick={() => { setSelfChecked((value) => !value); if (!selfChecked) onAssessment?.(70); }}>
+          <button className={`self-check ${selfChecked ? 'checked' : ''}`} onClick={selfAssess}>
             <span>{selfChecked ? '✓' : '○'}</span> Ik heb de opdracht hardop gedaan
           </button>
         </div>
