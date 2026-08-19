@@ -1,6 +1,9 @@
 declare module 'react' {
-  export function useState<T>(initial: T): [T, (value: T | ((previous: T) => T)) => void];
+  export function useState<T>(initial: T | (() => T)): [T, (value: T | ((previous: T) => T)) => void];
+  export function useEffect(effect: () => void | (() => void), deps?: readonly unknown[]): void;
+  export function useMemo<T>(factory: () => T, deps: readonly unknown[]): T;
   export type ReactNode = any;
+  export type CSSProperties = Record<string, string | number | undefined>;
 }
 
 declare module 'react-dom/client' {
