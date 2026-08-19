@@ -49,6 +49,20 @@ export const day03: LessonDay = {
       ],
     },
     {
+      id: "d03-listening",
+      lessonDay: 3,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-tudo-bem", type: "chunk", portuguese: "Tudo bem?", dutch: "Alles goed?", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "c-como-estas", type: "chunk", portuguese: "Como estás?", dutch: "Hoe gaat het met je?", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "c-estou-bem-obrigado", type: "chunk", portuguese: "Estou bem, obrigado.", dutch: "Het gaat goed, bedankt.", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "c-estou-muito-bem", type: "chunk", portuguese: "Estou muito bem.", dutch: "Het gaat heel goed.", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "c-hoje-estou-cansado", type: "chunk", portuguese: "Hoje estou cansado.", dutch: "Vandaag ben ik moe.", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "c-tenho-fome", type: "chunk", portuguese: "Tenho fome.", dutch: "Ik heb honger.", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+      ],
+    },
+    {
       id: "d03-grammar",
       lessonDay: 3,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day03: LessonDay = {
       lessonDay: 3,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-tudo-bem", type: "chunk", portuguese: "Tudo bem?", dutch: "Alles goed?", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "c-como-estas", type: "chunk", portuguese: "Como estás?", dutch: "Hoe gaat het met je?", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "c-estou-bem-obrigado", type: "chunk", portuguese: "Estou bem, obrigado.", dutch: "Het gaat goed, bedankt.", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "c-estou-muito-bem", type: "chunk", portuguese: "Estou muito bem.", dutch: "Het gaat heel goed.", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+        { id: "c-hoje-estou-cansado", type: "chunk", portuguese: "Hoje estou cansado.", dutch: "Vandaag ben ik moe.", dayIntroduced: 3, category: "hoe-gaat-het", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

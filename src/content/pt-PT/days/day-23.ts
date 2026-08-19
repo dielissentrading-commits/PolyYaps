@@ -49,11 +49,31 @@ export const day23: LessonDay = {
       ],
     },
     {
+      id: "d23-listening",
+      lessonDay: 23,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-gostas-de-viajar", type: "chunk", portuguese: "Gostas de viajar?", dutch: "Hou je van reizen?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "c-qual-e-o-teu-pais-favorito", type: "chunk", portuguese: "Qual é o teu país favorito?", dutch: "Wat is je favoriete land?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "c-onde-foste-nas-ultimas-ferias", type: "chunk", portuguese: "Onde foste nas últimas férias?", dutch: "Waar was je tijdens je laatste vakantie?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "c-ja-foste-a-portugal", type: "chunk", portuguese: "Já foste a Portugal?", dutch: "Ben je al eens in Portugal geweest?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "c-ja-alguma-vez-estiveste-em", type: "chunk", portuguese: "Já alguma vez estiveste em…?", dutch: "Ben je ooit in… geweest?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "c-gostava-de-visitar", type: "chunk", portuguese: "Gostava de visitar…", dutch: "Ik zou graag … bezoeken.", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+      ],
+    },
+    {
       id: "d23-speaking",
       lessonDay: 23,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-gostas-de-viajar", type: "chunk", portuguese: "Gostas de viajar?", dutch: "Hou je van reizen?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "c-qual-e-o-teu-pais-favorito", type: "chunk", portuguese: "Qual é o teu país favorito?", dutch: "Wat is je favoriete land?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "c-onde-foste-nas-ultimas-ferias", type: "chunk", portuguese: "Onde foste nas últimas férias?", dutch: "Waar was je tijdens je laatste vakantie?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "c-ja-foste-a-portugal", type: "chunk", portuguese: "Já foste a Portugal?", dutch: "Ben je al eens in Portugal geweest?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+        { id: "c-ja-alguma-vez-estiveste-em", type: "chunk", portuguese: "Já alguma vez estiveste em…?", dutch: "Ben je ooit in… geweest?", dayIntroduced: 23, category: "reizen-en-ervaringen", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

@@ -61,9 +61,17 @@ export function getChallengeTitle(challengeId: string): string | undefined {
   return CHALLENGE_TITLES[challengeId];
 }
 
-/** Total learning items introduced on a day, across all its modules. */
+/**
+ * Distinct learning items in a day. The listening module practises the day's
+ * own chunks, so items appear in more than one module and must not be counted
+ * twice.
+ */
 export function countItems(day: CourseDay): number {
-  return day.modules.reduce((total, module) => total + module.items.length, 0);
+  const ids = new Set<string>();
+  for (const module of day.modules) {
+    for (const item of module.items) ids.add(item.id);
+  }
+  return ids.size;
 }
 
 /** Indicative minutes for a day, from its actual modules. */

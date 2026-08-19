@@ -49,6 +49,20 @@ export const day02: LessonDay = {
       ],
     },
     {
+      id: "d02-listening",
+      lessonDay: 2,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-onde-moras", type: "chunk", portuguese: "Onde moras?", dutch: "Waar woon je?", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "c-moro-nos-paises-baixos", type: "chunk", portuguese: "Moro nos Países Baixos.", dutch: "Ik woon in Nederland.", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "c-de-onde-es", type: "chunk", portuguese: "De onde és?", dutch: "Waar kom je vandaan?", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "c-tenho-26-anos", type: "chunk", portuguese: "Tenho 26 anos.", dutch: "Ik ben 26 jaar.", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "c-que-linguas-falas", type: "chunk", portuguese: "Que línguas falas?", dutch: "Welke talen spreek je?", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "c-falo-neerlandes-e-ingles", type: "chunk", portuguese: "Falo neerlandês e inglês.", dutch: "Ik spreek Nederlands en Engels.", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+      ],
+    },
+    {
       id: "d02-grammar",
       lessonDay: 2,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day02: LessonDay = {
       lessonDay: 2,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-onde-moras", type: "chunk", portuguese: "Onde moras?", dutch: "Waar woon je?", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "c-moro-nos-paises-baixos", type: "chunk", portuguese: "Moro nos Países Baixos.", dutch: "Ik woon in Nederland.", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "c-de-onde-es", type: "chunk", portuguese: "De onde és?", dutch: "Waar kom je vandaan?", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "c-tenho-26-anos", type: "chunk", portuguese: "Tenho 26 anos.", dutch: "Ik ben 26 jaar.", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+        { id: "c-que-linguas-falas", type: "chunk", portuguese: "Que línguas falas?", dutch: "Welke talen spreek je?", dayIntroduced: 2, category: "persoonlijke-informatie", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

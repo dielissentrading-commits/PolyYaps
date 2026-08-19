@@ -49,6 +49,20 @@ export const day18: LessonDay = {
       ],
     },
     {
+      id: "d18-listening",
+      lessonDay: 18,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-amanha-vou-trabalhar", type: "chunk", portuguese: "Amanhã vou trabalhar.", dutch: "Morgen ga ik werken.", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "c-depois-vou-jantar", type: "chunk", portuguese: "Depois vou jantar.", dutch: "Daarna ga ik avondeten.", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "c-vou-visitar-lisboa", type: "chunk", portuguese: "Vou visitar Lisboa.", dutch: "Ik ga Lissabon bezoeken.", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "c-este-fim-de-semana-vou-descansar", type: "chunk", portuguese: "Este fim de semana vou descansar.", dutch: "Dit weekend ga ik uitrusten.", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "c-o-que-vais-fazer-amanha", type: "chunk", portuguese: "O que vais fazer amanhã?", dutch: "Wat ga je morgen doen?", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "c-vais-sair-esta-noite", type: "chunk", portuguese: "Vais sair esta noite?", dutch: "Ga je vanavond uit?", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+      ],
+    },
+    {
       id: "d18-grammar",
       lessonDay: 18,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day18: LessonDay = {
       lessonDay: 18,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-amanha-vou-trabalhar", type: "chunk", portuguese: "Amanhã vou trabalhar.", dutch: "Morgen ga ik werken.", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "c-depois-vou-jantar", type: "chunk", portuguese: "Depois vou jantar.", dutch: "Daarna ga ik avondeten.", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "c-vou-visitar-lisboa", type: "chunk", portuguese: "Vou visitar Lisboa.", dutch: "Ik ga Lissabon bezoeken.", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "c-este-fim-de-semana-vou-descansar", type: "chunk", portuguese: "Este fim de semana vou descansar.", dutch: "Dit weekend ga ik uitrusten.", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+        { id: "c-o-que-vais-fazer-amanha", type: "chunk", portuguese: "O que vais fazer amanhã?", dutch: "Wat ga je morgen doen?", dayIntroduced: 18, category: "morgen-en-de-toekomst", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

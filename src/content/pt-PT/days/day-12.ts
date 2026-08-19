@@ -49,6 +49,20 @@ export const day12: LessonDay = {
       ],
     },
     {
+      id: "d12-listening",
+      lessonDay: 12,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-estou-a-procura-de", type: "chunk", portuguese: "Estou à procura de…", dutch: "Ik ben op zoek naar…", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "c-quanto-custa-isto", type: "chunk", portuguese: "Quanto custa isto?", dutch: "Hoeveel kost dit?", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "c-tem-isto-noutro-tamanho", type: "chunk", portuguese: "Tem isto noutro tamanho?", dutch: "Heeft u dit in een andere maat?", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "c-tem-isto-em-preto", type: "chunk", portuguese: "Tem isto em preto?", dutch: "Heeft u dit in het zwart?", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "c-posso-experimentar", type: "chunk", portuguese: "Posso experimentar?", dutch: "Mag ik het passen?", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "c-e-demasiado-grande", type: "chunk", portuguese: "É demasiado grande.", dutch: "Het is te groot.", dayIntroduced: 12, category: "winkelen", priority: 2 },
+      ],
+    },
+    {
       id: "d12-grammar",
       lessonDay: 12,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day12: LessonDay = {
       lessonDay: 12,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-estou-a-procura-de", type: "chunk", portuguese: "Estou à procura de…", dutch: "Ik ben op zoek naar…", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "c-quanto-custa-isto", type: "chunk", portuguese: "Quanto custa isto?", dutch: "Hoeveel kost dit?", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "c-tem-isto-noutro-tamanho", type: "chunk", portuguese: "Tem isto noutro tamanho?", dutch: "Heeft u dit in een andere maat?", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "c-tem-isto-em-preto", type: "chunk", portuguese: "Tem isto em preto?", dutch: "Heeft u dit in het zwart?", dayIntroduced: 12, category: "winkelen", priority: 2 },
+        { id: "c-posso-experimentar", type: "chunk", portuguese: "Posso experimentar?", dutch: "Mag ik het passen?", dayIntroduced: 12, category: "winkelen", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

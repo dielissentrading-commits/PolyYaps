@@ -49,6 +49,20 @@ export const day06: LessonDay = {
       ],
     },
     {
+      id: "d06-listening",
+      lessonDay: 6,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-tenho-um-irmao", type: "chunk", portuguese: "Tenho um irmão.", dutch: "Ik heb een broer.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "c-tenho-uma-irma", type: "chunk", portuguese: "Tenho uma irmã.", dutch: "Ik heb een zus.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "c-esta-e-a-minha-familia", type: "chunk", portuguese: "Esta é a minha família.", dutch: "Dit is mijn familie.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "c-este-e-o-meu-amigo", type: "chunk", portuguese: "Este é o meu amigo.", dutch: "Dit is mijn vriend.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "c-esta-e-a-minha-namorada", type: "chunk", portuguese: "Esta é a minha namorada.", dutch: "Dit is mijn vriendin.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "c-moro-com-a-minha-namorada", type: "chunk", portuguese: "Moro com a minha namorada.", dutch: "Ik woon met mijn vriendin.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+      ],
+    },
+    {
       id: "d06-grammar",
       lessonDay: 6,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day06: LessonDay = {
       lessonDay: 6,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-tenho-um-irmao", type: "chunk", portuguese: "Tenho um irmão.", dutch: "Ik heb een broer.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "c-tenho-uma-irma", type: "chunk", portuguese: "Tenho uma irmã.", dutch: "Ik heb een zus.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "c-esta-e-a-minha-familia", type: "chunk", portuguese: "Esta é a minha família.", dutch: "Dit is mijn familie.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "c-este-e-o-meu-amigo", type: "chunk", portuguese: "Este é o meu amigo.", dutch: "Dit is mijn vriend.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+        { id: "c-esta-e-a-minha-namorada", type: "chunk", portuguese: "Esta é a minha namorada.", dutch: "Dit is mijn vriendin.", dayIntroduced: 6, category: "familie-partner-vrienden", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

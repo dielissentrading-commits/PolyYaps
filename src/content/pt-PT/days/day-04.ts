@@ -49,6 +49,20 @@ export const day04: LessonDay = {
       ],
     },
     {
+      id: "d04-listening",
+      lessonDay: 4,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-queria-um-cafe-por-favor", type: "chunk", portuguese: "Queria um café, por favor.", dutch: "Ik zou graag een koffie willen.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "c-queria-uma-cerveja", type: "chunk", portuguese: "Queria uma cerveja.", dutch: "Ik zou graag een bier willen.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "c-uma-agua-por-favor", type: "chunk", portuguese: "Uma água, por favor.", dutch: "Een water, alstublieft.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "c-com-leite-por-favor", type: "chunk", portuguese: "Com leite, por favor.", dutch: "Met melk, alstublieft.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "c-sem-acucar", type: "chunk", portuguese: "Sem açúcar.", dutch: "Zonder suiker.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "c-mais-alguma-coisa", type: "chunk", portuguese: "Mais alguma coisa?", dutch: "Nog iets?", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+      ],
+    },
+    {
       id: "d04-grammar",
       lessonDay: 4,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day04: LessonDay = {
       lessonDay: 4,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-queria-um-cafe-por-favor", type: "chunk", portuguese: "Queria um café, por favor.", dutch: "Ik zou graag een koffie willen.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "c-queria-uma-cerveja", type: "chunk", portuguese: "Queria uma cerveja.", dutch: "Ik zou graag een bier willen.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "c-uma-agua-por-favor", type: "chunk", portuguese: "Uma água, por favor.", dutch: "Een water, alstublieft.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "c-com-leite-por-favor", type: "chunk", portuguese: "Com leite, por favor.", dutch: "Met melk, alstublieft.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+        { id: "c-sem-acucar", type: "chunk", portuguese: "Sem açúcar.", dutch: "Zonder suiker.", dayIntroduced: 4, category: "in-een-cafe-bestellen", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

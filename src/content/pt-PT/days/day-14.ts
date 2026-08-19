@@ -49,6 +49,20 @@ export const day14: LessonDay = {
       ],
     },
     {
+      id: "d14-listening",
+      lessonDay: 14,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-queria-um-bilhete-para-lisboa", type: "chunk", portuguese: "Queria um bilhete para Lisboa.", dutch: "Ik zou graag een kaartje naar Lissabon willen.", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "c-so-ida", type: "chunk", portuguese: "Só ida.", dutch: "Alleen heen.", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "c-ida-e-volta", type: "chunk", portuguese: "Ida e volta.", dutch: "Retour.", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "c-a-que-horas-parte-o-comboio", type: "chunk", portuguese: "A que horas parte o comboio?", dutch: "Hoe laat vertrekt de trein?", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "c-a-que-horas-chega", type: "chunk", portuguese: "A que horas chega?", dutch: "Hoe laat komt hij aan?", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "c-qual-e-a-plataforma", type: "chunk", portuguese: "Qual é a plataforma?", dutch: "Welk perron is het?", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+      ],
+    },
+    {
       id: "d14-grammar",
       lessonDay: 14,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day14: LessonDay = {
       lessonDay: 14,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-queria-um-bilhete-para-lisboa", type: "chunk", portuguese: "Queria um bilhete para Lisboa.", dutch: "Ik zou graag een kaartje naar Lissabon willen.", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "c-so-ida", type: "chunk", portuguese: "Só ida.", dutch: "Alleen heen.", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "c-ida-e-volta", type: "chunk", portuguese: "Ida e volta.", dutch: "Retour.", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "c-a-que-horas-parte-o-comboio", type: "chunk", portuguese: "A que horas parte o comboio?", dutch: "Hoe laat vertrekt de trein?", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+        { id: "c-a-que-horas-chega", type: "chunk", portuguese: "A que horas chega?", dutch: "Hoe laat komt hij aan?", dayIntroduced: 14, category: "trein-metro-openbaar-vervoer", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

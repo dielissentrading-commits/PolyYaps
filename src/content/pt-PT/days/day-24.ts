@@ -49,6 +49,20 @@ export const day24: LessonDay = {
       ],
     },
     {
+      id: "d24-listening",
+      lessonDay: 24,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-portugal-e-mais-quente", type: "chunk", portuguese: "Portugal é mais quente.", dutch: "Portugal is warmer.", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "c-os-paises-baixos-sao-mais-pequenos", type: "chunk", portuguese: "Os Países Baixos são mais pequenos.", dutch: "Nederland is kleiner.", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "c-aqui-e-mais-tranquilo", type: "chunk", portuguese: "Aqui é mais tranquilo.", dutch: "Hier is het rustiger.", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "c-e-muito-diferente", type: "chunk", portuguese: "É muito diferente.", dutch: "Het is heel anders.", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "c-e-parecido-com", type: "chunk", portuguese: "É parecido com…", dutch: "Het lijkt op…", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "c-gosto-mais-de", type: "chunk", portuguese: "Gosto mais de…", dutch: "Ik hou meer van…", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+      ],
+    },
+    {
       id: "d24-grammar",
       lessonDay: 24,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day24: LessonDay = {
       lessonDay: 24,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-portugal-e-mais-quente", type: "chunk", portuguese: "Portugal é mais quente.", dutch: "Portugal is warmer.", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "c-os-paises-baixos-sao-mais-pequenos", type: "chunk", portuguese: "Os Países Baixos são mais pequenos.", dutch: "Nederland is kleiner.", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "c-aqui-e-mais-tranquilo", type: "chunk", portuguese: "Aqui é mais tranquilo.", dutch: "Hier is het rustiger.", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "c-e-muito-diferente", type: "chunk", portuguese: "É muito diferente.", dutch: "Het is heel anders.", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+        { id: "c-e-parecido-com", type: "chunk", portuguese: "É parecido com…", dutch: "Het lijkt op…", dayIntroduced: 24, category: "nederland-en-portugal-vergelijken", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

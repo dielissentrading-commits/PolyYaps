@@ -49,11 +49,31 @@ export const day17: LessonDay = {
       ],
     },
     {
+      id: "d17-listening",
+      lessonDay: 17,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-no-ano-passado-fui-a", type: "chunk", portuguese: "No ano passado fui a…", dutch: "Vorig jaar ging ik naar…", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "c-fiquei-la-uma-semana", type: "chunk", portuguese: "Fiquei lá uma semana.", dutch: "Ik bleef daar een week.", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "c-visitei", type: "chunk", portuguese: "Visitei…", dutch: "Ik bezocht…", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "c-conheci-a-cidade", type: "chunk", portuguese: "Conheci a cidade.", dutch: "Ik leerde de stad kennen.", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "c-comi-muito-bem", type: "chunk", portuguese: "Comi muito bem.", dutch: "Ik heb erg goed gegeten.", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "c-gostei-muito", type: "chunk", portuguese: "Gostei muito.", dutch: "Ik vond het erg leuk.", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+      ],
+    },
+    {
       id: "d17-speaking",
       lessonDay: 17,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-no-ano-passado-fui-a", type: "chunk", portuguese: "No ano passado fui a…", dutch: "Vorig jaar ging ik naar…", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "c-fiquei-la-uma-semana", type: "chunk", portuguese: "Fiquei lá uma semana.", dutch: "Ik bleef daar een week.", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "c-visitei", type: "chunk", portuguese: "Visitei…", dutch: "Ik bezocht…", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "c-conheci-a-cidade", type: "chunk", portuguese: "Conheci a cidade.", dutch: "Ik leerde de stad kennen.", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+        { id: "c-comi-muito-bem", type: "chunk", portuguese: "Comi muito bem.", dutch: "Ik heb erg goed gegeten.", dayIntroduced: 17, category: "een-reis-navertellen", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

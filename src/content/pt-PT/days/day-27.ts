@@ -49,11 +49,31 @@ export const day27: LessonDay = {
       ],
     },
     {
+      id: "d27-listening",
+      lessonDay: 27,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-o-objetivo-e", type: "chunk", portuguese: "O objetivo é…", dutch: "Het doel is…", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "c-estamos-a-tentar-melhorar-os-resultados", type: "chunk", portuguese: "Estamos a tentar melhorar os resultados.", dutch: "We proberen de resultaten te verbeteren.", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "c-os-resultados-sao-bons", type: "chunk", portuguese: "Os resultados são bons.", dutch: "De resultaten zijn goed.", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "c-precisamos-de-melhorar-isto", type: "chunk", portuguese: "Precisamos de melhorar isto.", dutch: "We moeten dit verbeteren.", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "c-qual-e-o-orcamento", type: "chunk", portuguese: "Qual é o orçamento?", dutch: "Wat is het budget?", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "c-temos-mais-clientes-este-mes", type: "chunk", portuguese: "Temos mais clientes este mês.", dutch: "We hebben deze maand meer klanten.", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+      ],
+    },
+    {
       id: "d27-speaking",
       lessonDay: 27,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-o-objetivo-e", type: "chunk", portuguese: "O objetivo é…", dutch: "Het doel is…", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "c-estamos-a-tentar-melhorar-os-resultados", type: "chunk", portuguese: "Estamos a tentar melhorar os resultados.", dutch: "We proberen de resultaten te verbeteren.", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "c-os-resultados-sao-bons", type: "chunk", portuguese: "Os resultados são bons.", dutch: "De resultaten zijn goed.", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "c-precisamos-de-melhorar-isto", type: "chunk", portuguese: "Precisamos de melhorar isto.", dutch: "We moeten dit verbeteren.", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+        { id: "c-qual-e-o-orcamento", type: "chunk", portuguese: "Qual é o orçamento?", dutch: "Wat is het budget?", dayIntroduced: 27, category: "eenvoudig-zakelijk-gesprek", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

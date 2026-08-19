@@ -56,11 +56,31 @@ export const day15: LessonDay = {
       ],
     },
     {
+      id: "d15-listening",
+      lessonDay: 15,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-tenho-uma-reserva", type: "chunk", portuguese: "Tenho uma reserva.", dutch: "Ik heb een reservering.", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-em-nome-de-duran", type: "chunk", portuguese: "Em nome de Duran.", dutch: "Op naam van Duran.", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-a-que-horas-e-o-pequeno-almoco", type: "chunk", portuguese: "A que horas é o pequeno-almoço?", dutch: "Hoe laat is het ontbijt?", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-onde-fica-o-meu-quarto", type: "chunk", portuguese: "Onde fica o meu quarto?", dutch: "Waar is mijn kamer?", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-o-wi-fi-nao-funciona", type: "chunk", portuguese: "O Wi-Fi não funciona.", dutch: "De wifi werkt niet.", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-preciso-de-uma-toalha", type: "chunk", portuguese: "Preciso de uma toalha.", dutch: "Ik heb een handdoek nodig.", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+      ],
+    },
+    {
       id: "d15-speaking",
       lessonDay: 15,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-tenho-uma-reserva", type: "chunk", portuguese: "Tenho uma reserva.", dutch: "Ik heb een reservering.", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-em-nome-de-duran", type: "chunk", portuguese: "Em nome de Duran.", dutch: "Op naam van Duran.", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-a-que-horas-e-o-pequeno-almoco", type: "chunk", portuguese: "A que horas é o pequeno-almoço?", dutch: "Hoe laat is het ontbijt?", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-onde-fica-o-meu-quarto", type: "chunk", portuguese: "Onde fica o meu quarto?", dutch: "Waar is mijn kamer?", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-o-wi-fi-nao-funciona", type: "chunk", portuguese: "O Wi-Fi não funciona.", dutch: "De wifi werkt niet.", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+      ],
       tasks: [
         {
           title: "Checkpoint — Portugal Travel Day",

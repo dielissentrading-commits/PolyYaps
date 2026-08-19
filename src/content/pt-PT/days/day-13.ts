@@ -53,7 +53,14 @@ export const day13: LessonDay = {
       lessonDay: 13,
       type: "listening",
       estimatedMinutes: 10,
-      items: [],
+      items: [
+        { id: "c-onde-fica", type: "chunk", portuguese: "Onde fica…?", dutch: "Waar is…?", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "c-como-posso-chegar-ao-centro", type: "chunk", portuguese: "Como posso chegar ao centro?", dutch: "Hoe kom ik in het centrum?", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "c-e-longe-daqui", type: "chunk", portuguese: "É longe daqui?", dutch: "Is het ver hiervandaan?", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "c-e-perto", type: "chunk", portuguese: "É perto.", dutch: "Het is dichtbij.", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "c-a-esquerda", type: "chunk", portuguese: "À esquerda.", dutch: "Naar links.", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "c-a-direita", type: "chunk", portuguese: "À direita.", dutch: "Naar rechts.", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+      ],
       notes: [
         {
           title: "Luisterfocus",
@@ -67,7 +74,13 @@ export const day13: LessonDay = {
       lessonDay: 13,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-onde-fica", type: "chunk", portuguese: "Onde fica…?", dutch: "Waar is…?", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "c-como-posso-chegar-ao-centro", type: "chunk", portuguese: "Como posso chegar ao centro?", dutch: "Hoe kom ik in het centrum?", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "c-e-longe-daqui", type: "chunk", portuguese: "É longe daqui?", dutch: "Is het ver hiervandaan?", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "c-e-perto", type: "chunk", portuguese: "É perto.", dutch: "Het is dichtbij.", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+        { id: "c-a-esquerda", type: "chunk", portuguese: "À esquerda.", dutch: "Naar links.", dayIntroduced: 13, category: "de-weg-vragen", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

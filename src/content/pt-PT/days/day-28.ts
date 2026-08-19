@@ -49,11 +49,31 @@ export const day28: LessonDay = {
       ],
     },
     {
+      id: "d28-listening",
+      lessonDay: 28,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-ha-um-problema", type: "chunk", portuguese: "Há um problema.", dutch: "Er is een probleem.", dayIntroduced: 28, category: "problemen-oplossen", priority: 2 },
+        { id: "c-acho-que-houve-um-erro", type: "chunk", portuguese: "Acho que houve um erro.", dutch: "Ik denk dat er een fout is gemaakt.", dayIntroduced: 28, category: "problemen-oplossen", priority: 2 },
+        { id: "c-nao-foi-isto-que-pedi", type: "chunk", portuguese: "Não foi isto que pedi.", dutch: "Dit is niet wat ik besteld heb.", dayIntroduced: 28, category: "problemen-oplossen", priority: 2 },
+        { id: "c-perdi-o-meu-bilhete", type: "chunk", portuguese: "Perdi o meu bilhete.", dutch: "Ik ben mijn kaartje kwijt.", dayIntroduced: 28, category: "problemen-oplossen", priority: 2 },
+        { id: "c-nao-percebo", type: "chunk", portuguese: "Não percebo.", dutch: "Ik begrijp het niet.", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+        { id: "c-pode-explicar-outra-vez", type: "chunk", portuguese: "Pode explicar outra vez?", dutch: "Kunt u het nog een keer uitleggen?", dayIntroduced: 28, category: "problemen-oplossen", priority: 2 },
+      ],
+    },
+    {
       id: "d28-speaking",
       lessonDay: 28,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-ha-um-problema", type: "chunk", portuguese: "Há um problema.", dutch: "Er is een probleem.", dayIntroduced: 28, category: "problemen-oplossen", priority: 2 },
+        { id: "c-acho-que-houve-um-erro", type: "chunk", portuguese: "Acho que houve um erro.", dutch: "Ik denk dat er een fout is gemaakt.", dayIntroduced: 28, category: "problemen-oplossen", priority: 2 },
+        { id: "c-nao-foi-isto-que-pedi", type: "chunk", portuguese: "Não foi isto que pedi.", dutch: "Dit is niet wat ik besteld heb.", dayIntroduced: 28, category: "problemen-oplossen", priority: 2 },
+        { id: "c-perdi-o-meu-bilhete", type: "chunk", portuguese: "Perdi o meu bilhete.", dutch: "Ik ben mijn kaartje kwijt.", dayIntroduced: 28, category: "problemen-oplossen", priority: 2 },
+        { id: "c-nao-percebo", type: "chunk", portuguese: "Não percebo.", dutch: "Ik begrijp het niet.", dayIntroduced: 15, category: "hotel-problemen-begrijpen", priority: 2 },
+      ],
       tasks: [
         {
           title: "Scenario's",

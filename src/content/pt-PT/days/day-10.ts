@@ -50,6 +50,20 @@ export const day10: LessonDay = {
       ],
     },
     {
+      id: "d10-listening",
+      lessonDay: 10,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-acho-que-sim", type: "chunk", portuguese: "Acho que sim.", dutch: "Ik denk van wel.", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "c-acho-que-nao", type: "chunk", portuguese: "Acho que não.", dutch: "Ik denk van niet.", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "c-acho-que-e-interessante", type: "chunk", portuguese: "Acho que é interessante.", dutch: "Ik vind/denk dat het interessant is.", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "c-gosto-porque", type: "chunk", portuguese: "Gosto porque…", dutch: "Ik vind het leuk omdat…", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "c-prefiro", type: "chunk", portuguese: "Prefiro…", dutch: "Ik heb liever…", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "c-para-mim", type: "chunk", portuguese: "Para mim…", dutch: "Voor mij…", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+      ],
+    },
+    {
       id: "d10-grammar",
       lessonDay: 10,
       type: "grammar",
@@ -68,7 +82,13 @@ export const day10: LessonDay = {
       lessonDay: 10,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-acho-que-sim", type: "chunk", portuguese: "Acho que sim.", dutch: "Ik denk van wel.", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "c-acho-que-nao", type: "chunk", portuguese: "Acho que não.", dutch: "Ik denk van niet.", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "c-acho-que-e-interessante", type: "chunk", portuguese: "Acho que é interessante.", dutch: "Ik vind/denk dat het interessant is.", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "c-gosto-porque", type: "chunk", portuguese: "Gosto porque…", dutch: "Ik vind het leuk omdat…", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+        { id: "c-prefiro", type: "chunk", portuguese: "Prefiro…", dutch: "Ik heb liever…", dayIntroduced: 10, category: "meningen-voorkeuren", priority: 2 },
+      ],
       tasks: [
         {
           title: "Checkpoint — Meet a Local",

@@ -49,6 +49,20 @@ export const day22: LessonDay = {
       ],
     },
     {
+      id: "d22-listening",
+      lessonDay: 22,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-gosto-muito-de-comida-portuguesa", type: "chunk", portuguese: "Gosto muito de comida portuguesa.", dutch: "Ik hou erg van Portugees eten.", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "c-qual-e-a-especialidade-daqui", type: "chunk", portuguese: "Qual é a especialidade daqui?", dutch: "Wat is de specialiteit hier?", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "c-queria-provar-algo-tipico", type: "chunk", portuguese: "Queria provar algo típico.", dutch: "Ik zou iets typisch willen proberen.", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "c-prefiro-vinho-branco", type: "chunk", portuguese: "Prefiro vinho branco.", dutch: "Ik heb liever witte wijn.", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "c-este-vinho-e-muito-bom", type: "chunk", portuguese: "Este vinho é muito bom.", dutch: "Deze wijn is erg goed.", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "c-gosto-mais-de-peixe-do-que-de-carne", type: "chunk", portuguese: "Gosto mais de peixe do que de carne.", dutch: "Ik hou meer van vis dan van vlees.", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+      ],
+    },
+    {
       id: "d22-grammar",
       lessonDay: 22,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day22: LessonDay = {
       lessonDay: 22,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-gosto-muito-de-comida-portuguesa", type: "chunk", portuguese: "Gosto muito de comida portuguesa.", dutch: "Ik hou erg van Portugees eten.", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "c-qual-e-a-especialidade-daqui", type: "chunk", portuguese: "Qual é a especialidade daqui?", dutch: "Wat is de specialiteit hier?", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "c-queria-provar-algo-tipico", type: "chunk", portuguese: "Queria provar algo típico.", dutch: "Ik zou iets typisch willen proberen.", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "c-prefiro-vinho-branco", type: "chunk", portuguese: "Prefiro vinho branco.", dutch: "Ik heb liever witte wijn.", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+        { id: "c-este-vinho-e-muito-bom", type: "chunk", portuguese: "Este vinho é muito bom.", dutch: "Deze wijn is erg goed.", dayIntroduced: 22, category: "eten-wijn-portugese-cultuur", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

@@ -231,6 +231,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         streakFreezes: streak.streakFreezes,
         lastCompletedDate: streak.lastCompletedDate,
         totalLearningMinutes: user.totalLearningMinutes + minutes,
+        listeningCorrect:
+          (user.listeningCorrect ?? 0) +
+          answers.filter((answer) => answer.exerciseType === 'listening' && answer.correct).length,
         // Finishing today's lesson unlocks the next day, never skipping ahead.
         currentDay: day === user.currentDay ? Math.min(day + 1, course.totalDays) : user.currentDay,
       };

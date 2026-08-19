@@ -49,6 +49,20 @@ export const day16: LessonDay = {
       ],
     },
     {
+      id: "d16-listening",
+      lessonDay: 16,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-ontem-trabalhei", type: "chunk", portuguese: "Ontem trabalhei.", dutch: "Gisteren heb ik gewerkt.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "c-ontem-fui-ao-centro", type: "chunk", portuguese: "Ontem fui ao centro.", dutch: "Gisteren ging ik naar het centrum.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "c-depois-fui-a-um-restaurante", type: "chunk", portuguese: "Depois fui a um restaurante.", dutch: "Daarna ging ik naar een restaurant.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "c-comi-peixe", type: "chunk", portuguese: "Comi peixe.", dutch: "Ik at vis.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "c-bebi-vinho", type: "chunk", portuguese: "Bebi vinho.", dutch: "Ik dronk wijn.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "c-vi-um-filme", type: "chunk", portuguese: "Vi um filme.", dutch: "Ik zag een film.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+      ],
+    },
+    {
       id: "d16-grammar",
       lessonDay: 16,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day16: LessonDay = {
       lessonDay: 16,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-ontem-trabalhei", type: "chunk", portuguese: "Ontem trabalhei.", dutch: "Gisteren heb ik gewerkt.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "c-ontem-fui-ao-centro", type: "chunk", portuguese: "Ontem fui ao centro.", dutch: "Gisteren ging ik naar het centrum.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "c-depois-fui-a-um-restaurante", type: "chunk", portuguese: "Depois fui a um restaurante.", dutch: "Daarna ging ik naar een restaurant.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "c-comi-peixe", type: "chunk", portuguese: "Comi peixe.", dutch: "Ik at vis.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+        { id: "c-bebi-vinho", type: "chunk", portuguese: "Bebi vinho.", dutch: "Ik dronk wijn.", dayIntroduced: 16, category: "wat-deed-je-gisteren", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

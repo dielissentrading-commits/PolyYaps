@@ -34,6 +34,8 @@ export interface Exercise {
   answerLang: 'pt-PT' | 'nl';
   /** Present for multiple-choice exercises. */
   options?: string[];
+  /** Hide the written prompt: the learner has to go on the audio alone. */
+  audioOnly?: boolean;
   weight: number;
 }
 
@@ -198,5 +200,36 @@ export function buildReviewSteps(
       produce: reviewExerciseFor(progress.masteryLevel) === 'production',
       seed: `${options.seed}-${item.id}`,
     }),
+  }));
+}
+
+/**
+ * Listening: hear the sentence, choose what it means, with the text hidden.
+ * This is "luisteren zonder tekst" from the learning cycle in step 4.
+ */
+export function listeningExercise(
+  item: LearningItem,
+  pool: LearningItem[],
+  seed: string,
+): Exercise {
+  const base = recognitionExercise(item, pool, seededRandom(seed));
+  return {
+    ...base,
+    id: `${item.id}-listening`,
+    type: 'listening',
+    audioOnly: true,
+    weight: EXERCISE_WEIGHTS.listening,
+  };
+}
+
+/** A listening round over a module's items. */
+export function buildListeningSteps(
+  items: LearningItem[],
+  options: { seed: string },
+): LessonStep[] {
+  return items.map((item) => ({
+    kind: 'exercise' as const,
+    item,
+    exercise: listeningExercise(item, items, `${options.seed}-${item.id}`),
   }));
 }

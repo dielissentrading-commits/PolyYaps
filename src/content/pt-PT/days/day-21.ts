@@ -49,11 +49,31 @@ export const day21: LessonDay = {
       ],
     },
     {
+      id: "d21-listening",
+      lessonDay: 21,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-e-a-tua-primeira-vez-em-portugal", type: "chunk", portuguese: "É a tua primeira vez em Portugal?", dutch: "Is het je eerste keer in Portugal?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "c-ha-quanto-tempo-estas-aqui", type: "chunk", portuguese: "Há quanto tempo estás aqui?", dutch: "Hoe lang ben je hier?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "c-estas-aqui-de-ferias", type: "chunk", portuguese: "Estás aqui de férias?", dutch: "Ben je hier op vakantie?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "c-ou-estas-aqui-em-trabalho", type: "chunk", portuguese: "Ou estás aqui em trabalho?", dutch: "Of ben je hier voor werk?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "c-vieste-sozinho", type: "chunk", portuguese: "Vieste sozinho?", dutch: "Ben je alleen gekomen?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "c-o-que-estas-a-achar-de-portugal", type: "chunk", portuguese: "O que estás a achar de Portugal?", dutch: "Wat vind je tot nu toe van Portugal?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+      ],
+    },
+    {
       id: "d21-speaking",
       lessonDay: 21,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-e-a-tua-primeira-vez-em-portugal", type: "chunk", portuguese: "É a tua primeira vez em Portugal?", dutch: "Is het je eerste keer in Portugal?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "c-ha-quanto-tempo-estas-aqui", type: "chunk", portuguese: "Há quanto tempo estás aqui?", dutch: "Hoe lang ben je hier?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "c-estas-aqui-de-ferias", type: "chunk", portuguese: "Estás aqui de férias?", dutch: "Ben je hier op vakantie?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "c-ou-estas-aqui-em-trabalho", type: "chunk", portuguese: "Ou estás aqui em trabalho?", dutch: "Of ben je hier voor werk?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+        { id: "c-vieste-sozinho", type: "chunk", portuguese: "Vieste sozinho?", dutch: "Ben je alleen gekomen?", dayIntroduced: 21, category: "iemand-leren-kennen", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

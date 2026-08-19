@@ -49,6 +49,20 @@ export const day09: LessonDay = {
       ],
     },
     {
+      id: "d09-listening",
+      lessonDay: 9,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-normalmente-acordo-as-sete", type: "chunk", portuguese: "Normalmente acordo às sete.", dutch: "Normaal word ik om zeven uur wakker.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "c-tomo-o-pequeno-almoco", type: "chunk", portuguese: "Tomo o pequeno-almoço.", dutch: "Ik ontbijt.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "c-depois-vou-trabalhar", type: "chunk", portuguese: "Depois vou trabalhar.", dutch: "Daarna ga ik werken.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "c-comeco-a-trabalhar-as-nove", type: "chunk", portuguese: "Começo a trabalhar às nove.", dutch: "Ik begin om negen uur met werken.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "c-almoco-ao-meio-dia", type: "chunk", portuguese: "Almoço ao meio-dia.", dutch: "Ik lunch rond het middaguur.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "c-acabo-de-trabalhar-as-cinco", type: "chunk", portuguese: "Acabo de trabalhar às cinco.", dutch: "Ik stop om vijf uur met werken.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+      ],
+    },
+    {
       id: "d09-grammar",
       lessonDay: 9,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day09: LessonDay = {
       lessonDay: 9,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-normalmente-acordo-as-sete", type: "chunk", portuguese: "Normalmente acordo às sete.", dutch: "Normaal word ik om zeven uur wakker.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "c-tomo-o-pequeno-almoco", type: "chunk", portuguese: "Tomo o pequeno-almoço.", dutch: "Ik ontbijt.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "c-depois-vou-trabalhar", type: "chunk", portuguese: "Depois vou trabalhar.", dutch: "Daarna ga ik werken.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "c-comeco-a-trabalhar-as-nove", type: "chunk", portuguese: "Começo a trabalhar às nove.", dutch: "Ik begin om negen uur met werken.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+        { id: "c-almoco-ao-meio-dia", type: "chunk", portuguese: "Almoço ao meio-dia.", dutch: "Ik lunch rond het middaguur.", dayIntroduced: 9, category: "dagelijkse-routine", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

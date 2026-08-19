@@ -49,6 +49,20 @@ export const day11: LessonDay = {
       ],
     },
     {
+      id: "d11-listening",
+      lessonDay: 11,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-tem-uma-mesa-para-dois", type: "chunk", portuguese: "Tem uma mesa para dois?", dutch: "Heeft u een tafel voor twee?", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "c-pode-trazer-a-ementa-por-favor", type: "chunk", portuguese: "Pode trazer a ementa, por favor?", dutch: "Kunt u de kaart brengen?", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "c-o-que-recomenda", type: "chunk", portuguese: "O que recomenda?", dutch: "Wat raadt u aan?", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "c-queria-este-prato", type: "chunk", portuguese: "Queria este prato.", dutch: "Ik zou graag dit gerecht willen.", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "c-para-mim-o-peixe", type: "chunk", portuguese: "Para mim, o peixe.", dutch: "Voor mij de vis.", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "c-sem-cebola-por-favor", type: "chunk", portuguese: "Sem cebola, por favor.", dutch: "Zonder ui, alstublieft.", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+      ],
+    },
+    {
       id: "d11-grammar",
       lessonDay: 11,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day11: LessonDay = {
       lessonDay: 11,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-tem-uma-mesa-para-dois", type: "chunk", portuguese: "Tem uma mesa para dois?", dutch: "Heeft u een tafel voor twee?", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "c-pode-trazer-a-ementa-por-favor", type: "chunk", portuguese: "Pode trazer a ementa, por favor?", dutch: "Kunt u de kaart brengen?", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "c-o-que-recomenda", type: "chunk", portuguese: "O que recomenda?", dutch: "Wat raadt u aan?", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "c-queria-este-prato", type: "chunk", portuguese: "Queria este prato.", dutch: "Ik zou graag dit gerecht willen.", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+        { id: "c-para-mim-o-peixe", type: "chunk", portuguese: "Para mim, o peixe.", dutch: "Voor mij de vis.", dayIntroduced: 11, category: "in-een-restaurant", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

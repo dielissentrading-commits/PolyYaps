@@ -66,11 +66,31 @@ export const day05: LessonDay = {
       ],
     },
     {
+      id: "d05-listening",
+      lessonDay: 5,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-quanto-custa", type: "chunk", portuguese: "Quanto custa?", dutch: "Hoeveel kost het?", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "c-quanto-e", type: "chunk", portuguese: "Quanto é?", dutch: "Hoeveel is het?", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "c-sao-cinco-euros", type: "chunk", portuguese: "São cinco euros.", dutch: "Het is vijf euro.", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "c-posso-pagar-com-cartao", type: "chunk", portuguese: "Posso pagar com cartão?", dutch: "Kan ik met kaart betalen?", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "c-em-dinheiro", type: "chunk", portuguese: "Em dinheiro.", dutch: "Contant.", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "c-que-horas-sao", type: "chunk", portuguese: "Que horas são?", dutch: "Hoe laat is het?", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+      ],
+    },
+    {
       id: "d05-speaking",
       lessonDay: 5,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-quanto-custa", type: "chunk", portuguese: "Quanto custa?", dutch: "Hoeveel kost het?", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "c-quanto-e", type: "chunk", portuguese: "Quanto é?", dutch: "Hoeveel is het?", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "c-sao-cinco-euros", type: "chunk", portuguese: "São cinco euros.", dutch: "Het is vijf euro.", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "c-posso-pagar-com-cartao", type: "chunk", portuguese: "Posso pagar com cartão?", dutch: "Kan ik met kaart betalen?", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+        { id: "c-em-dinheiro", type: "chunk", portuguese: "Em dinheiro.", dutch: "Contant.", dayIntroduced: 5, category: "getallen-geld-tijd", priority: 2 },
+      ],
       tasks: [
         {
           title: "Checkpoint — Café Challenge",

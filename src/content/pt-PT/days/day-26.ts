@@ -49,6 +49,20 @@ export const day26: LessonDay = {
       ],
     },
     {
+      id: "d26-listening",
+      lessonDay: 26,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-trabalho-em-marketing-digital", type: "chunk", portuguese: "Trabalho em marketing digital.", dutch: "Ik werk in digitale marketing.", dayIntroduced: 26, category: "zakelijk-kennismaken", priority: 2 },
+        { id: "c-trabalho-sobretudo-com-publicidade-online", type: "chunk", portuguese: "Trabalho sobretudo com publicidade online.", dutch: "Ik werk vooral met online advertising.", dayIntroduced: 26, category: "zakelijk-kennismaken", priority: 2 },
+        { id: "c-trabalho-com-varios-clientes", type: "chunk", portuguese: "Trabalho com vários clientes.", dutch: "Ik werk met verschillende klanten.", dayIntroduced: 26, category: "zakelijk-kennismaken", priority: 2 },
+        { id: "c-faco-parte-de-uma-equipa", type: "chunk", portuguese: "Faço parte de uma equipa.", dutch: "Ik maak deel uit van een team.", dayIntroduced: 26, category: "zakelijk-kennismaken", priority: 2 },
+        { id: "c-estou-aqui-por-causa-de-uma-reuniao", type: "chunk", portuguese: "Estou aqui por causa de uma reunião.", dutch: "Ik ben hier voor een vergadering.", dayIntroduced: 26, category: "zakelijk-kennismaken", priority: 2 },
+        { id: "c-estamos-a-trabalhar-num-projeto", type: "chunk", portuguese: "Estamos a trabalhar num projeto.", dutch: "We werken aan een project.", dayIntroduced: 26, category: "zakelijk-kennismaken", priority: 2 },
+      ],
+    },
+    {
       id: "d26-grammar",
       lessonDay: 26,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day26: LessonDay = {
       lessonDay: 26,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-trabalho-em-marketing-digital", type: "chunk", portuguese: "Trabalho em marketing digital.", dutch: "Ik werk in digitale marketing.", dayIntroduced: 26, category: "zakelijk-kennismaken", priority: 2 },
+        { id: "c-trabalho-sobretudo-com-publicidade-online", type: "chunk", portuguese: "Trabalho sobretudo com publicidade online.", dutch: "Ik werk vooral met online advertising.", dayIntroduced: 26, category: "zakelijk-kennismaken", priority: 2 },
+        { id: "c-trabalho-com-varios-clientes", type: "chunk", portuguese: "Trabalho com vários clientes.", dutch: "Ik werk met verschillende klanten.", dayIntroduced: 26, category: "zakelijk-kennismaken", priority: 2 },
+        { id: "c-faco-parte-de-uma-equipa", type: "chunk", portuguese: "Faço parte de uma equipa.", dutch: "Ik maak deel uit van een team.", dayIntroduced: 26, category: "zakelijk-kennismaken", priority: 2 },
+        { id: "c-estou-aqui-por-causa-de-uma-reuniao", type: "chunk", portuguese: "Estou aqui por causa de uma reunião.", dutch: "Ik ben hier voor een vergadering.", dayIntroduced: 26, category: "zakelijk-kennismaken", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

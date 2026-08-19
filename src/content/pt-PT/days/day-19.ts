@@ -49,11 +49,31 @@ export const day19: LessonDay = {
       ],
     },
     {
+      id: "d19-listening",
+      lessonDay: 19,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-queres-tomar-um-cafe", type: "chunk", portuguese: "Queres tomar um café?", dutch: "Wil je koffie drinken?", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "c-queres-jantar-comigo", type: "chunk", portuguese: "Queres jantar comigo?", dutch: "Wil je met mij eten?", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "c-podemos-ir-amanha", type: "chunk", portuguese: "Podemos ir amanhã.", dutch: "We kunnen morgen gaan.", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "c-vamos-ao-centro", type: "chunk", portuguese: "Vamos ao centro?", dutch: "Zullen we naar het centrum gaan?", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "c-a-que-horas", type: "chunk", portuguese: "A que horas?", dutch: "Hoe laat?", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "c-onde-nos-encontramos", type: "chunk", portuguese: "Onde nos encontramos?", dutch: "Waar spreken we af?", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+      ],
+    },
+    {
       id: "d19-speaking",
       lessonDay: 19,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-queres-tomar-um-cafe", type: "chunk", portuguese: "Queres tomar um café?", dutch: "Wil je koffie drinken?", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "c-queres-jantar-comigo", type: "chunk", portuguese: "Queres jantar comigo?", dutch: "Wil je met mij eten?", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "c-podemos-ir-amanha", type: "chunk", portuguese: "Podemos ir amanhã.", dutch: "We kunnen morgen gaan.", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "c-vamos-ao-centro", type: "chunk", portuguese: "Vamos ao centro?", dutch: "Zullen we naar het centrum gaan?", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+        { id: "c-a-que-horas", type: "chunk", portuguese: "A que horas?", dutch: "Hoe laat?", dayIntroduced: 19, category: "plannen-maken-met-iemand", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

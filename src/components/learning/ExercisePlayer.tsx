@@ -60,6 +60,14 @@ export function ExercisePlayer({
 
   const step = steps[index];
   const isExercise = step?.kind === 'exercise';
+
+  // A listening exercise should sound as soon as it appears; the learner can
+  // replay it, but should not have to press play to start.
+  useEffect(() => {
+    if (step?.kind === 'exercise' && step.exercise.audioOnly) {
+      void playAudio({ text: step.item.portuguese });
+    }
+  }, [step]);
   const answered = check !== null;
   const isLastStep = index >= steps.length - 1;
 
@@ -145,6 +153,7 @@ export function ExercisePlayer({
             exercise={step.exercise}
             answered={answered ? answer : undefined}
             onChoose={submit}
+            onListen={() => listen(step.item.portuguese)}
           />
         )}
 

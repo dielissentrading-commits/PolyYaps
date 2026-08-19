@@ -4,7 +4,8 @@ import { FocusShell } from '@/components/layout/FocusShell';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { ExercisePlayer } from '@/components/learning/ExercisePlayer';
-import { buildSteps } from '@/engine/exercises';
+import { SpeakingModule } from './SpeakingModule';
+import { buildListeningSteps, buildSteps } from '@/engine/exercises';
 import { getDay } from '@/content/pt-PT/course';
 import { getModuleDefinition } from '@/content/pt-PT/modules';
 import { useProgress } from '@/hooks/useProgress';
@@ -26,13 +27,16 @@ export function ModuleScreen() {
   const lesson = Number.isFinite(dayNumber) ? getDay(dayNumber) : undefined;
   const current = lesson?.modules.find((entry) => entry.type === module);
 
-  const steps = useMemo(
-    () =>
-      current
-        ? buildSteps(current.items, { currentDay: user.currentDay, seed: current.id })
-        : [],
-    [current, user.currentDay],
-  );
+  const steps = useMemo(() => {
+    if (!current) return [];
+    // Listening asks the same question with the text hidden, so it needs its
+    // own builder rather than the study-then-recall sequence.
+    if (current.type === 'listening') {
+      return buildListeningSteps(current.items, { seed: current.id });
+    }
+    if (current.type === 'speaking') return [];
+    return buildSteps(current.items, { currentDay: user.currentDay, seed: current.id });
+  }, [current, user.currentDay]);
 
   if (!lesson || !current) {
     return <Navigate to={lesson ? `/lesson/${lesson.day}` : '/learn'} replace />;
@@ -52,6 +56,19 @@ export function ModuleScreen() {
       nextModule ? `/lesson/${lesson.day}/${nextModule.type}` : `/lesson/${lesson.day}/result`,
     );
   };
+
+  if (current.type === 'speaking' && (current.items.length > 0 || current.tasks?.length)) {
+    return (
+      <SpeakingModule
+        title={definition?.label ?? current.type}
+        tasks={current.tasks ?? []}
+        items={current.items}
+        closeTo={`/lesson/${lesson.day}`}
+        finishLabel={finishLabel}
+        onFinish={finish}
+      />
+    );
+  }
 
   if (steps.length > 0) {
     return (

@@ -49,6 +49,20 @@ export const day01: LessonDay = {
       ],
     },
     {
+      id: "d01-listening",
+      lessonDay: 1,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-ola-bom-dia", type: "chunk", portuguese: "Olá, bom dia.", dutch: "Hallo, goedemorgen.", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "c-como-te-chamas", type: "chunk", portuguese: "Como te chamas?", dutch: "Hoe heet je?", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "c-chamo-me-duran", type: "chunk", portuguese: "Chamo-me Duran.", dutch: "Ik heet Duran.", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "c-sou-neerlandes", type: "chunk", portuguese: "Sou neerlandês.", dutch: "Ik ben Nederlands.", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "c-sou-dos-paises-baixos", type: "chunk", portuguese: "Sou dos Países Baixos.", dutch: "Ik kom uit Nederland.", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "c-estou-a-aprender-portugues", type: "chunk", portuguese: "Estou a aprender português.", dutch: "Ik ben Portugees aan het leren.", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+      ],
+    },
+    {
       id: "d01-grammar",
       lessonDay: 1,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day01: LessonDay = {
       lessonDay: 1,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-ola-bom-dia", type: "chunk", portuguese: "Olá, bom dia.", dutch: "Hallo, goedemorgen.", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "c-como-te-chamas", type: "chunk", portuguese: "Como te chamas?", dutch: "Hoe heet je?", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "c-chamo-me-duran", type: "chunk", portuguese: "Chamo-me Duran.", dutch: "Ik heet Duran.", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "c-sou-neerlandes", type: "chunk", portuguese: "Sou neerlandês.", dutch: "Ik ben Nederlands.", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+        { id: "c-sou-dos-paises-baixos", type: "chunk", portuguese: "Sou dos Países Baixos.", dutch: "Ik kom uit Nederland.", dayIntroduced: 1, category: "begroeten-jezelf-voorstellen", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",

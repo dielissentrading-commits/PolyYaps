@@ -49,6 +49,20 @@ export const day07: LessonDay = {
       ],
     },
     {
+      id: "d07-listening",
+      lessonDay: 7,
+      type: "listening",
+      estimatedMinutes: 10,
+      items: [
+        { id: "c-o-que-fazes", type: "chunk", portuguese: "O que fazes?", dutch: "Wat doe je voor werk?", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "c-trabalho-em-marketing", type: "chunk", portuguese: "Trabalho em marketing.", dutch: "Ik werk in marketing.", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "c-trabalho-numa-empresa", type: "chunk", portuguese: "Trabalho numa empresa.", dutch: "Ik werk bij een bedrijf.", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "c-trabalho-com-clientes", type: "chunk", portuguese: "Trabalho com clientes.", dutch: "Ik werk met klanten.", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "c-tenho-uma-reuniao-hoje", type: "chunk", portuguese: "Tenho uma reunião hoje.", dutch: "Ik heb vandaag een vergadering.", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "c-estou-a-trabalhar-num-projeto", type: "chunk", portuguese: "Estou a trabalhar num projeto.", dutch: "Ik werk aan een project.", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+      ],
+    },
+    {
       id: "d07-grammar",
       lessonDay: 7,
       type: "grammar",
@@ -67,7 +81,13 @@ export const day07: LessonDay = {
       lessonDay: 7,
       type: "speaking",
       estimatedMinutes: 15,
-      items: [],
+      items: [
+        { id: "c-o-que-fazes", type: "chunk", portuguese: "O que fazes?", dutch: "Wat doe je voor werk?", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "c-trabalho-em-marketing", type: "chunk", portuguese: "Trabalho em marketing.", dutch: "Ik werk in marketing.", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "c-trabalho-numa-empresa", type: "chunk", portuguese: "Trabalho numa empresa.", dutch: "Ik werk bij een bedrijf.", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "c-trabalho-com-clientes", type: "chunk", portuguese: "Trabalho com clientes.", dutch: "Ik werk met klanten.", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+        { id: "c-tenho-uma-reuniao-hoje", type: "chunk", portuguese: "Tenho uma reunião hoje.", dutch: "Ik heb vandaag een vergadering.", dayIntroduced: 7, category: "werk-beroep", priority: 2 },
+      ],
       tasks: [
         {
           title: "Spreekopdracht",
