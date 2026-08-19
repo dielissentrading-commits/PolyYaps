@@ -8,21 +8,23 @@ PolyYaps is a mobile-first Progressive Web App for learning European Portuguese 
 - Stack: React + TypeScript + Vite
 - Storage: local-first; IndexedDB for mastery and localStorage for compact course progress in the current prototype
 - Learning: data-driven lessons, item-level mastery, spaced repetition, Smart Review
-- Gamification: XP, streaks, levels, stars, achievements, passport stamps, boss challenges
+- Gamification: XP, streaks, named levels, stars, achievements, passport stamps, checkpoint history and streak freezes
 - UX direction: Airbnb-modern, warm, premium, travel-oriented
 
 ## Current prototype
 
-V0.4 is the current implementation milestone.
+V0.5 is the current implementation milestone.
 
-- Dag 1–4 are fully playable through one generic lesson engine.
-- Dag 5 is the first dedicated Café Challenge checkpoint.
+- Dag 1–9 are fully playable through one generic lesson engine.
+- Dag 5 is the Café Challenge in Lisboa.
+- Dag 10 is the Meet a Local conversational checkpoint in Coimbra.
 - Every learned word/chunk receives a mastery record with strength 0–100 and mastery level 0–4.
 - Review dates are scheduled automatically.
-- Smart Review mixes recognition, active recall and listening.
-- Weakness categories such as `SER_VS_ESTAR`, `TER_AGE`, `QUERIA_REQUEST`, `NUMBERS`, `PAYMENT` and `TIME` are aggregated and surfaced in the UI.
+- Smart Review mixes recognition, active recall and listening and surfaces weakness categories.
 - Home, Review and Progress use real local mastery data.
-- Passing the Café Challenge earns the first passport stamp and challenge achievement.
+- Named levels, achievements and the Passaporte Português now have dedicated UI.
+- Passing checkpoint days earns passport stamps and challenge achievements.
+- Streak freezes are earned at five-day milestones and can preserve a streak after one missed study day.
 
 ## Course content
 
@@ -43,6 +45,7 @@ These Markdown files are the editorial source of truth. Playable lessons are con
 - `docs/09-v0.2-day1.md` — first complete playable lesson
 - `docs/10-v0.3-learning-engine.md` — item mastery, IndexedDB, review scheduling and generic lessons
 - `docs/11-v0.4-survival-phase.md` — Dag 3–5, weakness categories and Café Challenge
+- `docs/12-v0.5-phase-two-gamification.md` — Dag 6–10, Meet a Local, levels, Passport, achievements and streak rewards
 
 ## Roadmap
 
@@ -50,7 +53,7 @@ These Markdown files are the editorial source of truth. Playable lessons are con
 2. ✅ V0.2 — Day 1 and first real lesson flow
 3. ✅ V0.3 — IndexedDB mastery, spaced repetition, Smart Review and Day 2
 4. ✅ V0.4 — Day 3–5, weakness categories and first Café Challenge
-5. V0.5 — Day 6–10 plus deeper gamification: levels, Passport and achievements
+5. ✅ V0.5 — Day 6–10, Meet a Local and deeper gamification
 6. V0.6 — recorded pt-PT audio and automatic speaking assessment
 7. V0.7 — full offline PWA and install polish
 8. V0.8 — all 30 days converted to structured app data
