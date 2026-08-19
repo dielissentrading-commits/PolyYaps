@@ -2,8 +2,29 @@ const CACHE = 'polyyaps-v1';
 const BASE = new URL('./', self.location.href).href;
 const CORE = [BASE, new URL('./manifest.webmanifest', self.location.href).href, new URL('./icon.svg', self.location.href).href];
 
+async function precacheAppShell() {
+  const cache = await caches.open(CACHE);
+  await cache.addAll(CORE);
+  try {
+    const response = await fetch(BASE, { cache: 'no-store' });
+    if (!response.ok) return;
+    const html = await response.clone().text();
+    await cache.put(BASE, response);
+    const paths = Array.from(html.matchAll(/(?:src|href)=["']([^"']+)["']/g))
+      .map((match) => match[1])
+      .filter((path) => !path.startsWith('http') && !path.startsWith('data:'))
+      .map((path) => new URL(path, BASE).href)
+      .filter((url) => url.startsWith(BASE));
+    await Promise.all(paths.map(async (url) => {
+      try { await cache.add(url); } catch { /* optional asset */ }
+    }));
+  } catch {
+    // CORE remains available even when optional asset discovery fails.
+  }
+}
+
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(CORE)).then(() => self.skipWaiting()));
+  event.waitUntil(precacheAppShell().then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', (event) => {
