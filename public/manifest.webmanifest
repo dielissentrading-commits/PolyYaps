@@ -1,0 +1,10 @@
+{
+  "name": "PolyYaps",
+  "short_name": "PolyYaps",
+  "description": "Leer Europees Portugees in 30 dagen.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF9F7",
+  "theme_color": "#D95C45",
+  "lang": "nl-NL"
+}
