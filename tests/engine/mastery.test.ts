@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { applyAnswer, emptyItemProgress, isActive } from '@/engine/mastery';
+import type { ItemProgress } from '@/types';
 
 const at = (day: string) => new Date(`${day}T10:00:00`);
 
@@ -30,20 +31,20 @@ describe('applyAnswer', () => {
   });
 
   it('never lowers mastery on a correct answer', () => {
-    const strong = { ...emptyItemProgress('w-ola'), masteryLevel: 4 as const, strength: 90 };
+    const strong: ItemProgress = { ...emptyItemProgress('w-ola'), masteryLevel: 4, strength: 90 };
     const result = applyAnswer(strong, { exerciseType: 'recognition', correct: true });
     expect(result.masteryLevel).toBe(4);
   });
 
   it('lowers strength on a mistake', () => {
-    const known = { ...emptyItemProgress('w-ola'), strength: 80, masteryLevel: 3 as const };
+    const known: ItemProgress = { ...emptyItemProgress('w-ola'), strength: 80, masteryLevel: 3 };
     const result = applyAnswer(known, { exerciseType: 'production', correct: false });
     expect(result.strength).toBeLessThan(80);
     expect(result.timesWrong).toBe(1);
   });
 
   it('keeps mastery at recognised at worst after a mistake', () => {
-    let progress = { ...emptyItemProgress('w-ola'), strength: 10, masteryLevel: 3 as const };
+    let progress: ItemProgress = { ...emptyItemProgress('w-ola'), strength: 10, masteryLevel: 3 };
     for (let round = 0; round < 5; round += 1) {
       progress = applyAnswer(progress, { exerciseType: 'sentence', correct: false });
     }
@@ -52,7 +53,7 @@ describe('applyAnswer', () => {
   });
 
   it('keeps strength inside 0 and 100', () => {
-    let progress = emptyItemProgress('w-ola');
+    let progress: ItemProgress = emptyItemProgress('w-ola');
     for (let round = 0; round < 20; round += 1) {
       progress = applyAnswer(progress, { exerciseType: 'spontaneous', correct: true });
     }
