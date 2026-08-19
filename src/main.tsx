@@ -4,6 +4,7 @@ import './styles.css';
 import './lesson.css';
 import './lesson-v02.css';
 import './lesson-v03.css';
+import './lesson-v04.css';
 
 const root = document.getElementById('root');
 
