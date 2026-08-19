@@ -2,8 +2,8 @@
   "name": "PolyYaps — Europees Portugees",
   "short_name": "PolyYaps",
   "description": "Leer praktisch Europees Portugees in 30 dagen met spreken, luisteren en Smart Review.",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": ".",
+  "scope": ".",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#FAF9F7",
@@ -11,7 +11,7 @@
   "lang": "nl-NL",
   "icons": [
     {
-      "src": "/icon.svg",
+      "src": "./icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
