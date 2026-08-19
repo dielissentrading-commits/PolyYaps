@@ -7,9 +7,10 @@ type Props = {
   onComplete: (progress: ProgressState) => void;
 };
 
-type Phase = 'intro' | 'vocabulary' | 'chunks' | 'grammar' | 'speaking' | 'quiz' | 'result';
+type Phase = 'intro' | 'vocabulary' | 'recall' | 'chunks' | 'listening' | 'grammar' | 'speaking' | 'quiz' | 'result';
 
-const phases: Phase[] = ['intro', 'vocabulary', 'chunks', 'grammar', 'speaking', 'quiz', 'result'];
+const phases: Phase[] = ['intro', 'vocabulary', 'recall', 'chunks', 'listening', 'grammar', 'speaking', 'quiz', 'result'];
+const listeningItems = [day1.chunks[0], day1.chunks[1], day1.chunks[3], day1.chunks[5], day1.chunks[7]];
 
 function speak(text: string) {
   if (!('speechSynthesis' in window)) return;
@@ -31,7 +32,12 @@ function normalize(value: string) {
 export function LessonOverlay({ onClose, onComplete }: Props) {
   const [phase, setPhase] = useState<Phase>('intro');
   const [vocabIndex, setVocabIndex] = useState(0);
+  const [recallIndex, setRecallIndex] = useState(0);
+  const [recallAnswer, setRecallAnswer] = useState('');
+  const [recallFeedback, setRecallFeedback] = useState<'correct' | 'wrong' | null>(null);
   const [chunkIndex, setChunkIndex] = useState(0);
+  const [listeningIndex, setListeningIndex] = useState(0);
+  const [listeningRevealed, setListeningRevealed] = useState(false);
   const [quizIndex, setQuizIndex] = useState(0);
   const [answer, setAnswer] = useState('');
   const [quizScore, setQuizScore] = useState(0);
@@ -42,7 +48,9 @@ export function LessonOverlay({ onClose, onComplete }: Props) {
   const phaseIndex = phases.indexOf(phase);
   const totalProgress = Math.round((phaseIndex / (phases.length - 1)) * 100);
   const currentWord = day1.vocabulary[vocabIndex];
+  const recallWord = day1.vocabulary[recallIndex];
   const currentChunk = day1.chunks[chunkIndex];
+  const currentListening = listeningItems[listeningIndex];
   const currentQuestion = day1.quiz[quizIndex];
 
   const result = useMemo(() => {
@@ -59,12 +67,36 @@ export function LessonOverlay({ onClose, onComplete }: Props) {
 
   function nextVocabulary() {
     if (vocabIndex < day1.vocabulary.length - 1) setVocabIndex((value) => value + 1);
-    else go('chunks');
+    else go('recall');
+  }
+
+  function checkRecall() {
+    const correct = normalize(recallAnswer) === normalize(recallWord.portuguese);
+    setRecallFeedback(correct ? 'correct' : 'wrong');
+  }
+
+  function nextRecall() {
+    if (recallIndex < day1.vocabulary.length - 1) {
+      setRecallIndex((value) => value + 1);
+      setRecallAnswer('');
+      setRecallFeedback(null);
+    } else {
+      go('chunks');
+    }
   }
 
   function nextChunk() {
     if (chunkIndex < day1.chunks.length - 1) setChunkIndex((value) => value + 1);
-    else go('grammar');
+    else go('listening');
+  }
+
+  function nextListening() {
+    if (listeningIndex < listeningItems.length - 1) {
+      setListeningIndex((value) => value + 1);
+      setListeningRevealed(false);
+    } else {
+      go('grammar');
+    }
   }
 
   function submitQuiz(choice?: string) {
@@ -77,7 +109,7 @@ export function LessonOverlay({ onClose, onComplete }: Props) {
     if (choice) setAnswer(choice);
   }
 
-  function nextQuiz() {
+  function continueQuiz() {
     if (quizIndex < day1.quiz.length - 1) {
       setQuizIndex((value) => value + 1);
       setAnswer('');
@@ -85,21 +117,6 @@ export function LessonOverlay({ onClose, onComplete }: Props) {
       return;
     }
 
-    const score = Math.round((quizScore / day1.quiz.length) * 100);
-    const lastWasCorrect = feedback === 'correct';
-    const correctedScore = Math.round(((quizScore + (lastWasCorrect ? 0 : 0)) / day1.quiz.length) * 100);
-    const finalScore = feedback ? correctedScore : score;
-    const progress = completeDayOne(
-      finalScore,
-      day1.vocabulary.map((item) => item.id),
-      day1.chunks.map((item) => item.id),
-    );
-    setFinalProgress(progress);
-    setPhase('result');
-  }
-
-  // quizScore is incremented before React renders the feedback state. Use this when finishing.
-  function finishQuiz() {
     const finalScore = Math.round((quizScore / day1.quiz.length) * 100);
     const progress = completeDayOne(
       finalScore,
@@ -108,11 +125,6 @@ export function LessonOverlay({ onClose, onComplete }: Props) {
     );
     setFinalProgress(progress);
     setPhase('result');
-  }
-
-  function continueQuiz() {
-    if (quizIndex === day1.quiz.length - 1) finishQuiz();
-    else nextQuiz();
   }
 
   return (
@@ -135,7 +147,7 @@ export function LessonOverlay({ onClose, onComplete }: Props) {
               <p>{day1.goal}</p>
             </div>
             <div className="lesson-breakdown">
-              <span>15 woorden</span><span>8 chunks</span><span>ser</span><span>10 toetsvragen</span>
+              <span>15 woorden</span><span>8 chunks</span><span>5 luisteritems</span><span>10 toetsvragen</span>
             </div>
             <button className="primary-button" onClick={() => go('vocabulary')}>Begin met woorden</button>
           </section>
@@ -143,7 +155,7 @@ export function LessonOverlay({ onClose, onComplete }: Props) {
 
         {phase === 'vocabulary' && (
           <section className="lesson-stage flash-stage">
-            <div className="stage-meta"><span>WOORDEN</span><strong>{vocabIndex + 1} / {day1.vocabulary.length}</strong></div>
+            <div className="stage-meta"><span>WOORDEN LEREN</span><strong>{vocabIndex + 1} / {day1.vocabulary.length}</strong></div>
             <div className="micro-progress"><span style={{ width: `${((vocabIndex + 1) / day1.vocabulary.length) * 100}%` }} /></div>
             <div className="word-card">
               <h1>{currentWord.portuguese}</h1>
@@ -151,7 +163,34 @@ export function LessonOverlay({ onClose, onComplete }: Props) {
               <button className="audio-button" onClick={() => speak(currentWord.portuguese)} aria-label="Luister naar uitspraak">🔊</button>
               {currentWord.example && <div className="example-line">{currentWord.example}</div>}
             </div>
-            <button className="primary-button" onClick={nextVocabulary}>{vocabIndex === day1.vocabulary.length - 1 ? 'Door naar chunks' : 'Volgende woord'}</button>
+            <button className="primary-button" onClick={nextVocabulary}>{vocabIndex === day1.vocabulary.length - 1 ? 'Test wat je onthoudt' : 'Volgende woord'}</button>
+          </section>
+        )}
+
+        {phase === 'recall' && (
+          <section className="lesson-stage recall-stage">
+            <div className="stage-meta"><span>ACTIEF OPHALEN</span><strong>{recallIndex + 1} / {day1.vocabulary.length}</strong></div>
+            <div className="micro-progress"><span style={{ width: `${((recallIndex + 1) / day1.vocabulary.length) * 100}%` }} /></div>
+            <div className="recall-card">
+              <small>HOE ZEG JE:</small>
+              <h1>{recallWord.dutch}</h1>
+              <input
+                autoCapitalize="none"
+                autoComplete="off"
+                value={recallAnswer}
+                disabled={Boolean(recallFeedback)}
+                onChange={(event) => setRecallAnswer(event.target.value)}
+                onKeyDown={(event) => { if (event.key === 'Enter' && recallAnswer && !recallFeedback) checkRecall(); }}
+                placeholder="Typ in het Portugees..."
+              />
+              {!recallFeedback && <button className="primary-button" disabled={!recallAnswer.trim()} onClick={checkRecall}>Controleren</button>}
+              {recallFeedback && <div className={`inline-feedback ${recallFeedback}`}>
+                <strong>{recallFeedback === 'correct' ? '✓ Correct' : 'Nog niet helemaal'}</strong>
+                {recallFeedback === 'wrong' && <span>Correct: <b>{recallWord.portuguese}</b></span>}
+                <button className="secondary-button" onClick={() => speak(recallWord.portuguese)}>🔊 Luister</button>
+                <button className="primary-button" onClick={nextRecall}>{recallIndex === day1.vocabulary.length - 1 ? 'Door naar chunks' : 'Volgende'}</button>
+              </div>}
+            </div>
           </section>
         )}
 
@@ -165,7 +204,25 @@ export function LessonOverlay({ onClose, onComplete }: Props) {
               <button className="audio-button" onClick={() => speak(currentChunk.portuguese)} aria-label="Luister naar uitspraak">🔊</button>
               <small>Zeg de zin daarna één keer hardop na.</small>
             </div>
-            <button className="primary-button" onClick={nextChunk}>{chunkIndex === day1.chunks.length - 1 ? 'Door naar grammatica' : 'Volgende chunk'}</button>
+            <button className="primary-button" onClick={nextChunk}>{chunkIndex === day1.chunks.length - 1 ? 'Luistertest' : 'Volgende chunk'}</button>
+          </section>
+        )}
+
+        {phase === 'listening' && (
+          <section className="lesson-stage listening-stage">
+            <div className="stage-meta"><span>LUISTEREN</span><strong>{listeningIndex + 1} / {listeningItems.length}</strong></div>
+            <div className="micro-progress"><span style={{ width: `${((listeningIndex + 1) / listeningItems.length) * 100}%` }} /></div>
+            <div className="listening-card">
+              <div className="listening-icon">👂</div>
+              <h2>Luister zonder de tekst te zien.</h2>
+              <button className="audio-button large" onClick={() => speak(currentListening.portuguese)}>▶</button>
+              {!listeningRevealed ? (
+                <button className="secondary-button" onClick={() => setListeningRevealed(true)}>Toon wat ik hoorde</button>
+              ) : (
+                <div className="listening-reveal"><strong>{currentListening.portuguese}</strong><span>{currentListening.dutch}</span></div>
+              )}
+            </div>
+            {listeningRevealed && <button className="primary-button" onClick={nextListening}>{listeningIndex === listeningItems.length - 1 ? 'Door naar grammatica' : 'Volgende luisteritem'}</button>}
           </section>
         )}
 
@@ -192,7 +249,7 @@ export function LessonOverlay({ onClose, onComplete }: Props) {
             <h1>{day1.speaking.title}</h1>
             <p className="lead">{day1.speaking.prompt}</p>
             <div className="speak-orb" aria-hidden="true">🎙</div>
-            <p className="speak-hint">Spreek nu hardop. PolyYaps luistert in V0.2 nog niet automatisch mee.</p>
+            <p className="speak-hint">Spreek nu hardop. Automatische spraakbeoordeling voegen we in een latere versie toe.</p>
             <button className="secondary-button" onClick={() => speak(day1.speaking.model)}>🔊 Luister naar voorbeeld</button>
             <button className={`self-check ${speakingDone ? 'checked' : ''}`} onClick={() => setSpeakingDone((value) => !value)}>
               <span>{speakingDone ? '✓' : '○'}</span> Ik heb mijn introductie hardop gedaan
@@ -209,26 +266,13 @@ export function LessonOverlay({ onClose, onComplete }: Props) {
               <h2>{currentQuestion.prompt}</h2>
               {currentQuestion.type === 'input' ? (
                 <>
-                  <input
-                    autoCapitalize="none"
-                    autoComplete="off"
-                    value={answer}
-                    disabled={Boolean(feedback)}
-                    onChange={(event) => setAnswer(event.target.value)}
-                    onKeyDown={(event) => { if (event.key === 'Enter' && answer && !feedback) submitQuiz(); }}
-                    placeholder="Typ je antwoord..."
-                  />
+                  <input autoCapitalize="none" autoComplete="off" value={answer} disabled={Boolean(feedback)} onChange={(event) => setAnswer(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter' && answer && !feedback) submitQuiz(); }} placeholder="Typ je antwoord..." />
                   {!feedback && <button className="primary-button" disabled={!answer.trim()} onClick={() => submitQuiz()}>Controleren</button>}
                 </>
               ) : (
                 <div className="choice-list">
                   {currentQuestion.options?.map((option) => (
-                    <button
-                      key={option}
-                      className={feedback && option === currentQuestion.answer ? 'correct-choice' : feedback && option === answer ? 'wrong-choice' : ''}
-                      disabled={Boolean(feedback)}
-                      onClick={() => submitQuiz(option)}
-                    >{option}</button>
+                    <button key={option} className={feedback && option === currentQuestion.answer ? 'correct-choice' : feedback && option === answer ? 'wrong-choice' : ''} disabled={Boolean(feedback)} onClick={() => submitQuiz(option)}>{option}</button>
                   ))}
                 </div>
               )}
