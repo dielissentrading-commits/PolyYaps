@@ -8,6 +8,8 @@ import { day7 } from './day7';
 import { day8 } from './day8';
 import { day9 } from './day9';
 import { day10Challenge } from './day10Challenge';
+import { laterLessons } from './days11to30';
+import { laterChallenges } from './laterChallenges';
 import type { ChallengeContent, LessonContent } from '../types/learning';
 
 export const lessonRegistry: Record<number, LessonContent> = {
@@ -19,11 +21,13 @@ export const lessonRegistry: Record<number, LessonContent> = {
   7: day7,
   8: day8,
   9: day9,
+  ...laterLessons,
 };
 
 export const challengeRegistry: Record<number, ChallengeContent> = {
   5: day5Challenge,
   10: day10Challenge,
+  ...laterChallenges,
 };
 
 export function getLesson(day: number) {
