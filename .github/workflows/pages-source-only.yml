@@ -12,7 +12,22 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Inspect GitHub Pages config
+      - name: Switch GitHub Pages to workflow deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          code=$(curl -sS -o /tmp/pages-update.txt -w "%{http_code}" \
+            -X PUT \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/pages" \
+            -d '{"build_type":"workflow"}')
+          cat /tmp/pages-update.txt
+          echo "HTTP $code"
+          test "$code" = "204"
+
+      - name: Confirm GitHub Pages config
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
