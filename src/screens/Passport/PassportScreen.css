@@ -56,8 +56,8 @@
 .stamp__ring {
   display: grid;
   place-items: center;
-  width: 96px;
-  height: 96px;
+  width: 104px;
+  height: 104px;
   border: 2px dashed color-mix(in srgb, var(--color-muted) 35%, transparent);
   border-radius: 50%;
   color: var(--color-muted);
@@ -73,11 +73,15 @@
   opacity: 1;
 }
 
+/* Sized so the longest stamp name still fits on one line inside the ring. */
 .stamp__title {
-  font-size: var(--font-size-small);
+  max-width: 84px;
+  font-size: 10px;
+  line-height: 14px;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
+  overflow-wrap: break-word;
 }
 
 .stamp__scenario {

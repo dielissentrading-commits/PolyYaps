@@ -56,7 +56,7 @@ export function HomeScreen() {
             icon="review"
             tone="primary"
             title="Smart Review"
-            description={`${review.dueCount} items klaar · ± ${review.estimatedMinutes} min`}
+            description={`± ${review.estimatedMinutes} min oefenen`}
             badge={String(review.dueCount)}
           />
 
@@ -64,7 +64,7 @@ export function HomeScreen() {
             <ActionCard
               to="/review"
               icon="sparkle"
-              title={`Focus vandaag: ${review.focusLabel}`}
+              title={`Focus: ${review.focusLabel}`}
               description={review.focusHint ?? 'Extra oefening op je zwakste categorie.'}
             />
           )}

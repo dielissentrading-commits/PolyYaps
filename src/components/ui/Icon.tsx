@@ -25,7 +25,8 @@ export type IconName =
 
 const PATHS: Record<IconName, string> = {
   home: 'M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5h-6v5H5a1 1 0 0 1-1-1v-8.5Z',
-  path: 'M7 4v6a3 3 0 0 0 3 3h4a3 3 0 0 1 3 3v4M7 4a1.6 1.6 0 1 0 0-.001M17 20a1.6 1.6 0 1 0 0-.001',
+  path:
+    'M7 6v5a3 3 0 0 0 3 3h4a3 3 0 0 1 3 3v2M9 4a2 2 0 1 1-4 0 2 2 0 0 1 4 0M19 20a2 2 0 1 1-4 0 2 2 0 0 1 4 0',
   review: 'M20 12a8 8 0 1 1-2.6-5.9M20 4v4h-4',
   progress: 'M5 20V10m7 10V4m7 16v-7',
   'chevron-right': 'm9 6 6 6-6 6',
