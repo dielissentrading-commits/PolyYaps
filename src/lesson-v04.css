@@ -11,6 +11,7 @@
 .personal-focus small { color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .1em; }
 .personal-focus strong { font-size: 20px; letter-spacing: -.025em; }
 .personal-focus span { color: var(--muted); font-size: 12px; line-height: 1.5; }
+.review-focus-chip { align-self: flex-start; margin-top: 14px; padding: 7px 10px; border-radius: 999px; background: #f3eee8; color: var(--primary-dark); font-size: 10px; font-weight: 800; }
 
 .challenge-shell { background: #faf8f4; }
 .challenge-intro { align-items: center; text-align: center; }
