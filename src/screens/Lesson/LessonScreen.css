@@ -89,3 +89,7 @@
   flex-shrink: 0;
   color: var(--color-muted);
 }
+
+.lesson__note {
+  margin-top: var(--space-6);
+}

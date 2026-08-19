@@ -2,12 +2,13 @@ import { Navigate, useParams } from 'react-router-dom';
 import { FocusShell } from '@/components/layout/FocusShell';
 import { ButtonLink } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
-import { course, getChallengeTitle, getPhaseTitle } from '@/content/pt-PT/course';
+import { course, getChallengeTask, getChallengeTitle } from '@/content/pt-PT/course';
 import './ChallengeScreen.css';
 
 /**
- * Boss challenge shell — checkpoint days replace the normal module sequence
- * with a challenge flow (docs/07-technical-architecture.md, section 6).
+ * Boss challenge — checkpoint days replace the normal module sequence with a
+ * challenge flow (docs/07-technical-architecture.md, section 6). The steps come
+ * from the day's Checkpoint section in the editorial content.
  */
 export function ChallengeScreen() {
   const { id } = useParams();
@@ -18,13 +19,15 @@ export function ChallengeScreen() {
     return <Navigate to="/learn" replace />;
   }
 
+  const task = getChallengeTask(day);
+
   return (
     <FocusShell
       title={`Dag ${day.day} · Challenge`}
       closeTo="/learn"
       footer={
         <ButtonLink
-          to={`/lesson/${day.day}/result`}
+          to={`/lesson/${day.day}`}
           fullWidth
           trailing={<Icon name="chevron-right" size={20} />}
         >
@@ -34,9 +37,9 @@ export function ChallengeScreen() {
     >
       <div className="challenge">
         <div className="challenge__hero">
-          <span className="challenge__eyebrow">{getPhaseTitle(day.day)}</span>
+          <span className="challenge__eyebrow">{day.phaseTitle}</span>
           <h1 className="challenge__title">{title}</h1>
-          <p className="challenge__description">{day.description}</p>
+          <p className="challenge__description">{day.goal}</p>
         </div>
 
         <div className="challenge__rewards">
@@ -45,28 +48,23 @@ export function ChallengeScreen() {
           <span className="chip">Tot 3 sterren</span>
         </div>
 
-        <ol className="challenge__steps">
-          <li className="challenge__step">
-            <span className="challenge__step-index">1</span>
-            <span>Warm-up in het Portugees</span>
-          </li>
-          <li className="challenge__step">
-            <span className="challenge__step-index">2</span>
-            <span>Scenario spelen zonder Engels</span>
-          </li>
-          <li className="challenge__step">
-            <span className="challenge__step-index">3</span>
-            <span>Feedback op maximaal drie fouten</span>
-          </li>
-          <li className="challenge__step">
-            <span className="challenge__step-index">4</span>
-            <span>Retry en beloning</span>
-          </li>
-        </ol>
+        {task && (
+          <section className="challenge__task">
+            <h2 className="eyebrow">{task.body[0] ?? 'Wat je moet doen'}</h2>
+            <ol className="challenge__steps">
+              {task.steps.map((step, index) => (
+                <li className="challenge__step" key={step}>
+                  <span className="challenge__step-index">{index + 1}</span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
 
         <div className="placeholder challenge__note">
-          <span className="placeholder__title">Challenge-flow volgt later</span>
-          Scenario’s worden data-driven (V0.8). Deze shell toont alleen opbouw en beloningen.
+          <span className="placeholder__title">Beoordeling volgt later</span>
+          De stappen komen uit de lesstof. Scoring, stempel en XP komen uit de challenge-engine.
         </div>
       </div>
     </FocusShell>

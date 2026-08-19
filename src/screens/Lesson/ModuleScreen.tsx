@@ -4,19 +4,16 @@ import { FocusShell } from '@/components/layout/FocusShell';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { getDay } from '@/content/pt-PT/course';
-import { LESSON_MODULES, getModuleDefinition } from '@/content/pt-PT/modules';
+import { getModuleDefinition } from '@/content/pt-PT/modules';
+import type { LearningItem, LessonNote, LessonTask } from '@/types';
 import './ModuleScreen.css';
 
-/** Placeholder item count per module so the progress bar behaves realistically. */
-const ITEMS_PER_MODULE = 5;
-
 /**
- * Lesson player shell — docs/06-app-design.md, "Lesson player".
+ * Lesson player — docs/06-app-design.md, "Lesson player".
  *
- * V0.1 has no exercises yet: it establishes the focus-mode frame, the item
- * counter, the progress bar and the one dominant continuation action. V0.2
- * replaces the placeholder body with Flashcard / AnswerInput / listening and
- * speaking components driven by real learning items.
+ * It walks one module at a time: item modules step through their learning
+ * items, note and task modules are a single screen. Exercises, answer checking
+ * and audio are still to come; this presents the material and the flow.
  */
 export function ModuleScreen() {
   const { day, module } = useParams();
@@ -24,7 +21,7 @@ export function ModuleScreen() {
 
   const dayNumber = Number(day);
   const lesson = Number.isFinite(dayNumber) ? getDay(dayNumber) : undefined;
-  const definition = module ? getModuleDefinition(module) : undefined;
+  const current = lesson?.modules.find((entry) => entry.type === module);
 
   const [step, setStep] = useState(1);
 
@@ -33,17 +30,23 @@ export function ModuleScreen() {
     setStep(1);
   }, [module]);
 
-  if (!lesson || !definition) {
-    return <Navigate to="/learn" replace />;
+  if (!lesson || !current) {
+    return <Navigate to={lesson ? `/lesson/${lesson.day}` : '/learn'} replace />;
   }
 
-  const moduleIndex = LESSON_MODULES.findIndex((entry) => entry.type === definition.type);
-  const nextModule = LESSON_MODULES[moduleIndex + 1];
-  const isLastStep = step >= ITEMS_PER_MODULE;
+  const definition = getModuleDefinition(current.type);
+  const totalSteps = Math.max(1, current.items.length);
+  const isLastStep = step >= totalSteps;
+
+  const moduleIndex = lesson.modules.findIndex((entry) => entry.id === current.id);
+  const nextModule = lesson.modules[moduleIndex + 1];
+  const nextLabel = nextModule
+    ? (getModuleDefinition(nextModule.type)?.label ?? nextModule.type)
+    : undefined;
 
   const advance = () => {
     if (!isLastStep) {
-      setStep((current) => current + 1);
+      setStep((value) => value + 1);
       return;
     }
     if (nextModule) {
@@ -53,37 +56,101 @@ export function ModuleScreen() {
     }
   };
 
+  const item = current.items[step - 1];
+
   return (
     <FocusShell
-      title={definition.label}
-      step={step}
-      totalSteps={ITEMS_PER_MODULE}
+      title={definition?.label ?? current.type}
+      step={current.items.length ? step : undefined}
+      totalSteps={current.items.length ? totalSteps : undefined}
       closeTo={`/lesson/${lesson.day}`}
       footer={
         <Button fullWidth onClick={advance} trailing={<Icon name="chevron-right" size={20} />}>
-          {isLastStep ? (nextModule ? `Verder naar ${nextModule.label}` : 'Naar resultaat') : 'Volgende'}
+          {isLastStep ? (nextLabel ? `Verder naar ${nextLabel}` : 'Naar resultaat') : 'Volgende'}
         </Button>
       }
     >
       <div className="module">
-        <div className="module__target">
-          <p className="module__prompt muted small">{definition.description}</p>
-          <p className="module__portuguese" lang="pt-PT">
-            Learning target
-          </p>
-          <p className="module__translation muted">Vertaling en context verschijnen hier</p>
-
-          <button type="button" className="module__audio" disabled>
-            <Icon name={definition.type === 'speaking' ? 'mic' : 'sound'} size={20} />
-            <span>{definition.type === 'speaking' ? 'Opnemen' : 'Luister'}</span>
-          </button>
-        </div>
+        {item && <ItemCard item={item} lessonDay={lesson.day} />}
+        {!item && current.notes?.map((note) => <NoteCard key={note.title} note={note} />)}
+        {!item && current.tasks?.map((task) => <TaskCard key={task.title} task={task} />)}
 
         <div className="placeholder module__note">
-          <span className="placeholder__title">Module {moduleIndex + 1} van {LESSON_MODULES.length}</span>
-          Deze module is nog een shell. De oefeningen, audio en feedbackstates komen in V0.2.
+          <span className="placeholder__title">Nog geen oefening</span>
+          Je ziet de lesstof; actief ophalen, antwoordcontrole en audio komen in de volgende stap.
         </div>
       </div>
     </FocusShell>
+  );
+}
+
+function ItemCard({ item, lessonDay }: { item: LearningItem; lessonDay: number }) {
+  // An item introduced on an earlier day is reinforcement, not new material.
+  const isRepeat = item.dayIntroduced < lessonDay;
+
+  return (
+    <div className="module__target">
+      <p className="module__prompt muted small">
+        {isRepeat
+          ? `Herhaling uit dag ${item.dayIntroduced}`
+          : item.type === 'chunk'
+            ? 'Zin'
+            : 'Woord'}
+      </p>
+      <p className="module__portuguese" lang="pt-PT">
+        {item.portuguese}
+      </p>
+      <p className="module__translation muted">{item.dutch}</p>
+
+      <button type="button" className="module__audio" disabled>
+        <Icon name="sound" size={20} />
+        <span>Luister</span>
+      </button>
+    </div>
+  );
+}
+
+function NoteCard({ note }: { note: LessonNote }) {
+  return (
+    <section className="module__panel">
+      <h2 className="module__panel-title">{note.title}</h2>
+      {note.body.map((paragraph) => (
+        <p className="module__panel-body" key={paragraph}>
+          {paragraph}
+        </p>
+      ))}
+      {note.points.length > 0 && (
+        <ul className="module__points">
+          {note.points.map((point) => (
+            <li className="module__point" key={point} lang="pt-PT">
+              {point}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
+
+function TaskCard({ task }: { task: LessonTask }) {
+  return (
+    <section className="module__panel">
+      <h2 className="module__panel-title">{task.title}</h2>
+      {task.body.map((paragraph) => (
+        <p className="module__panel-body" key={paragraph}>
+          {paragraph}
+        </p>
+      ))}
+      {task.steps.length > 0 && (
+        <ol className="module__steps">
+          {task.steps.map((step, index) => (
+            <li className="module__step" key={step}>
+              <span className="module__step-index">{index + 1}</span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
+      )}
+    </section>
   );
 }

@@ -14,7 +14,7 @@ import {
 import type {
   Achievement,
   AchievementProgress,
-  LessonDay,
+  CourseDay,
   LessonProgress,
   PassportStamp,
   ReviewQueueSummary,
@@ -40,7 +40,7 @@ export interface ProgressState {
   achievementProgress: AchievementProgress[];
   passportStamps: PassportStamp[];
   /** The day the user should study next. */
-  todayLesson?: LessonDay;
+  todayLesson?: CourseDay;
   completionPercentage: number;
   lessonProgressFor: (day: number) => LessonProgress | undefined;
 }

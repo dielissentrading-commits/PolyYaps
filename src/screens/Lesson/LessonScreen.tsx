@@ -2,15 +2,20 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { FocusShell } from '@/components/layout/FocusShell';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
-import { getDay, getPhaseTitle } from '@/content/pt-PT/course';
-import { LESSON_MODULES } from '@/content/pt-PT/modules';
+import { countItems, countMinutes, getDay } from '@/content/pt-PT/course';
+import { getModuleDefinition } from '@/content/pt-PT/modules';
+import type { LessonModule } from '@/types';
 import './LessonScreen.css';
 
-/**
- * Lesson detail — the module sequence for one day.
- * V0.1 renders the sequence and navigates it; V0.2 fills the modules with
- * real learning items.
- */
+/** How much material a module holds, for the row subtitle. */
+function moduleSummary(module: LessonModule): string {
+  if (module.items.length) return `${module.items.length} items`;
+  if (module.notes?.length) return module.notes.map((note) => note.title).join(' · ');
+  if (module.tasks?.length) return module.tasks.map((task) => task.title).join(' · ');
+  return '';
+}
+
+/** Lesson detail — the module sequence for one day, driven by its content. */
 export function LessonScreen() {
   const { day } = useParams();
   const navigate = useNavigate();
@@ -21,52 +26,65 @@ export function LessonScreen() {
     return <Navigate to="/learn" replace />;
   }
 
-  const totalMinutes = LESSON_MODULES.reduce((sum, module) => sum + module.estimatedMinutes, 0);
+  const first = lesson.modules[0];
+  const firstLabel = first ? (getModuleDefinition(first.type)?.label ?? first.type) : '';
 
   return (
     <FocusShell
       title={`Dag ${lesson.day}`}
       closeTo="/learn"
       footer={
-        <Button
-          fullWidth
-          trailing={<Icon name="chevron-right" size={20} />}
-          onClick={() => navigate(`/lesson/${lesson.day}/${LESSON_MODULES[0].type}`)}
-        >
-          Start met {LESSON_MODULES[0].label}
-        </Button>
+        first && (
+          <Button
+            fullWidth
+            trailing={<Icon name="chevron-right" size={20} />}
+            onClick={() => navigate(`/lesson/${lesson.day}/${first.type}`)}
+          >
+            Start met {firstLabel}
+          </Button>
+        )
       }
     >
       <div className="lesson">
-        <span className="eyebrow">{getPhaseTitle(lesson.day)}</span>
+        <span className="eyebrow">{lesson.phaseTitle}</span>
         <h1 className="lesson__title">{lesson.title}</h1>
-        <p className="lesson__description muted">{lesson.description}</p>
+        <p className="lesson__description muted">{lesson.goal}</p>
 
         <div className="lesson__meta">
-          <span className="chip">≈ {totalMinutes} min</span>
-          <span className="chip">{LESSON_MODULES.length} modules</span>
-          <span className="chip chip--primary">100 XP</span>
+          <span className="chip">≈ {countMinutes(lesson)} min</span>
+          <span className="chip">{lesson.modules.length} modules</span>
+          {countItems(lesson) > 0 && <span className="chip">{countItems(lesson)} items</span>}
         </div>
 
         <ol className="lesson__modules">
-          {LESSON_MODULES.map((module, index) => (
-            <li key={module.type}>
-              <button
-                type="button"
-                className="lesson__module"
-                onClick={() => navigate(`/lesson/${lesson.day}/${module.type}`)}
-              >
-                <span className="lesson__module-index">{index + 1}</span>
-                <span className="lesson__module-body">
-                  <span className="lesson__module-label">{module.label}</span>
-                  <span className="lesson__module-description">{module.description}</span>
-                </span>
-                <span className="lesson__module-minutes">{module.estimatedMinutes}m</span>
-                <Icon name="chevron-right" size={18} className="lesson__module-chevron" />
-              </button>
-            </li>
-          ))}
+          {lesson.modules.map((module, index) => {
+            const definition = getModuleDefinition(module.type);
+            return (
+              <li key={module.id}>
+                <button
+                  type="button"
+                  className="lesson__module"
+                  onClick={() => navigate(`/lesson/${lesson.day}/${module.type}`)}
+                >
+                  <span className="lesson__module-index">{index + 1}</span>
+                  <span className="lesson__module-body">
+                    <span className="lesson__module-label">
+                      {definition?.label ?? module.type}
+                    </span>
+                    <span className="lesson__module-description">{moduleSummary(module)}</span>
+                  </span>
+                  <span className="lesson__module-minutes">{module.estimatedMinutes}m</span>
+                  <Icon name="chevron-right" size={18} className="lesson__module-chevron" />
+                </button>
+              </li>
+            );
+          })}
         </ol>
+
+        <div className="placeholder lesson__note">
+          <span className="placeholder__title">Review en dagtoets volgen later</span>
+          Deze modules komen niet uit de lesstof maar uit de review- en scoring-engine (V0.4).
+        </div>
       </div>
     </FocusShell>
   );

@@ -3,12 +3,15 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "PolyYaps — mobile-first PWA for learning European Portuguese in 30 days",
+  "description": "PolyYaps \u2014 mobile-first PWA for learning European Portuguese in 30 days",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc -b --noEmit"
+    "typecheck": "tsc -b --noEmit",
+    "build:content": "node scripts/build-content.mjs",
+    "validate:content": "node scripts/validate-content.mjs",
+    "check": "npm run validate:content && npm run build"
   },
   "dependencies": {
     "react": "^19.2.8",

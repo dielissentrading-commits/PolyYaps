@@ -36,12 +36,33 @@ export type LessonModuleType =
   | 'speaking'
   | 'test';
 
+/** A short explanation shown in a grammar or listening module. */
+export interface LessonNote {
+  title: string;
+  /** Paragraphs of prose. */
+  body: string[];
+  /** Bullet points, e.g. verb forms or key phrases. */
+  points: string[];
+}
+
+export type LessonTaskKind = 'speaking' | 'challenge' | 'test';
+
+/** A practice assignment: a speaking prompt, a challenge or an exam part. */
+export interface LessonTask {
+  title: string;
+  kind: LessonTaskKind;
+  body: string[];
+  steps: string[];
+}
+
 export interface LessonModule {
   id: string;
   lessonDay: number;
   type: LessonModuleType;
   estimatedMinutes: number;
   items: LearningItem[];
+  notes?: LessonNote[];
+  tasks?: LessonTask[];
 }
 
 /** The five curriculum phases from docs/01-masterplan-stap-1-tm-5.md, step 2. */
@@ -50,12 +71,18 @@ export type CoursePhase = 1 | 2 | 3 | 4 | 5;
 export interface LessonDay {
   day: number;
   title: string;
-  description: string;
-  phase: CoursePhase;
+  /** What the learner can do after this day, from the editorial source. */
+  goal: string;
   checkpoint: boolean;
   /** Present on checkpoint days, which replace the normal module sequence. */
   challengeId?: string;
   modules: LessonModule[];
+}
+
+/** A curriculum day with its position in the course attached. */
+export interface CourseDay extends LessonDay {
+  phase: CoursePhase;
+  phaseTitle: string;
 }
 
 export interface PhaseDefinition {
@@ -70,5 +97,5 @@ export interface Course {
   title: string;
   totalDays: number;
   phases: PhaseDefinition[];
-  days: LessonDay[];
+  days: CourseDay[];
 }
