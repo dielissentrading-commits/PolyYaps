@@ -6,6 +6,10 @@ declare module 'react' {
   export type CSSProperties = Record<string, string | number | undefined>;
 }
 
+declare namespace React {
+  type CSSProperties = Record<string, string | number | undefined>;
+}
+
 declare module 'react-dom/client' {
   export function createRoot(element: Element): { render(node: any): void };
 }
