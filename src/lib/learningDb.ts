@@ -39,33 +39,12 @@ export function itemKey(day: number, itemType: 'word' | 'chunk', itemId: string)
   return `d${day}:${itemType}:${itemId}`;
 }
 
-export function descriptorFromItem(
-  day: number,
-  itemType: 'word' | 'chunk',
-  item: { id: string; portuguese: string; dutch: string; weaknessCategory?: string },
-): ItemDescriptor {
-  return {
-    key: itemKey(day, itemType, item.id),
-    itemId: item.id,
-    day,
-    itemType,
-    portuguese: item.portuguese,
-    dutch: item.dutch,
-    weaknessCategory: item.weaknessCategory,
-  };
+export function descriptorFromItem(day: number, itemType: 'word' | 'chunk', item: { id: string; portuguese: string; dutch: string; weaknessCategory?: string }): ItemDescriptor {
+  return { key: itemKey(day, itemType, item.id), itemId: item.id, day, itemType, portuguese: item.portuguese, dutch: item.dutch, weaknessCategory: item.weaknessCategory };
 }
 
 function initialRecord(item: ItemDescriptor): MasteryRecord {
-  return {
-    ...item,
-    masteryLevel: 0,
-    strength: 0,
-    timesSeen: 0,
-    timesCorrect: 0,
-    timesWrong: 0,
-    spokenCorrect: 0,
-    usedSpontaneously: 0,
-  };
+  return { ...item, masteryLevel: 0, strength: 0, timesSeen: 0, timesCorrect: 0, timesWrong: 0, spokenCorrect: 0, usedSpontaneously: 0 };
 }
 
 export async function getMastery(key: string): Promise<MasteryRecord | undefined> {
@@ -84,11 +63,28 @@ export async function getAllMastery(): Promise<MasteryRecord[]> {
   return result as MasteryRecord[];
 }
 
+export async function replaceAllMastery(records: MasteryRecord[]) {
+  const db = await openDb();
+  const tx = db.transaction(STORE, 'readwrite');
+  const store = tx.objectStore(STORE);
+  store.clear();
+  for (const record of records) store.put(record);
+  await transactionDone(tx);
+  db.close();
+}
+
+export async function clearMastery() {
+  const db = await openDb();
+  const tx = db.transaction(STORE, 'readwrite');
+  tx.objectStore(STORE).clear();
+  await transactionDone(tx);
+  db.close();
+}
+
 export async function ensureItems(items: ItemDescriptor[]) {
   const existing = new Set((await getAllMastery()).map((record) => record.key));
   const missing = items.filter((item) => !existing.has(item.key));
   if (!missing.length) return;
-
   const db = await openDb();
   const tx = db.transaction(STORE, 'readwrite');
   const store = tx.objectStore(STORE);
@@ -112,29 +108,8 @@ function intervalForStrength(strength: number, correct: boolean) {
   return 30;
 }
 
-const positiveDelta: Record<EvidenceType, number> = {
-  exposure: 7,
-  recognition: 9,
-  recall: 14,
-  listening: 12,
-  sentence: 16,
-  speaking: 17,
-  context: 20,
-  spontaneous: 24,
-  quiz: 14,
-};
-
-const negativeDelta: Record<EvidenceType, number> = {
-  exposure: 5,
-  recognition: 11,
-  recall: 16,
-  listening: 14,
-  sentence: 17,
-  speaking: 18,
-  context: 20,
-  spontaneous: 22,
-  quiz: 16,
-};
+const positiveDelta: Record<EvidenceType, number> = { exposure: 7, recognition: 9, recall: 14, listening: 12, sentence: 16, speaking: 17, context: 20, spontaneous: 24, quiz: 14 };
+const negativeDelta: Record<EvidenceType, number> = { exposure: 5, recognition: 11, recall: 16, listening: 14, sentence: 17, speaking: 18, context: 20, spontaneous: 22, quiz: 16 };
 
 function nextMasteryLevel(record: MasteryRecord, evidence: EvidenceType, correct: boolean, strength: number): MasteryLevel {
   if (!correct) return Math.max(record.timesSeen > 0 ? 1 : 0, record.masteryLevel - (strength < 20 ? 1 : 0)) as MasteryLevel;
@@ -147,11 +122,7 @@ function nextMasteryLevel(record: MasteryRecord, evidence: EvidenceType, correct
 
 export async function recordAttempt(item: ItemDescriptor, evidence: EvidenceType, correct: boolean): Promise<MasteryRecord> {
   const existing = (await getMastery(item.key)) ?? initialRecord(item);
-
-  // Seeing the same card again is useful for practice flow, but should not farm
-  // strength or postpone a retrieval-based review. Only the first exposure counts.
   if (evidence === 'exposure' && correct && existing.timesSeen > 0) return existing;
-
   const delta = correct ? positiveDelta[evidence] : -negativeDelta[evidence];
   const strength = Math.max(0, Math.min(100, existing.strength + delta));
   const now = new Date();
@@ -169,7 +140,6 @@ export async function recordAttempt(item: ItemDescriptor, evidence: EvidenceType
     spokenCorrect: existing.spokenCorrect + (correct && evidence === 'speaking' ? 1 : 0),
     usedSpontaneously: existing.usedSpontaneously + (correct && evidence === 'spontaneous' ? 1 : 0),
   };
-
   const db = await openDb();
   const tx = db.transaction(STORE, 'readwrite');
   tx.objectStore(STORE).put(next);
@@ -181,8 +151,7 @@ export async function recordAttempt(item: ItemDescriptor, evidence: EvidenceType
 export async function getDueItems(limit = 20): Promise<MasteryRecord[]> {
   const all = await getAllMastery();
   const now = Date.now();
-  return all
-    .filter((item) => item.timesSeen > 0 && item.nextReview && new Date(item.nextReview).getTime() <= now)
+  return all.filter((item) => item.timesSeen > 0 && item.nextReview && new Date(item.nextReview).getTime() <= now)
     .sort((a, b) => a.strength - b.strength || new Date(a.nextReview ?? 0).getTime() - new Date(b.nextReview ?? 0).getTime())
     .slice(0, limit);
 }
@@ -192,7 +161,6 @@ export async function getReviewSnapshot() {
   const due = await getDueItems(1000);
   const dueKeys = new Set(due.map((item) => item.key));
   const categoryMap = new Map<string, { count: number; strength: number; due: number }>();
-
   for (const item of all) {
     if (!item.weaknessCategory) continue;
     const current = categoryMap.get(item.weaknessCategory) ?? { count: 0, strength: 0, due: 0 };
@@ -201,16 +169,8 @@ export async function getReviewSnapshot() {
     current.due += dueKeys.has(item.key) ? 1 : 0;
     categoryMap.set(item.weaknessCategory, current);
   }
-
-  const weaknesses = Array.from(categoryMap.entries())
-    .map(([category, stats]) => ({
-      category,
-      count: stats.count,
-      due: stats.due,
-      averageStrength: Math.round(stats.strength / stats.count),
-    }))
+  const weaknesses = Array.from(categoryMap.entries()).map(([category, stats]) => ({ category, count: stats.count, due: stats.due, averageStrength: Math.round(stats.strength / stats.count) }))
     .sort((a, b) => a.averageStrength - b.averageStrength || b.due - a.due);
-
   return {
     learned: all.length,
     due: due.length,
