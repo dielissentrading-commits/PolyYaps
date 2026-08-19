@@ -147,6 +147,11 @@ function nextMasteryLevel(record: MasteryRecord, evidence: EvidenceType, correct
 
 export async function recordAttempt(item: ItemDescriptor, evidence: EvidenceType, correct: boolean): Promise<MasteryRecord> {
   const existing = (await getMastery(item.key)) ?? initialRecord(item);
+
+  // Seeing the same card again is useful for practice flow, but should not farm
+  // strength or postpone a retrieval-based review. Only the first exposure counts.
+  if (evidence === 'exposure' && correct && existing.timesSeen > 0) return existing;
+
   const delta = correct ? positiveDelta[evidence] : -negativeDelta[evidence];
   const strength = Math.max(0, Math.min(100, existing.strength + delta));
   const now = new Date();
