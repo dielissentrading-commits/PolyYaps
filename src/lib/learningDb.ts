@@ -27,6 +27,14 @@ function requestToPromise<T>(request: IDBRequest<T>): Promise<T> {
   });
 }
 
+function transactionDone(tx: IDBTransaction) {
+  return new Promise<void>((resolve, reject) => {
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+    tx.onabort = () => reject(tx.error);
+  });
+}
+
 export function itemKey(day: number, itemType: 'word' | 'chunk', itemId: string) {
   return `d${day}:${itemType}:${itemId}`;
 }
@@ -77,18 +85,15 @@ export async function getAllMastery(): Promise<MasteryRecord[]> {
 }
 
 export async function ensureItems(items: ItemDescriptor[]) {
+  const existing = new Set((await getAllMastery()).map((record) => record.key));
+  const missing = items.filter((item) => !existing.has(item.key));
+  if (!missing.length) return;
+
   const db = await openDb();
   const tx = db.transaction(STORE, 'readwrite');
   const store = tx.objectStore(STORE);
-  for (const item of items) {
-    const existing = await requestToPromise(store.get(item.key));
-    if (!existing) store.put(initialRecord(item));
-  }
-  await new Promise<void>((resolve, reject) => {
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-    tx.onabort = () => reject(tx.error);
-  });
+  for (const item of missing) store.put(initialRecord(item));
+  await transactionDone(tx);
   db.close();
 }
 
@@ -132,7 +137,7 @@ const negativeDelta: Record<EvidenceType, number> = {
 };
 
 function nextMasteryLevel(record: MasteryRecord, evidence: EvidenceType, correct: boolean, strength: number): MasteryLevel {
-  if (!correct) return Math.max(1, record.masteryLevel - (strength < 20 ? 1 : 0)) as MasteryLevel;
+  if (!correct) return Math.max(record.timesSeen > 0 ? 1 : 0, record.masteryLevel - (strength < 20 ? 1 : 0)) as MasteryLevel;
   let level = Math.max(record.masteryLevel, 1) as MasteryLevel;
   if (['recall', 'listening', 'quiz'].includes(evidence)) level = Math.max(level, 2) as MasteryLevel;
   if (['sentence', 'speaking', 'context'].includes(evidence)) level = Math.max(level, 3) as MasteryLevel;
@@ -163,10 +168,7 @@ export async function recordAttempt(item: ItemDescriptor, evidence: EvidenceType
   const db = await openDb();
   const tx = db.transaction(STORE, 'readwrite');
   tx.objectStore(STORE).put(next);
-  await new Promise<void>((resolve, reject) => {
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
+  await transactionDone(tx);
   db.close();
   return next;
 }
