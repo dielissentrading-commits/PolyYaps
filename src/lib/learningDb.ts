@@ -185,6 +185,27 @@ export async function getDueItems(limit = 20): Promise<MasteryRecord[]> {
 export async function getReviewSnapshot() {
   const all = (await getAllMastery()).filter((item) => item.timesSeen > 0);
   const due = await getDueItems(1000);
+  const dueKeys = new Set(due.map((item) => item.key));
+  const categoryMap = new Map<string, { count: number; strength: number; due: number }>();
+
+  for (const item of all) {
+    if (!item.weaknessCategory) continue;
+    const current = categoryMap.get(item.weaknessCategory) ?? { count: 0, strength: 0, due: 0 };
+    current.count += 1;
+    current.strength += item.strength;
+    current.due += dueKeys.has(item.key) ? 1 : 0;
+    categoryMap.set(item.weaknessCategory, current);
+  }
+
+  const weaknesses = Array.from(categoryMap.entries())
+    .map(([category, stats]) => ({
+      category,
+      count: stats.count,
+      due: stats.due,
+      averageStrength: Math.round(stats.strength / stats.count),
+    }))
+    .sort((a, b) => a.averageStrength - b.averageStrength || b.due - a.due);
+
   return {
     learned: all.length,
     due: due.length,
@@ -193,5 +214,6 @@ export async function getReviewSnapshot() {
     strong: all.filter((item) => item.strength >= 70).length,
     active: all.filter((item) => item.masteryLevel === 4).length,
     averageStrength: all.length ? Math.round(all.reduce((sum, item) => sum + item.strength, 0) / all.length) : 0,
+    weaknesses,
   };
 }
