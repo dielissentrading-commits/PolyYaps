@@ -11,6 +11,17 @@ PolyYaps is a mobile-first Progressive Web App for learning European Portuguese 
 - Gamification: XP, streaks, levels, stars, achievements, passport stamps, boss challenges
 - UX direction: Airbnb-modern, warm, premium, travel-oriented
 
+## Course content
+
+The complete human-readable European Portuguese course material lives in `content/`.
+
+- `content/README.md` — content model and source-of-truth notes
+- `content/lessons/days-01-10.md` — survival Portuguese and talking about yourself
+- `content/lessons/days-11-20.md` — travel, past tense, future and plans
+- `content/lessons/days-21-30.md` — social Portuguese, work, integration and final challenge
+
+These Markdown files are the editorial source of truth and can later be converted into typed lesson data for the application.
+
 ## Documentation
 
 - `docs/01-masterplan-stap-1-tm-5.md` — learning goals, curriculum, learning method, testing, progress and gamification
