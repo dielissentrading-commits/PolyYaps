@@ -51,19 +51,27 @@ function daysBetween(a: string, b: string) {
 }
 
 function updateStreak(existing: ProgressState, today: string) {
-  if (existing.lastStudyDate === today) return existing.streak;
-  if (!existing.lastStudyDate) return 1;
+  if (existing.lastStudyDate === today) return { streak: existing.streak, freezes: existing.streakFreezes ?? 0, advanced: false };
+  if (!existing.lastStudyDate) return { streak: 1, freezes: existing.streakFreezes ?? 0, advanced: true };
+
   const gap = daysBetween(existing.lastStudyDate, today);
-  return gap === 1 ? existing.streak + 1 : 1;
+  if (gap === 1) return { streak: existing.streak + 1, freezes: existing.streakFreezes ?? 0, advanced: true };
+  if (gap === 2 && (existing.streakFreezes ?? 0) > 0) {
+    return { streak: existing.streak + 1, freezes: existing.streakFreezes - 1, advanced: true };
+  }
+  return { streak: 1, freezes: existing.streakFreezes ?? 0, advanced: true };
 }
 
-function applyStreakRewards(existing: ProgressState, streak: number, achievements: Set<string>) {
-  let freezes = existing.streakFreezes ?? 0;
-  const streakAdvanced = streak > existing.streak;
-  if (streak >= 5) achievements.add('em-boa-forma');
-  if (streak >= 20) achievements.add('persistente');
-  if (streakAdvanced && streak > 0 && streak % 5 === 0) freezes = Math.min(2, freezes + 1);
+function applyStreakRewards(existing: ProgressState, streakState: ReturnType<typeof updateStreak>, achievements: Set<string>) {
+  let freezes = streakState.freezes;
+  if (streakState.streak >= 5) achievements.add('em-boa-forma');
+  if (streakState.streak >= 20) achievements.add('persistente');
+  if (streakState.advanced && streakState.streak > 0 && streakState.streak % 5 === 0) freezes = Math.min(2, freezes + 1);
   return freezes;
+}
+
+function mergeLearningKeys(existing: string[], day: number, type: 'word' | 'chunk', ids: string[]) {
+  return Array.from(new Set([...existing, ...ids.map((id) => `d${day}:${type}:${id}`)]));
 }
 
 export function loadProgress(): ProgressState {
@@ -95,26 +103,29 @@ export function completeLesson(day: number, score: number, wordIds: string[], ch
   const baseXp = 100;
   const scoreBonus = score === 100 ? 15 : score >= 90 ? 10 : 0;
   const xpEarned = previousResult ? Math.max(10, scoreBonus) : baseXp + scoreBonus;
-  const streak = updateStreak(existing, today);
+  const streakState = updateStreak(existing, today);
   const achievements = new Set(existing.achievements);
+  const learnedWords = mergeLearningKeys(existing.learnedWords, day, 'word', wordIds);
+  const learnedChunks = mergeLearningKeys(existing.learnedChunks, day, 'chunk', chunkIds);
+
   if (!existing.completedDays.includes(day)) achievements.add('primeiras-palavras');
-  if (existing.learnedWords.length + wordIds.length >= 100) achievements.add('cem-palavras');
-  const streakFreezes = applyStreakRewards(existing, streak, achievements);
+  if (learnedWords.length >= 100) achievements.add('cem-palavras');
+  const streakFreezes = applyStreakRewards(existing, streakState, achievements);
 
   const next: ProgressState = {
     ...existing,
     currentDay: Math.max(existing.currentDay, Math.min(30, day + 1)),
     totalXp: existing.totalXp + xpEarned,
-    streak,
-    longestStreak: Math.max(existing.longestStreak, streak),
+    streak: streakState.streak,
+    longestStreak: Math.max(existing.longestStreak, streakState.streak),
     streakFreezes,
     completedDays: Array.from(new Set([...existing.completedDays, day])).sort((a, b) => a - b),
     dayResults: {
       ...existing.dayResults,
       [day]: { score, stars, xpEarned, completedAt: new Date().toISOString(), kind: 'lesson' },
     },
-    learnedWords: Array.from(new Set([...existing.learnedWords, ...wordIds.map((id) => `d${day}:word:${id}`)])),
-    learnedChunks: Array.from(new Set([...existing.learnedChunks, ...chunkIds.map((id) => `d${day}:chunk:${id}`)])),
+    learnedWords,
+    learnedChunks,
     achievements: Array.from(achievements),
     lastStudyDate: today,
   };
@@ -135,32 +146,38 @@ export function completeChallenge(
   const existing = loadProgress();
   const today = localDateKey();
   const previousResult = existing.dayResults[day];
+  const previouslyPassed = existing.completedDays.includes(day);
   const stars: 1 | 2 | 3 = score >= 90 ? 3 : score >= 75 ? 2 : 1;
   const passed = score >= 70;
-  const xpEarned = previousResult ? 15 : passed ? rewardXp : 60;
-  const streak = updateStreak(existing, today);
+  const priorAttemptXp = previousResult?.xpEarned ?? 0;
+  const xpEarned = previouslyPassed ? 15 : passed ? Math.max(15, rewardXp - priorAttemptXp) : previousResult ? 15 : 60;
+  const streakState = updateStreak(existing, today);
   const stamps = new Set(existing.passportStamps);
   const achievements = new Set(existing.achievements);
+  const learnedWords = mergeLearningKeys(existing.learnedWords, day, 'word', wordIds);
+  const learnedChunks = mergeLearningKeys(existing.learnedChunks, day, 'chunk', chunkIds);
+
   if (passed) {
     stamps.add(stampId);
     achievements.add(achievementId);
   }
-  const streakFreezes = applyStreakRewards(existing, streak, achievements);
+  if (learnedWords.length >= 100) achievements.add('cem-palavras');
+  const streakFreezes = applyStreakRewards(existing, streakState, achievements);
 
   const next: ProgressState = {
     ...existing,
     currentDay: passed ? Math.max(existing.currentDay, Math.min(30, day + 1)) : Math.max(existing.currentDay, day),
     totalXp: existing.totalXp + xpEarned,
-    streak,
-    longestStreak: Math.max(existing.longestStreak, streak),
+    streak: streakState.streak,
+    longestStreak: Math.max(existing.longestStreak, streakState.streak),
     streakFreezes,
     completedDays: passed ? Array.from(new Set([...existing.completedDays, day])).sort((a, b) => a - b) : existing.completedDays,
     dayResults: {
       ...existing.dayResults,
       [day]: { score, stars, xpEarned, completedAt: new Date().toISOString(), kind: 'challenge' },
     },
-    learnedWords: Array.from(new Set([...existing.learnedWords, ...wordIds.map((id) => `d${day}:word:${id}`)])),
-    learnedChunks: Array.from(new Set([...existing.learnedChunks, ...chunkIds.map((id) => `d${day}:chunk:${id}`)])),
+    learnedWords,
+    learnedChunks,
     passportStamps: Array.from(stamps),
     achievements: Array.from(achievements),
     lastStudyDate: today,
