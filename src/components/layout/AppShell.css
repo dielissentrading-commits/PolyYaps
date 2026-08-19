@@ -1,0 +1,47 @@
+.app-shell {
+  display: flex;
+  justify-content: center;
+  min-height: 100dvh;
+  background: var(--color-background);
+}
+
+/*
+ * On phones the frame fills the viewport. On wider screens it stays a centred
+ * mobile column, which keeps the iPhone reference viewport honest during
+ * desktop development.
+ */
+.app-shell__frame {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--app-max-width);
+  height: 100dvh;
+  background: var(--color-background);
+  overflow: hidden;
+}
+
+.app-shell__content {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Breathing room so the last card never sits against the navigation. */
+.app-shell__content-end {
+  height: var(--space-10);
+}
+
+@media (min-width: 560px) {
+  .app-shell {
+    padding: var(--space-6) 0;
+    background: var(--color-sand);
+  }
+
+  .app-shell__frame {
+    height: min(844px, calc(100dvh - var(--space-10)));
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+    box-shadow: var(--shadow-raised);
+  }
+}

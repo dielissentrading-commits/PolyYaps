@@ -1,0 +1,75 @@
+/**
+ * PolyYaps design tokens — docs/06-app-design.md, section "Design tokens".
+ * These are the single source of truth for color, shape and spacing.
+ * Component CSS must reference these variables rather than raw values.
+ */
+
+:root {
+  /* Color */
+  --color-primary: #d95c45;
+  --color-primary-dark: #c44e3a;
+  --color-primary-soft: #fbeeea;
+  --color-text: #222222;
+  --color-muted: #737373;
+  --color-background: #faf9f7;
+  --color-surface: #ffffff;
+  --color-border: #e8e5e1;
+  --color-success: #4f7658;
+  --color-success-soft: #edf3ee;
+  --color-sand: #ede6da;
+
+  /* Radius */
+  --radius-small: 12px;
+  --radius-medium: 16px;
+  --radius-large: 24px;
+  --radius-pill: 999px;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  /* Layout */
+  --page-padding: 20px;
+  --button-height: 54px;
+  --bottom-nav-height: 78px;
+  --app-max-width: 480px;
+
+  /* Typography */
+  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui,
+    sans-serif;
+
+  --font-size-h1: 32px;
+  --line-height-h1: 38px;
+  --font-size-h2: 24px;
+  --line-height-h2: 30px;
+  --font-size-h3: 18px;
+  --line-height-h3: 24px;
+  --font-size-body: 16px;
+  --line-height-body: 24px;
+  --font-size-small: 14px;
+  --line-height-small: 20px;
+  --font-size-tiny: 13px;
+  --line-height-tiny: 18px;
+  --font-size-target: 36px;
+  --line-height-target: 44px;
+
+  /* Elevation — subtle only, per the visual direction */
+  --shadow-card: 0 1px 2px rgba(34, 34, 34, 0.04), 0 8px 24px rgba(34, 34, 34, 0.05);
+  --shadow-raised: 0 2px 4px rgba(34, 34, 34, 0.06), 0 12px 32px rgba(34, 34, 34, 0.08);
+  --shadow-nav: 0 -1px 0 var(--color-border);
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --duration-fast: 120ms;
+  --duration-medium: 240ms;
+
+  /* Safe areas (iPhone standalone mode) */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}

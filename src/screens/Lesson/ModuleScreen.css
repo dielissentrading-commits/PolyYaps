@@ -1,0 +1,61 @@
+.module {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-height: 100%;
+  padding: var(--space-6) 0;
+}
+
+.module__target {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  background: var(--color-background);
+  text-align: center;
+}
+
+.module__prompt {
+  margin-bottom: var(--space-2);
+}
+
+/* Large Portuguese learning target — docs/06-app-design.md, typography. */
+.module__portuguese {
+  font-size: var(--font-size-target);
+  line-height: var(--line-height-target);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.module__translation {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.module__audio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  font-size: var(--font-size-small);
+  font-weight: 650;
+}
+
+.module__audio:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.module__note {
+  margin-top: auto;
+}

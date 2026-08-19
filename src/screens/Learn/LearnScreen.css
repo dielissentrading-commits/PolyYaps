@@ -1,0 +1,22 @@
+.learn__summary {
+  padding: var(--space-5);
+}
+
+.learn__summary-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.learn__summary-value {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.learn__phase:first-of-type {
+  margin-top: var(--space-8);
+}

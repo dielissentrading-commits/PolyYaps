@@ -1,0 +1,40 @@
+.indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px var(--space-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  font-weight: 700;
+}
+
+.indicator--streak {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}
+
+.indicator--xp {
+  background: var(--color-sand);
+  color: var(--color-text);
+}
+
+.indicator__value {
+  font-variant-numeric: tabular-nums;
+}
+
+.indicator__unit {
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--color-border);
+}
+
+.stars__star--on {
+  color: var(--color-primary);
+}

@@ -1,0 +1,91 @@
+.lesson {
+  padding-bottom: var(--space-6);
+}
+
+.lesson__title {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+}
+
+.lesson__description {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.lesson__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.lesson__modules {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.lesson__module {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface);
+  text-align: left;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.lesson__module:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+}
+
+.lesson__module-index {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+  background: var(--color-sand);
+  font-size: var(--font-size-tiny);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.lesson__module-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.lesson__module-label {
+  font-size: var(--font-size-body);
+  font-weight: 650;
+}
+
+.lesson__module-description {
+  color: var(--color-muted);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.lesson__module-minutes {
+  flex-shrink: 0;
+  color: var(--color-muted);
+  font-size: var(--font-size-tiny);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.lesson__module-chevron {
+  flex-shrink: 0;
+  color: var(--color-muted);
+}

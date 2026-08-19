@@ -1,0 +1,38 @@
+.result {
+  padding: var(--space-6) 0;
+}
+
+.result__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-8) var(--space-5);
+  border-radius: var(--radius-large);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.result__score {
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.result__rewards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.result__skills {
+  margin-top: var(--space-4);
+}
+
+.result__note {
+  margin-top: var(--space-8);
+}

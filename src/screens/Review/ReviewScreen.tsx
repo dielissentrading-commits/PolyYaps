@@ -1,0 +1,57 @@
+import { TopBar } from '@/components/layout/TopBar';
+import { ButtonLink } from '@/components/ui/Button';
+import { StatCard } from '@/components/cards/StatCard';
+import { Icon } from '@/components/ui/Icon';
+import { useProgress } from '@/hooks/useProgress';
+import './ReviewScreen.css';
+
+export function ReviewScreen() {
+  const { review, vocabulary } = useProgress();
+
+  return (
+    <>
+      <TopBar title="Smart Review" subtitle="Spaced repetition en zwakke items" />
+
+      <div className="page">
+        <section className="card review__hero">
+          <span className="eyebrow">Klaar om te herhalen</span>
+          <p className="review__count">{review.dueCount} items</p>
+          <p className="muted small">
+            ± {review.estimatedMinutes} minuten · gemengd woorden, chunks en luisteren
+          </p>
+          <ButtonLink to="/lesson/1/review" fullWidth trailing={<Icon name="chevron-right" size={20} />}>
+            Start review
+          </ButtonLink>
+        </section>
+
+        <section className="section--tight review__stats">
+          <StatCard label="Zwakke items" value={review.weakCount} />
+          <StatCard label="Actieve woorden" value={vocabulary.itemsActive} />
+        </section>
+
+        {review.focusLabel && (
+          <section className="section">
+            <div className="section-header">
+              <h2 className="eyebrow">Focus vandaag</h2>
+            </div>
+            <div className="card review__focus">
+              <div className="review__focus-head">
+                <span className="chip chip--primary">{review.focusCategory}</span>
+              </div>
+              <h3 className="review__focus-title">{review.focusLabel}</h3>
+              <p className="muted small">{review.focusHint}</p>
+            </div>
+          </section>
+        )}
+
+        <section className="section">
+          <div className="placeholder">
+            <span className="placeholder__title">Review-engine volgt in V0.4</span>
+            De wachtrij, mastery-levels en intervallen komen uit de review- en weakness-engine.
+            Deze shell laat alleen de structuur zien.
+          </div>
+        </section>
+      </div>
+    </>
+  );
+}
