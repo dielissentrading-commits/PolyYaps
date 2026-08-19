@@ -1,0 +1,44 @@
+.course-complete-card { background: linear-gradient(145deg,#fff 0%,#f1eee5 100%); }
+
+.speech-practice { width: 100%; display: flex; flex-direction: column; gap: 14px; }
+.speech-prompt { padding: 18px; display: flex; flex-direction: column; gap: 7px; background: #f4efe9; border-radius: 18px; }
+.speech-prompt small { color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .1em; }
+.speech-prompt strong { font-size: 17px; line-height: 1.5; }
+.speak-orb-button { width: 118px; height: 118px; margin: 8px auto; display: grid; place-items: center; align-content: center; gap: 4px; border: 0; border-radius: 50%; background: var(--primary); color: #fff; box-shadow: 0 14px 34px rgba(217,92,69,.2); }
+.speak-orb-button span { font-size: 34px; }
+.speak-orb-button small { font-size: 10px; font-weight: 800; }
+.speak-orb-button.listening { animation: speechPulse 1.1s ease-in-out infinite; }
+@keyframes speechPulse { 50% { transform: scale(1.055); box-shadow: 0 16px 38px rgba(217,92,69,.3); } }
+.speech-transcript,.speech-score,.speech-fallback,.speech-error { padding: 15px 16px; border-radius: 16px; }
+.speech-transcript { display: flex; flex-direction: column; gap: 5px; background: var(--surface); border: 1px solid var(--border); }
+.speech-transcript small { color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .1em; }
+.speech-score { display: flex; align-items: center; gap: 14px; background: #f4f1ec; }
+.speech-score strong { font-size: 24px; }
+.speech-score span { color: var(--muted); font-size: 12px; line-height: 1.45; }
+.speech-score.good strong { color: var(--success); }
+.speech-score.medium strong { color: var(--primary-dark); }
+.speech-score.weak strong { color: #a46d4e; }
+.speech-error { color: #8d4b3f; background: #faf0ed; font-size: 12px; }
+.speech-fallback { display: flex; flex-direction: column; gap: 8px; background: #f4f1ec; }
+.speech-fallback span { color: var(--muted); font-size: 12px; line-height: 1.5; }
+.mic-mini-score { display: block; margin: -2px 0 10px; color: var(--muted); text-align: center; }
+.text-button { min-height: 42px; border: 0; background: transparent; color: var(--muted); font-weight: 700; }
+
+.settings-shell { background: var(--background); }
+.settings-page { width: 100%; max-width: 560px; margin: 0 auto; padding: 24px 20px calc(42px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 16px; }
+.settings-hero { padding: 10px 2px 12px; }
+.settings-hero h1 { margin: 20px 0 7px; font-size: 30px; letter-spacing: -.04em; }
+.settings-hero p,.settings-card p { color: var(--muted); font-size: 13px; line-height: 1.55; }
+.settings-card { padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; }
+.settings-card > small { color: var(--primary-dark); font-size: 9px; font-weight: 800; letter-spacing: .11em; }
+.settings-card h2 { margin: 7px 0 5px; font-size: 20px; }
+.file-button { min-height: 52px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: 15px; font-weight: 750; cursor: pointer; }
+.file-button input { display: none; }
+.install-card { background: #f4efe8; }
+.danger-card { border-color: #ecd9d4; }
+.secondary-button.danger { color: #944c40; }
+.settings-message { padding: 13px 15px; background: #eff5ef; color: var(--success); border-radius: 14px; font-size: 12px; }
+
+@media (display-mode: standalone) {
+  .install-card { display: none; }
+}
