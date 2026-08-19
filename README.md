@@ -4,9 +4,9 @@ PolyYaps is a mobile-first Progressive Web App for learning European Portuguese 
 
 ## Live app
 
-**GitHub Pages:** https://dielissentrading-commits.github.io/PolyYaps
+**GitHub Pages:** https://dielissentrading-commits.github.io/PolyYaps/
 
-Every push to `main` triggers the GitHub Pages production deployment workflow.
+The repository currently uses GitHub Pages' branch-based hosting from `main:/`. Every normal push to `main` triggers `Publish PolyYaps To Legacy Pages`: GitHub Actions builds the Vite app from `app.html` and publishes the generated production `index.html`, assets, manifest, icon and service worker into the repository root that Pages serves.
 
 ## V1.0
 
@@ -22,7 +22,7 @@ PolyYaps V1.0 is the first complete webapp release.
 - Course progress can be exported/imported as a local JSON backup.
 - The PWA has a manifest, standalone Home Screen metadata and an offline service-worker app shell.
 - GitHub Actions verifies `tsc -b && vite build`.
-- GitHub Pages is configured for static production hosting.
+- GitHub Pages hosts the production build directly from the repository root.
 
 ## Stack
 
@@ -40,6 +40,8 @@ PolyYaps V1.0 is the first complete webapp release.
 npm install
 npm run dev
 ```
+
+The development server opens `/app.html`, which is kept separate from the generated production `index.html` used by GitHub Pages.
 
 Production build:
 
@@ -60,6 +62,8 @@ Typed playable content lives under `src/data/`.
 
 ## Key application files
 
+- `app.html` — Vite development/build HTML entry
+- `index.html` — generated production entry served by GitHub Pages
 - `src/App.tsx` — app shell and routing between learning modes
 - `src/components/LessonOverlayV1.tsx` — final generic lesson player
 - `src/components/ScenarioChallengeOverlay.tsx` — generic checkpoint player
@@ -69,7 +73,7 @@ Typed playable content lives under `src/data/`.
 - `src/lib/progress.ts` — course progress, XP and streaks
 - `src/lib/gamification.ts` — levels, achievements and passport
 - `src/lib/dataPortability.ts` — backup/import/reset
-- `public/sw.js` — offline app shell
+- `public/sw.js` — offline app shell source
 
 ## Documentation
 
@@ -92,7 +96,8 @@ Typed playable content lives under `src/data/`.
 6. ✅ V0.6 — pt-PT speaking/listening progressive enhancement
 7. ✅ V0.7 — installable/offline PWA foundation
 8. ✅ V0.8 — full 30-day typed curriculum
-9. ✅ V1.0 — QA, backup/import, final checkpoints and GitHub Pages deployment
+9. ✅ V1.0 — QA, backup/import, final checkpoints and static deployment pipeline
+10. ✅ V1.0.1 — fixed GitHub Pages blank screen by publishing the production Vite build to the configured Pages source
 
 ## Known limitation
 
