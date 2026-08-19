@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { BottomNav } from './components/BottomNav';
 import { LessonOverlay } from './components/LessonOverlay';
 import { SmartReviewOverlay } from './components/SmartReviewOverlay';
+import { CafeChallengeOverlay } from './components/CafeChallengeOverlay';
 import { lessons } from './data/mockData';
-import { getAvailableDays, getLesson } from './data/lessonRegistry';
+import { getAvailableDays, getChallenge, getDayTitle, getLesson } from './data/lessonRegistry';
 import { getReviewSnapshot } from './lib/learningDb';
 import { loadProgress, type ProgressState } from './lib/progress';
 
@@ -18,18 +19,40 @@ const emptyReview: ReviewSnapshot = {
   strong: 0,
   active: 0,
   averageStrength: 0,
+  weaknesses: [],
 };
+
+const weaknessLabels: Record<string, string> = {
+  SER_VS_ESTAR: 'ser vs. estar',
+  TER_AGE: 'ter voor leeftijd',
+  TER_STATES: 'ter bij honger/dorst',
+  QUERIA_REQUEST: 'beleefd bestellen',
+  NUMBERS: 'getallen & prijzen',
+  PAYMENT: 'betalen',
+  TIME: 'tijd',
+};
+
+function weaknessLabel(category: string) {
+  return weaknessLabels[category] ?? category.toLowerCase().replaceAll('_', ' ');
+}
 
 function Stars({ count = 0 }: { count?: number }) {
   return <span className="stars" aria-label={`${count} sterren`}>{'★'.repeat(count)}{'☆'.repeat(Math.max(0, 3 - count))}</span>;
 }
 
-function Home({ progress, review, onStartLesson, onGoReview }: { progress: ProgressState; review: ReviewSnapshot; onStartLesson: (day: number) => void; onGoReview: () => void }) {
+function Home({ progress, review, onStartDay, onGoReview }: { progress: ProgressState; review: ReviewSnapshot; onStartDay: (day: number) => void; onGoReview: () => void }) {
+  const availableDays = getAvailableDays();
+  const maxAvailable = Math.max(...availableDays);
   const currentLesson = getLesson(progress.currentDay);
-  const currentResult = progress.dayResults[progress.currentDay];
-  const fallbackLesson = getLesson(Math.max(...getAvailableDays()));
-  const courseCaughtUp = !currentLesson && progress.currentDay > Math.max(...getAvailableDays());
-  const lesson = currentLesson ?? fallbackLesson;
+  const currentChallenge = getChallenge(progress.currentDay);
+  const courseCaughtUp = progress.currentDay > maxAvailable || (!currentLesson && !currentChallenge);
+  const fallbackDay = maxAvailable;
+  const fallbackLesson = getLesson(fallbackDay);
+  const fallbackChallenge = getChallenge(fallbackDay);
+  const title = courseCaughtUp ? 'Dag 6 · Familie & relaties' : currentLesson?.title ?? currentChallenge?.title ?? fallbackLesson?.title ?? fallbackChallenge?.title ?? 'Volgende les';
+  const goal = courseCaughtUp ? 'Dag 1–5 zijn volledig speelbaar. Dag 6 wordt de volgende contentrelease.' : currentLesson?.goal ?? currentChallenge?.goal ?? '';
+  const isChallenge = Boolean(currentChallenge);
+  const topWeakness = review.weaknesses[0];
 
   return (
     <main className="page home-page">
@@ -40,7 +63,7 @@ function Home({ progress, review, onStartLesson, onGoReview }: { progress: Progr
 
       <section className="greeting">
         <h1>Olá, Duran</h1>
-        <p>{courseCaughtUp ? 'Je bent bij met de speelbare lessen.' : `Klaar voor Dag ${progress.currentDay}?`}</p>
+        <p>{courseCaughtUp ? 'Je hebt de eerste fase afgerond.' : isChallenge ? 'Vandaag test je wat je echt kunt gebruiken.' : `Klaar voor Dag ${progress.currentDay}?`}</p>
       </section>
 
       <div className="stat-strip">
@@ -49,13 +72,13 @@ function Home({ progress, review, onStartLesson, onGoReview }: { progress: Progr
         <span>⌁ <strong>Level {Math.max(1, Math.floor(progress.totalXp / 500) + 1)}</strong></span>
       </div>
 
-      <section className="daily-card">
-        <div className="eyebrow">{courseCaughtUp ? 'VOLGENDE CONTENT' : `DAG ${lesson.day} VAN 30`}</div>
-        <h2>{courseCaughtUp ? 'Dag 3 · Hoe gaat het?' : lesson.title}</h2>
-        <p>{courseCaughtUp ? 'Dag 1 en 2 zijn volledig speelbaar. Dag 3 wordt de volgende les die we op deze engine zetten.' : lesson.goal}</p>
-        <div className="progress-line"><span style={{ width: currentResult ? '100%' : '0%' }} /></div>
-        <div className="card-meta"><span>{courseCaughtUp ? 'Binnenkort speelbaar' : '± 60 minuten'}</span><strong>{currentResult ? <Stars count={currentResult.stars} /> : `${Math.round((progress.completedDays.length / 30) * 100)}% cursus`}</strong></div>
-        <button className="primary-button" disabled={courseCaughtUp} onClick={() => onStartLesson(lesson.day)}>{courseCaughtUp ? 'Dag 3 volgt' : `Start Dag ${lesson.day}`}</button>
+      <section className={`daily-card ${isChallenge ? 'daily-challenge' : ''}`}>
+        <div className="eyebrow">{courseCaughtUp ? 'VOLGENDE CONTENT' : isChallenge ? 'CHECKPOINT · LISBOA' : `DAG ${progress.currentDay} VAN 30`}</div>
+        <h2>{title}</h2>
+        <p>{goal}</p>
+        <div className="progress-line"><span style={{ width: '0%' }} /></div>
+        <div className="card-meta"><span>{courseCaughtUp ? 'Binnenkort speelbaar' : isChallenge ? '± 10 minuten · 150 XP' : '± 60 minuten'}</span><strong>{Math.round((progress.completedDays.length / 30) * 100)}% cursus</strong></div>
+        <button className="primary-button" disabled={courseCaughtUp} onClick={() => onStartDay(progress.currentDay)}>{courseCaughtUp ? 'Dag 6 volgt' : isChallenge ? 'Start Café Challenge' : `Start Dag ${progress.currentDay}`}</button>
       </section>
 
       <section className="section-block">
@@ -67,20 +90,20 @@ function Home({ progress, review, onStartLesson, onGoReview }: { progress: Progr
         </button>
         <div className="focus-card">
           <span className="action-icon">◎</span>
-          <div className="action-copy"><small>Mastery</small><strong>{review.averageStrength}% gemiddelde sterkte</strong><span>{review.active} actief · {review.weak} zwakke items</span></div>
+          <div className="action-copy"><small>{topWeakness ? 'Zwakste patroon' : 'Mastery'}</small><strong>{topWeakness ? weaknessLabel(topWeakness.category) : `${review.averageStrength}% gemiddelde sterkte`}</strong><span>{topWeakness ? `${topWeakness.averageStrength}% strength · ${topWeakness.count} items` : `${review.active} actief · ${review.weak} zwakke items`}</span></div>
         </div>
       </section>
 
       <section className="mini-mastery">
         <div><strong>{progress.learnedWords.length}</strong><span>woorden</span></div>
         <div><strong>{progress.learnedChunks.length}</strong><span>chunks</span></div>
-        <div><strong>{review.active}</strong><span>actief</span></div>
+        <div><strong>{progress.passportStamps.length}</strong><span>stempels</span></div>
       </section>
     </main>
   );
 }
 
-function Learn({ progress, onStartLesson }: { progress: ProgressState; onStartLesson: (day: number) => void }) {
+function Learn({ progress, onStartDay }: { progress: ProgressState; onStartDay: (day: number) => void }) {
   const available = new Set(getAvailableDays());
   return (
     <main className="page learn-page">
@@ -88,25 +111,25 @@ function Learn({ progress, onStartLesson }: { progress: ProgressState; onStartLe
         <div><div className="eyebrow">30 DAGEN</div><h1>Je route door Portugal</h1></div>
         <span className="route-progress">{progress.completedDays.length}/30</span>
       </header>
-      <p className="lead compact">Dag 1 en 2 gebruiken nu dezelfde learning engine. Nieuwe dagen kunnen als content worden toegevoegd zonder nieuwe les-UI te bouwen.</p>
+      <p className="lead compact">De volledige Survival-fase is nu speelbaar: vier lessen en de eerste Café Challenge.</p>
 
       <section className="learning-path">
         {lessons.map((lesson, index) => {
           const completed = progress.completedDays.includes(lesson.day);
           const playable = available.has(lesson.day) && lesson.day <= progress.currentDay;
           const status = completed ? 'complete' : playable ? 'current' : 'upcoming';
-          const isChallenge = lesson.day % 5 === 0;
+          const isChallenge = lesson.day === 5;
           const stars = progress.dayResults[lesson.day]?.stars;
           return (
             <div className="path-row" key={lesson.day}>
               <div className={`path-line ${index === lessons.length - 1 ? 'last' : ''}`} />
-              <button className={`path-node ${status} ${isChallenge ? 'challenge' : ''}`} onClick={playable || completed ? () => onStartLesson(lesson.day) : undefined} aria-label={`Dag ${lesson.day}: ${lesson.title}`} disabled={!playable && !completed}>
-                <span>{completed ? '✓' : isChallenge ? '✦' : lesson.day}</span>
+              <button className={`path-node ${status} ${isChallenge ? 'challenge' : ''}`} onClick={playable || completed ? () => onStartDay(lesson.day) : undefined} aria-label={`Dag ${lesson.day}: ${lesson.title}`} disabled={!playable && !completed}>
+                <span>{completed ? '✓' : isChallenge ? '☕' : lesson.day}</span>
               </button>
               <div className={`path-copy ${status}`}>
                 {lesson.city && <small>{lesson.city.toUpperCase()}</small>}
                 <strong>Dag {lesson.day} · {lesson.title}</strong>
-                <span>{lesson.phase}{stars ? ' · ' : ''}{stars ? <Stars count={stars} /> : available.has(lesson.day) ? ' · speelbaar' : ''}</span>
+                <span>{lesson.phase}{stars ? ' · ' : ''}{stars ? <Stars count={stars} /> : available.has(lesson.day) ? isChallenge ? ' · challenge' : ' · speelbaar' : ''}</span>
               </div>
             </div>
           );
@@ -120,7 +143,7 @@ function Review({ review, onStartReview }: { review: ReviewSnapshot; onStartRevi
   return (
     <main className="page review-page">
       <header className="page-header"><div><div className="eyebrow">SLIM HERHALEN</div><h1>Smart Review</h1></div></header>
-      <p className="lead compact">PolyYaps plant ieder woord en iedere chunk apart. Fouten komen sneller terug; sterke items krijgen meer ruimte.</p>
+      <p className="lead compact">PolyYaps plant ieder item apart én groepeert fouten naar taalpatroon, zodat je ziet waarom iets lastig blijft.</p>
 
       <section className="review-hero">
         <strong>{review.due}</strong>
@@ -133,6 +156,20 @@ function Review({ review, onStartReview }: { review: ReviewSnapshot; onStartRevi
         </div>
         <button className="primary-button" disabled={!review.learned} onClick={onStartReview}>{review.due ? 'Start Smart Review' : review.learned ? 'Bekijk reviewstatus' : 'Nog geen review'}</button>
       </section>
+
+      {review.weaknesses.length > 0 && (
+        <section className="section-block">
+          <div className="section-heading"><h3>Patronen om op te letten</h3><span>laagste eerst</span></div>
+          <div className="weakness-list">
+            {review.weaknesses.slice(0, 5).map((weakness) => (
+              <div className="weakness-row" key={weakness.category}>
+                <div><strong>{weaknessLabel(weakness.category)}</strong><span>{weakness.count} gekoppelde items · {weakness.due} nu klaar</span></div>
+                <b>{weakness.averageStrength}%</b>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="section-block">
         <div className="section-heading"><h3>Mastery-overzicht</h3><span>{review.learned} items</span></div>
@@ -149,24 +186,27 @@ function Review({ review, onStartReview }: { review: ReviewSnapshot; onStartRevi
 function Progress({ progress, review }: { progress: ProgressState; review: ReviewSnapshot }) {
   const completed = progress.completedDays.length;
   const percent = Math.round((completed / 30) * 100);
+  const topWeakness = review.weaknesses[0];
   return (
     <main className="page progress-page">
       <header className="page-header"><div><div className="eyebrow">O MEU PROGRESSO</div><h1>Je Portugees</h1></div></header>
-      <section className="progress-overview"><div className="progress-ring dynamic-ring" style={{ '--progress': `${percent}%` } as React.CSSProperties}><span>{percent}%</span></div><div><strong>Dag {progress.currentDay} van 30</strong><span>{review.learned} items hebben nu een eigen mastery-record.</span></div></section>
-      <div className="stat-grid"><div><span>🔥</span><strong>{progress.streak}</strong><small>streak</small></div><div><span>✦</span><strong>{progress.totalXp}</strong><small>XP</small></div><div><span>◎</span><strong>{review.averageStrength}</strong><small>strength</small></div></div>
+      <section className="progress-overview"><div className="progress-ring dynamic-ring" style={{ '--progress': `${percent}%` } as React.CSSProperties}><span>{percent}%</span></div><div><strong>Dag {progress.currentDay} van 30</strong><span>{review.learned} items hebben een eigen mastery-record.</span></div></section>
+      <div className="stat-grid"><div><span>🔥</span><strong>{progress.streak}</strong><small>streak</small></div><div><span>✦</span><strong>{progress.totalXp}</strong><small>XP</small></div><div><span>☕</span><strong>{progress.passportStamps.length}</strong><small>stempels</small></div></div>
 
       <section className="section-block"><div className="section-heading"><h3>Mastery</h3></div><div className="skill-list"><div className="skill"><div><strong>Actief beheerst</strong><span>{review.active}/{review.learned || 0}</span></div><div className="skill-bar"><span style={{ width: `${review.learned ? Math.round((review.active / review.learned) * 100) : 0}%` }} /></div></div><div className="skill"><div><strong>Gemiddelde strength</strong><span>{review.averageStrength}%</span></div><div className="skill-bar"><span style={{ width: `${review.averageStrength}%` }} /></div></div></div></section>
 
-      <section className="section-block"><div className="section-heading"><h3>Dagresultaten</h3></div>{progress.completedDays.length ? <div className="review-list">{progress.completedDays.map((day) => <div className="review-row" key={day}><i className="dot strong" /><div><strong>Dag {day} · {getLesson(day)?.title ?? 'Les'}</strong><span>{progress.dayResults[day]?.score}% · {progress.dayResults[day]?.xpEarned} XP</span></div></div>)}</div> : <div className="empty-state">Nog geen resultaten. Begin met Dag 1.</div>}</section>
+      {topWeakness && <section className="section-block"><div className="section-heading"><h3>Persoonlijke focus</h3></div><div className="personal-focus"><small>ZWAKSTE TAALPATROON</small><strong>{weaknessLabel(topWeakness.category)}</strong><span>{topWeakness.averageStrength}% strength over {topWeakness.count} items. Smart Review geeft deze items automatisch voorrang wanneer ze klaarstaan.</span></div></section>}
 
-      <div className="progress-links"><button>🇵🇹 <span><strong>Portugees paspoort</strong><small>Eerste stempel bij Dag 5</small></span><b>›</b></button><button>⌘ <span><strong>Achievements</strong><small>{completed ? 'Primeiras Palavras ontgrendeld' : 'Begin met leren om achievements te verdienen'}</small></span><b>›</b></button></div>
+      <section className="section-block"><div className="section-heading"><h3>Dagresultaten</h3></div>{progress.completedDays.length ? <div className="review-list">{progress.completedDays.map((day) => <div className="review-row" key={day}><i className="dot strong" /><div><strong>Dag {day} · {getDayTitle(day)}</strong><span>{progress.dayResults[day]?.score}% · {progress.dayResults[day]?.xpEarned} XP</span></div></div>)}</div> : <div className="empty-state">Nog geen resultaten. Begin met Dag 1.</div>}</section>
+
+      <div className="progress-links"><button>🇵🇹 <span><strong>Portugees paspoort</strong><small>{progress.passportStamps.length ? `${progress.passportStamps.length} stempel verdiend` : 'Eerste stempel bij Dag 5'}</small></span><b>›</b></button><button>⌘ <span><strong>Achievements</strong><small>{progress.achievements.length} ontgrendeld</small></span><b>›</b></button></div>
     </main>
   );
 }
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('home');
-  const [lessonDay, setLessonDay] = useState<number | null>(null);
+  const [activeDay, setActiveDay] = useState<number | null>(null);
   const [reviewOpen, setReviewOpen] = useState(false);
   const [progress, setProgress] = useState<ProgressState>(() => loadProgress());
   const [review, setReview] = useState<ReviewSnapshot>(emptyReview);
@@ -177,17 +217,19 @@ export default function App() {
 
   useEffect(() => { void refreshReview(); }, [progress]);
 
-  if (lessonDay) {
-    const lesson = getLesson(lessonDay);
-    if (lesson) return <LessonOverlay lesson={lesson} onClose={() => setLessonDay(null)} onComplete={setProgress} onMasteryChanged={() => void refreshReview()} />;
+  if (activeDay) {
+    const challenge = getChallenge(activeDay);
+    if (challenge) return <CafeChallengeOverlay onClose={() => setActiveDay(null)} onComplete={setProgress} onMasteryChanged={() => void refreshReview()} />;
+    const lesson = getLesson(activeDay);
+    if (lesson) return <LessonOverlay lesson={lesson} onClose={() => setActiveDay(null)} onComplete={setProgress} onMasteryChanged={() => void refreshReview()} />;
   }
 
   if (reviewOpen) return <SmartReviewOverlay onClose={() => setReviewOpen(false)} onChanged={() => void refreshReview()} />;
 
   return (
     <div className="app-shell">
-      {tab === 'home' && <Home progress={progress} review={review} onStartLesson={setLessonDay} onGoReview={() => setTab('review')} />}
-      {tab === 'learn' && <Learn progress={progress} onStartLesson={setLessonDay} />}
+      {tab === 'home' && <Home progress={progress} review={review} onStartDay={setActiveDay} onGoReview={() => setTab('review')} />}
+      {tab === 'learn' && <Learn progress={progress} onStartDay={setActiveDay} />}
       {tab === 'review' && <Review review={review} onStartReview={() => setReviewOpen(true)} />}
       {tab === 'progress' && <Progress progress={progress} review={review} />}
       <BottomNav active={tab} onChange={setTab} />
