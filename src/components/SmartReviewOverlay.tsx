@@ -9,6 +9,21 @@ type Props = {
 
 type Feedback = 'correct' | 'wrong' | null;
 
+const weaknessLabels: Record<string, string> = {
+  SER_VS_ESTAR: 'ser vs. estar',
+  TER_AGE: 'ter voor leeftijd',
+  TER_STATES: 'ter bij honger/dorst',
+  QUERIA_REQUEST: 'beleefd bestellen',
+  NUMBERS: 'getallen & prijzen',
+  PAYMENT: 'betalen',
+  TIME: 'tijd',
+};
+
+function weaknessLabel(category?: string) {
+  if (!category) return undefined;
+  return weaknessLabels[category] ?? category.toLowerCase().replaceAll('_', ' ');
+}
+
 function speak(text: string) {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
@@ -53,6 +68,7 @@ export function SmartReviewOverlay({ onClose, onChanged }: Props) {
     return item.masteryLevel <= 1 ? 'recognition' : 'recall';
   }, [index, item]);
   const options = useMemo(() => item ? choicesFor(item, pool) : [], [item, pool]);
+  const focusLabel = weaknessLabel(item?.weaknessCategory);
 
   async function grade(submitted: string) {
     if (!item || feedback) return;
@@ -92,7 +108,7 @@ export function SmartReviewOverlay({ onClose, onChanged }: Props) {
     return (
       <section className="focus-shell">
         <header className="focus-header"><button className="icon-button" onClick={onClose}>×</button><span>Smart Review</span><span /></header>
-        <main className="review-player-empty"><div className="result-mark">✓</div><div className="eyebrow">REVIEW COMPLETO</div><h1>{score}%</h1><p>{queue.length} items opnieuw getest. De nieuwe reviewdatums zijn opgeslagen.</p><button className="primary-button" onClick={onClose}>Naar Home</button></main>
+        <main className="review-player-empty"><div className="result-mark">✓</div><div className="eyebrow">REVIEW COMPLETO</div><h1>{score}%</h1><p>{queue.length} items opnieuw getest. De nieuwe reviewdatums en patroonsterktes zijn opgeslagen.</p><button className="primary-button" onClick={onClose}>Naar Home</button></main>
       </section>
     );
   }
@@ -104,12 +120,13 @@ export function SmartReviewOverlay({ onClose, onChanged }: Props) {
       <main className="lesson-player">
         <section className="lesson-stage review-exercise-stage">
           <div className="stage-meta"><span>{mode === 'recall' ? 'ACTIEF OPHALEN' : mode === 'listening' ? 'LUISTEREN' : 'HERKENNEN'}</span><strong>sterkte {item.strength}</strong></div>
+          {focusLabel && <div className="review-focus-chip">Focus · {focusLabel}</div>}
           <div className="review-prompt-card">
             {mode === 'recall' && <><small>HOE ZEG JE:</small><h1>{item.dutch}</h1><input autoCapitalize="none" autoComplete="off" value={answer} disabled={Boolean(feedback)} onChange={(event) => setAnswer(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter' && answer && !feedback) void grade(answer); }} placeholder="Typ in het Portugees…" />{!feedback && <button className="primary-button" disabled={!answer.trim()} onClick={() => void grade(answer)}>Controleren</button>}</>}
             {mode === 'recognition' && <><small>WAT BETEKENT:</small><h1>{item.portuguese}</h1><div className="choice-list">{options.map((option) => <button key={option} disabled={Boolean(feedback)} className={feedback && option === item.dutch ? 'correct-choice' : feedback && option === answer ? 'wrong-choice' : ''} onClick={() => void grade(option)}>{option}</button>)}</div></>}
             {mode === 'listening' && <><small>LUISTER ZONDER TE LEZEN</small><button className="review-audio-orb" onClick={() => speak(item.portuguese)}>▶</button><div className="choice-list">{options.map((option) => <button key={option} disabled={Boolean(feedback)} className={feedback && option === item.dutch ? 'correct-choice' : feedback && option === answer ? 'wrong-choice' : ''} onClick={() => void grade(option)}>{option}</button>)}</div></>}
           </div>
-          {feedback && <div className={`inline-feedback ${feedback}`}><strong>{feedback === 'correct' ? '✓ Correct' : 'Nog niet helemaal'}</strong>{feedback === 'wrong' && <span>Correct: <b>{mode === 'recall' ? item.portuguese : item.dutch}</b></span>}<div className="mastery-feedback"><span>Mastery {item.masteryLevel}/4</span><span>Review opnieuw ingepland</span></div><button className="primary-button" onClick={next}>{index === queue.length - 1 ? 'Bekijk resultaat' : 'Volgende'}</button></div>}
+          {feedback && <div className={`inline-feedback ${feedback}`}><strong>{feedback === 'correct' ? '✓ Correct' : 'Nog niet helemaal'}</strong>{feedback === 'wrong' && <span>Correct: <b>{mode === 'recall' ? item.portuguese : item.dutch}</b></span>}<div className="mastery-feedback"><span>Mastery {item.masteryLevel}/4</span><span>{focusLabel ? `${focusLabel} bijgewerkt` : 'Review opnieuw ingepland'}</span></div><button className="primary-button" onClick={next}>{index === queue.length - 1 ? 'Bekijk resultaat' : 'Volgende'}</button></div>}
         </section>
       </main>
     </section>
