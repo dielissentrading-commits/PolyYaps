@@ -11,6 +11,7 @@ export type ProgressState = {
   totalXp: number;
   streak: number;
   longestStreak: number;
+  streakFreezes: number;
   completedDays: number[];
   dayResults: Record<number, DayResult>;
   learnedWords: string[];
@@ -27,6 +28,7 @@ const initialProgress: ProgressState = {
   totalXp: 0,
   streak: 0,
   longestStreak: 0,
+  streakFreezes: 0,
   completedDays: [],
   dayResults: {},
   learnedWords: [],
@@ -55,6 +57,15 @@ function updateStreak(existing: ProgressState, today: string) {
   return gap === 1 ? existing.streak + 1 : 1;
 }
 
+function applyStreakRewards(existing: ProgressState, streak: number, achievements: Set<string>) {
+  let freezes = existing.streakFreezes ?? 0;
+  const streakAdvanced = streak > existing.streak;
+  if (streak >= 5) achievements.add('em-boa-forma');
+  if (streak >= 20) achievements.add('persistente');
+  if (streakAdvanced && streak > 0 && streak % 5 === 0) freezes = Math.min(2, freezes + 1);
+  return freezes;
+}
+
 export function loadProgress(): ProgressState {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -63,6 +74,7 @@ export function loadProgress(): ProgressState {
     return {
       ...initialProgress,
       ...parsed,
+      streakFreezes: parsed.streakFreezes ?? 0,
       passportStamps: parsed.passportStamps ?? [],
       achievements: parsed.achievements ?? [],
     };
@@ -87,6 +99,7 @@ export function completeLesson(day: number, score: number, wordIds: string[], ch
   const achievements = new Set(existing.achievements);
   if (!existing.completedDays.includes(day)) achievements.add('primeiras-palavras');
   if (existing.learnedWords.length + wordIds.length >= 100) achievements.add('cem-palavras');
+  const streakFreezes = applyStreakRewards(existing, streak, achievements);
 
   const next: ProgressState = {
     ...existing,
@@ -94,6 +107,7 @@ export function completeLesson(day: number, score: number, wordIds: string[], ch
     totalXp: existing.totalXp + xpEarned,
     streak,
     longestStreak: Math.max(existing.longestStreak, streak),
+    streakFreezes,
     completedDays: Array.from(new Set([...existing.completedDays, day])).sort((a, b) => a - b),
     dayResults: {
       ...existing.dayResults,
@@ -116,6 +130,7 @@ export function completeChallenge(
   stampId: string,
   wordIds: string[],
   chunkIds: string[],
+  achievementId = 'um-cafe-por-favor',
 ): ProgressState {
   const existing = loadProgress();
   const today = localDateKey();
@@ -128,8 +143,9 @@ export function completeChallenge(
   const achievements = new Set(existing.achievements);
   if (passed) {
     stamps.add(stampId);
-    achievements.add('um-cafe-por-favor');
+    achievements.add(achievementId);
   }
+  const streakFreezes = applyStreakRewards(existing, streak, achievements);
 
   const next: ProgressState = {
     ...existing,
@@ -137,6 +153,7 @@ export function completeChallenge(
     totalXp: existing.totalXp + xpEarned,
     streak,
     longestStreak: Math.max(existing.longestStreak, streak),
+    streakFreezes,
     completedDays: passed ? Array.from(new Set([...existing.completedDays, day])).sort((a, b) => a - b) : existing.completedDays,
     dayResults: {
       ...existing.dayResults,
