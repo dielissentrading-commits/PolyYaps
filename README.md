@@ -13,14 +13,16 @@ PolyYaps is a mobile-first Progressive Web App for learning European Portuguese 
 
 ## Current prototype
 
-V0.3 is the current implementation milestone.
+V0.4 is the current implementation milestone.
 
-- Dag 1 is fully playable.
-- Dag 2 is fully playable through the same generic lesson engine.
+- Dag 1–4 are fully playable through one generic lesson engine.
+- Dag 5 is the first dedicated Café Challenge checkpoint.
 - Every learned word/chunk receives a mastery record with strength 0–100 and mastery level 0–4.
 - Review dates are scheduled automatically.
 - Smart Review mixes recognition, active recall and listening.
+- Weakness categories such as `SER_VS_ESTAR`, `TER_AGE`, `QUERIA_REQUEST`, `NUMBERS`, `PAYMENT` and `TIME` are aggregated and surfaced in the UI.
 - Home, Review and Progress use real local mastery data.
+- Passing the Café Challenge earns the first passport stamp and challenge achievement.
 
 ## Course content
 
@@ -40,14 +42,15 @@ These Markdown files are the editorial source of truth. Playable lessons are con
 - `docs/07-technical-architecture.md` — technical architecture and implementation roadmap
 - `docs/09-v0.2-day1.md` — first complete playable lesson
 - `docs/10-v0.3-learning-engine.md` — item mastery, IndexedDB, review scheduling and generic lessons
+- `docs/11-v0.4-survival-phase.md` — Dag 3–5, weakness categories and Café Challenge
 
 ## Roadmap
 
 1. ✅ V0.1 — app shell, Home, navigation, learning path
 2. ✅ V0.2 — Day 1 and first real lesson flow
 3. ✅ V0.3 — IndexedDB mastery, spaced repetition, Smart Review and Day 2
-4. V0.4 — Day 3–5, weakness categories and first Café Challenge
-5. V0.5 — deeper gamification: levels, Passport, achievements and anti-XP-farming
+4. ✅ V0.4 — Day 3–5, weakness categories and first Café Challenge
+5. V0.5 — Day 6–10 plus deeper gamification: levels, Passport and achievements
 6. V0.6 — recorded pt-PT audio and automatic speaking assessment
 7. V0.7 — full offline PWA and install polish
 8. V0.8 — all 30 days converted to structured app data
