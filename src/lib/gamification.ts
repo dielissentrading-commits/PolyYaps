@@ -2,15 +2,15 @@ import type { ProgressState } from './progress';
 
 export const levels = [
   { level: 1, name: 'Novato', minXp: 0 },
-  { level: 2, name: 'Principiante', minXp: 300 },
-  { level: 3, name: 'Explorador', minXp: 700 },
-  { level: 4, name: 'Viajante', minXp: 1200 },
-  { level: 5, name: 'Comunicador', minXp: 1800 },
-  { level: 6, name: 'Conversador', minXp: 2500 },
-  { level: 7, name: 'Aventureiro', minXp: 3300 },
-  { level: 8, name: 'Confiante', minXp: 4200 },
-  { level: 9, name: 'Quase Português', minXp: 5200 },
-  { level: 10, name: 'Desafio Completo', minXp: 6500 },
+  { level: 2, name: 'Principiante', minXp: 250 },
+  { level: 3, name: 'Explorador', minXp: 550 },
+  { level: 4, name: 'Viajante', minXp: 900 },
+  { level: 5, name: 'Comunicador', minXp: 1300 },
+  { level: 6, name: 'Conversador', minXp: 1750 },
+  { level: 7, name: 'Aventureiro', minXp: 2250 },
+  { level: 8, name: 'Confiante', minXp: 2800 },
+  { level: 9, name: 'Quase Português', minXp: 3400 },
+  { level: 10, name: 'Desafio Completo', minXp: 4000 },
 ] as const;
 
 export const achievements = [
