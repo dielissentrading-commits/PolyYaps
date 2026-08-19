@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TopBar } from '@/components/layout/TopBar';
 import { Button } from '@/components/ui/Button';
+import { InstallCard } from '@/components/pwa/InstallCard';
 import { useProgress } from '@/hooks/useProgress';
 import './SettingsScreen.css';
 
@@ -15,6 +16,8 @@ export function SettingsScreen() {
       <TopBar title="Instellingen" showBack backTo="/" />
 
       <div className="page">
+        <InstallCard />
+
         <section className="card settings__profile">
           <span className="eyebrow">Jouw cursus</span>
           <h2 className="settings__course">Europees Portugees · pt-PT</h2>

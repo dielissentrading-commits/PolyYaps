@@ -6,7 +6,7 @@
   "description": "PolyYaps \u2014 mobile-first PWA for learning European Portuguese in 30 days",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/build-sw.mjs",
     "preview": "vite preview",
     "typecheck": "tsc -b --noEmit",
     "test": "vitest run",
