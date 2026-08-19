@@ -1,0 +1,63 @@
+.social-challenge-shell { background: #faf9f7; }
+.challenge-badge.social { background: #eee9e3; }
+.conversation-formula { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; margin: 24px 0; }
+.conversation-formula span { min-height: 58px; padding: 12px; display: flex; align-items: center; gap: 9px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; font-size: 12px; color: var(--muted); }
+.conversation-formula b { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 10px; background: #f3eee8; color: var(--primary-dark); font-size: 13px; }
+.local-bubble { margin: 28px 0 24px; padding: 16px; display: grid; grid-template-columns: 42px 1fr 34px; align-items: center; gap: 11px; background: #eceee9; border-radius: 20px 20px 20px 6px; }
+.local-avatar { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: var(--success); color: #fff; font-weight: 800; }
+.local-bubble > div:nth-child(2) { display: flex; flex-direction: column; gap: 4px; }
+.local-bubble small { color: var(--muted); font-size: 8px; font-weight: 800; letter-spacing: .1em; }
+.local-bubble strong { font-size: 15px; line-height: 1.4; }
+.local-bubble button { width: 34px; height: 34px; border: 0; border-radius: 50%; background: rgba(255,255,255,.75); }
+
+.level-progress-card { padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; }
+.level-progress-card .section-heading { margin-bottom: 12px; }
+.checkpoint-history { display: flex; flex-direction: column; gap: 8px; }
+.checkpoint-history > div { display: grid; grid-template-columns: 40px 1fr auto; gap: 12px; align-items: center; padding: 14px 15px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; }
+.checkpoint-history > div > span { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 13px; background: #f3eee8; font-size: 20px; }
+.checkpoint-history > div > div { display: flex; flex-direction: column; gap: 3px; }
+.checkpoint-history strong { font-size: 13px; }
+.checkpoint-history small { color: var(--muted); font-size: 10px; }
+
+.collection-shell { background: var(--background); }
+.collection-page { flex: 1; padding: 28px var(--page) calc(30px + env(safe-area-inset-bottom)); }
+.collection-page > .primary-button { margin-top: 24px; }
+.passport-cover { min-height: 205px; margin-bottom: 30px; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; border-radius: 25px; background: #405c48; color: #fff; box-shadow: 0 14px 36px rgba(52, 78, 60, .18); }
+.passport-cover small { font-size: 9px; letter-spacing: .18em; opacity: .72; }
+.passport-cover h1 { margin: 18px 0; font-size: 35px; line-height: 1.05; letter-spacing: -.045em; }
+.passport-cover span { font-size: 11px; opacity: .7; }
+.stamp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.stamp-card { min-height: 150px; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); }
+.stamp-card.locked { opacity: .42; filter: grayscale(.7); }
+.stamp-card.unlocked { background: #f4eddf; border-style: dashed; border-color: #cfa985; }
+.stamp-mark { width: 54px; height: 54px; margin-bottom: 10px; display: grid; place-items: center; border-radius: 50%; border: 2px solid currentColor; color: #aa624e; font-size: 25px; transform: rotate(-5deg); }
+.stamp-card small { color: var(--muted); font-size: 8px; letter-spacing: .1em; }
+.stamp-card strong { margin-top: 3px; font-size: 14px; }
+.stamp-card span { margin-top: 3px; color: var(--muted); font-size: 10px; }
+
+.level-card { position: relative; margin-bottom: 30px; padding: 22px; display: grid; grid-template-columns: 1fr 58px; gap: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 22px; }
+.level-card > div:first-child { display: flex; flex-direction: column; gap: 3px; }
+.level-card small { color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .1em; }
+.level-card h1 { margin: 0; font-size: 25px; letter-spacing: -.035em; }
+.level-card span { color: var(--muted); font-size: 11px; }
+.level-number { width: 58px; height: 58px; display: grid; place-items: center; border-radius: 18px; background: #f3eee8; color: var(--primary-dark); font-size: 24px; font-weight: 900; }
+.level-track { grid-column: 1 / -1; height: 7px; overflow: hidden; border-radius: 999px; background: #eeeae5; }
+.level-track span { display: block; height: 100%; background: var(--primary); border-radius: inherit; }
+.level-card p { grid-column: 1 / -1; margin: -7px 0 0; color: var(--muted); font-size: 10px; }
+.achievement-list { display: flex; flex-direction: column; gap: 9px; }
+.achievement-card { min-height: 74px; padding: 13px 14px; display: grid; grid-template-columns: 44px 1fr 20px; align-items: center; gap: 12px; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); }
+.achievement-card.locked { opacity: .42; }
+.achievement-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 14px; background: #f3eee8; font-weight: 850; }
+.achievement-card > div:nth-child(2) { display: flex; flex-direction: column; gap: 3px; }
+.achievement-card strong { font-size: 13px; }
+.achievement-card span { color: var(--muted); font-size: 10px; line-height: 1.35; }
+.achievement-card b { color: var(--success); }
+.freeze-card { margin-top: 16px; padding: 16px; display: flex; align-items: center; gap: 13px; border-radius: 18px; background: #edf3f3; }
+.freeze-card > span { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 14px; background: rgba(255,255,255,.7); font-size: 20px; }
+.freeze-card div { display: flex; flex-direction: column; gap: 4px; }
+.freeze-card strong { font-size: 13px; }
+.freeze-card small { color: var(--muted); font-size: 10px; line-height: 1.4; }
+
+@media (min-width: 560px) {
+  .collection-shell, .social-challenge-shell { border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+}
