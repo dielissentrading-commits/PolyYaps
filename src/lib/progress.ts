@@ -2,6 +2,7 @@ export type DayResult = {
   score: number;
   stars: 1 | 2 | 3;
   xpEarned: number;
+  cumulativeXp?: number;
   completedAt: string;
   kind?: 'lesson' | 'challenge';
 };
@@ -87,13 +88,23 @@ export function saveProgress(progress: ProgressState) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
 }
 
+export function grantAchievement(id: string): ProgressState {
+  const existing = loadProgress();
+  if (existing.achievements.includes(id)) return existing;
+  const next = { ...existing, achievements: [...existing.achievements, id] };
+  saveProgress(next);
+  return next;
+}
+
 export function completeLesson(day: number, score: number, wordIds: string[], chunkIds: string[]): ProgressState {
   const existing = loadProgress();
   const today = localDateKey();
   const previousResult = existing.dayResults[day];
   const stars: 1 | 2 | 3 = score >= 90 ? 3 : score >= 75 ? 2 : 1;
-  const scoreBonus = score === 100 ? 15 : score >= 90 ? 10 : 0;
-  const xpEarned = previousResult ? Math.max(10, scoreBonus) : 100 + scoreBonus;
+  const targetXp = 100 + (score === 100 ? 15 : score >= 90 ? 10 : 0);
+  const priorCumulative = previousResult?.cumulativeXp ?? previousResult?.xpEarned ?? 0;
+  const xpEarned = previousResult ? Math.max(0, Math.min(15, score - previousResult.score)) : targetXp;
+  const cumulativeXp = priorCumulative + xpEarned;
   const streakState = updateStreak(existing, today);
   const achievements = new Set(existing.achievements);
   const learnedWords = mergeLearningKeys(existing.learnedWords, day, 'word', wordIds);
@@ -112,7 +123,7 @@ export function completeLesson(day: number, score: number, wordIds: string[], ch
     longestStreak: Math.max(existing.longestStreak, streakState.streak),
     streakFreezes,
     completedDays: Array.from(new Set([...existing.completedDays, day])).sort((a, b) => a - b),
-    dayResults: { ...existing.dayResults, [day]: { score, stars, xpEarned, completedAt: new Date().toISOString(), kind: 'lesson' } },
+    dayResults: { ...existing.dayResults, [day]: { score, stars, xpEarned, cumulativeXp, completedAt: new Date().toISOString(), kind: 'lesson' } },
     learnedWords,
     learnedChunks,
     achievements: Array.from(achievements),
@@ -129,8 +140,11 @@ export function completeChallenge(day: number, score: number, rewardXp: number, 
   const previouslyPassed = existing.completedDays.includes(day);
   const stars: 1 | 2 | 3 = score >= 90 ? 3 : score >= 75 ? 2 : 1;
   const passed = score >= 70;
-  const priorAttemptXp = previousResult?.xpEarned ?? 0;
-  const xpEarned = previouslyPassed ? 15 : passed ? Math.max(15, rewardXp - priorAttemptXp) : previousResult ? 15 : 60;
+  const priorCumulative = previousResult?.cumulativeXp ?? previousResult?.xpEarned ?? 0;
+  let xpEarned = 0;
+  if (!previousResult && !passed) xpEarned = Math.min(60, rewardXp);
+  else if (!previouslyPassed && passed) xpEarned = Math.max(0, rewardXp - priorCumulative);
+  const cumulativeXp = priorCumulative + xpEarned;
   const streakState = updateStreak(existing, today);
   const stamps = new Set(existing.passportStamps);
   const achievements = new Set(existing.achievements);
@@ -154,7 +168,7 @@ export function completeChallenge(day: number, score: number, rewardXp: number, 
     longestStreak: Math.max(existing.longestStreak, streakState.streak),
     streakFreezes,
     completedDays,
-    dayResults: { ...existing.dayResults, [day]: { score, stars, xpEarned, completedAt: new Date().toISOString(), kind: 'challenge' } },
+    dayResults: { ...existing.dayResults, [day]: { score, stars, xpEarned, cumulativeXp, completedAt: new Date().toISOString(), kind: 'challenge' } },
     learnedWords,
     learnedChunks,
     passportStamps: Array.from(stamps),
