@@ -16,8 +16,9 @@ export function SpeechPractice({ prompt, model, onAssessment }: Props) {
   const supported = speechRecognitionAvailable();
 
   function selfAssess() {
-    setSelfChecked((value) => !value);
-    if (!selfChecked) onAssessment?.(70);
+    const checked = !selfChecked;
+    setSelfChecked(checked);
+    onAssessment?.(checked ? 70 : 0);
   }
 
   async function record() {
@@ -56,12 +57,13 @@ export function SpeechPractice({ prompt, model, onAssessment }: Props) {
           {error && (
             <div className="speech-fallback">
               <strong>Microfoonbeoordeling lukte niet</strong>
-              <span>{error} Zeg de zin hardop na; je kunt daarna handmatig bevestigen dat je geoefend hebt.</span>
-              <button className={`self-check ${selfChecked ? 'checked' : ''}`} onClick={selfAssess}>
-                <span>{selfChecked ? '✓' : '○'}</span> Ik heb de opdracht hardop gedaan
-              </button>
+              <span>{error} Je kunt hieronder altijd handmatig bevestigen dat je geoefend hebt.</span>
             </div>
           )}
+          <button className={`self-check ${selfChecked ? 'checked' : ''}`} onClick={selfAssess} disabled={listening}>
+            <span>{selfChecked ? '✓' : '○'}</span> Ik heb de opdracht hardop gedaan
+          </button>
+          <small className="speech-privacy">De app bewaart of uploadt geen microfoonopname. Alleen de herkende tekst wordt tijdelijk gebruikt voor de score.</small>
         </>
       ) : (
         <div className="speech-fallback">
@@ -70,6 +72,7 @@ export function SpeechPractice({ prompt, model, onAssessment }: Props) {
           <button className={`self-check ${selfChecked ? 'checked' : ''}`} onClick={selfAssess}>
             <span>{selfChecked ? '✓' : '○'}</span> Ik heb de opdracht hardop gedaan
           </button>
+          <small className="speech-privacy">Er wordt geen audio opgenomen, bewaard of verzonden door PolyYaps.</small>
         </div>
       )}
     </div>
