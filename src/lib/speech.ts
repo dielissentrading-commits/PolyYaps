@@ -4,6 +4,8 @@ export type SpeechAssessment = {
   supported: boolean;
 };
 
+const recognitionTimeoutMs = 12_000;
+
 export function normalizePortuguese(value: string) {
   return value
     .trim()
@@ -85,21 +87,47 @@ export function recognizePortugueseOnce(): Promise<string> {
     recognition.continuous = false;
 
     let finished = false;
+    let heardResult = false;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
     const finish = (callback: () => void) => {
       if (finished) return;
       finished = true;
+      if (timeoutId) clearTimeout(timeoutId);
+      recognition.onresult = null;
+      recognition.onerror = null;
+      recognition.onnomatch = null;
+      recognition.onend = null;
       callback();
     };
 
     recognition.onresult = (event: any) => {
+      heardResult = true;
       const transcript = event?.results?.[0]?.[0]?.transcript ?? '';
-      finish(() => resolve(String(transcript)));
+      const value = String(transcript).trim();
+      finish(() => value ? resolve(value) : reject(new Error('Ik kon geen duidelijke Portugese zin herkennen.')));
     };
     recognition.onerror = (event: any) => {
       finish(() => reject(new Error(event?.error ? `Microfoon: ${event.error}` : 'Spraakherkenning mislukt.')));
     };
     recognition.onnomatch = () => finish(() => reject(new Error('Ik kon geen duidelijke Portugese zin herkennen.')));
-    recognition.start();
+    recognition.onend = () => {
+      if (!heardResult) finish(() => reject(new Error('De microfoon stopte zonder spraak te herkennen.')));
+    };
+
+    timeoutId = setTimeout(() => {
+      try {
+        recognition.abort();
+      } catch {
+        // Some WebKit versions throw when aborting an already-ended session.
+      }
+      finish(() => reject(new Error('De microfoon reageerde niet op tijd.')));
+    }, recognitionTimeoutMs);
+
+    try {
+      recognition.start();
+    } catch (reason) {
+      finish(() => reject(reason instanceof Error ? reason : new Error('Spraakherkenning kon niet starten.')));
+    }
   });
 }
 
